@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Español en Juego — IFB</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:linear-gradient(135deg,#0d0d1a 0%,#12192e 55%,#0a2540 100%);font-family:'Trebuchet MS','Segoe UI',sans-serif;color:white;display:flex;flex-direction:column;align-items:center;padding:22px 16px}
+h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;background:linear-gradient(90deg,#FF6B6B,#FFE66D,#4ECDC4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.card{background:rgba(255,255,255,0.055);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:28px;width:100%;max-width:560px}
+.btn{border:none;border-radius:14px;font-weight:900;font-size:1rem;cursor:pointer;padding:14px 20px;transition:transform .15s;width:100%;display:block;margin-top:0}
+.btn:hover{transform:scale(1.03)}
+.scorebar{display:flex;gap:12px;width:100%;max-width:560px;margin-bottom:18px}
+.sbox{flex:1;border-radius:16px;padding:12px 14px;text-align:center;position:relative}
+.hidden{display:none!important}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.cat-btn{padding:9px 8px;border-radius:11px;font-size:.72rem;font-weight:700;cursor:pointer;text-align:center;border:none}
+.bet-opts{display:flex;gap:10px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.bet-btn{padding:13px 22px;border-radius:12px;font-weight:900;font-size:1.1rem;cursor:pointer;min-width:64px}
+.two-btns{display:flex;gap:14px}
+.two-btns .btn{padding:18px;text-align:center}
+input{width:100%;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,0.07);color:white;font-size:1rem;outline:none;margin-bottom:0}
+.badge{display:inline-block;border-radius:30px;padding:3px 14px;font-size:.75rem;font-weight:700}
+.qbox{background:rgba(255,255,255,0.07);border-radius:16px;padding:22px 20px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.12);text-align:center}
+.ibar{border-radius:10px;padding:9px 14px;margin-bottom:16px;font-size:.83rem;text-align:center}
+.ansbox{background:rgba(78,205,196,0.18);border:2px solid #4ECDC4;border-radius:16px;padding:20px;margin-bottom:22px;text-align:center}
+.peek-btn{padding:7px 18px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:#999;font-size:.78rem;cursor:pointer}
+.peek-ans{background:rgba(78,205,196,0.14);border:1px solid #4ECDC4;border-radius:10px;padding:10px 14px;color:#4ECDC4;font-weight:700;margin-top:8px}
+</style>
+</head>
+<body>
+<div style="text-align:center"><h1>ESPAÑOL EN JUEGO!</h1><p style="color:#555;font-size:.8rem;margin:4px 0 22px">Quiz de Español Básico · IFB</p></div>
+
+<div class="scorebar hidden" id="scorebar">
+  <div class="sbox" id="sbox0"><div id="tag0" style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:.6rem;font-weight:900;padding:2px 10px;border-radius:20px;white-space:nowrap;color:#111;display:none"></div><div id="sname0" style="font-weight:900;font-size:.8rem;margin-bottom:4px"></div><div id="snum0" style="font-size:2.2rem;font-weight:900;line-height:1">100</div><div style="font-size:.65rem;color:#888;margin-top:2px">pts</div></div>
+  <div class="sbox" id="sbox1"><div id="tag1" style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:.6rem;font-weight:900;padding:2px 10px;border-radius:20px;white-space:nowrap;color:#111;display:none"></div><div id="sname1" style="font-weight:900;font-size:.8rem;margin-bottom:4px"></div><div id="snum1" style="font-size:2.2rem;font-weight:900;line-height:1">100</div><div style="font-size:.65rem;color:#888;margin-top:2px">pts</div></div>
+</div>
+
+<div class="card" id="sc-setup">
+  <div style="text-align:center;margin-bottom:24px"><div style="font-size:2.5rem">🎮</div><h2 style="margin:6px 0 4px;color:#FFE66D;font-size:1.3rem">Nombres de los Equipos</h2><p style="color:#999;font-size:.85rem">Cada equipo tiene 100 puntos</p></div>
+  <div style="margin-bottom:16px"><label style="display:block;color:#FF6B6B;font-weight:700;font-size:.85rem;margin-bottom:6px">EQUIPO 1</label><input id="n0" placeholder="Nombre del Equipo 1" style="border:2px solid #FF6B6B"/></div>
+  <div style="margin-bottom:20px"><label style="display:block;color:#4ECDC4;font-weight:700;font-size:.85rem;margin-bottom:6px">EQUIPO 2</label><input id="n1" placeholder="Nombre del Equipo 2" style="border:2px solid #4ECDC4"/></div>
+  <button class="btn" style="background:linear-gradient(90deg,#FF6B6B,#FFE66D);color:#111;margin-top:4px" onclick="startGame()">COMENZAR EL JUEGO! 🚀</button>
+</div>
+
+<div class="card hidden" id="sc-draw">
+  <div style="text-align:center;margin-bottom:18px"><div id="dr-round" style="color:#666;font-size:.75rem;margin-bottom:4px"></div><h2 id="dr-title" style="font-size:1.35rem;margin:4px 0 6px"></h2><p style="color:#bbb;margin:0;font-size:.9rem">Es tu turno de <strong>preguntar</strong>!<br>Elige una categoría o saca al azar.</p></div>
+  <div class="cat-grid" id="cat-grid"></div>
+  <button class="btn" style="background:linear-gradient(90deg,#FFE66D,#FF6B6B);color:#111" onclick="drawQ(null)">🎲 PREGUNTA ALEATORIA</button>
+</div>
+
+<div class="card hidden" id="sc-bet">
+  <div style="text-align:center;margin-bottom:18px"><span class="badge" id="bet-badge"></span><h2 id="bet-title" style="margin:14px 0 4px;font-size:1.3rem"></h2><p style="color:#ccc;margin:0 0 4px;font-size:.9rem">Cuántos puntos apostas?</p><p id="bet-info" style="color:#888;margin:0;font-size:.8rem"></p></div>
+  <div class="bet-opts" id="bet-opts"></div>
+  <div class="ibar" style="background:rgba(255,255,255,0.06);color:#bbb;margin-bottom:18px">Correcto: <strong style="color:#4ECDC4" id="bp"></strong> pts &nbsp;|&nbsp; Incorrecto: <strong style="color:#FF6B6B" id="bm"></strong> pts</div>
+  <button class="btn" id="bet-btn" style="color:#111;margin-top:4px" onclick="confirmBet()"></button>
+</div>
+
+<div class="card hidden" id="sc-question">
+  <div style="text-align:center;margin-bottom:16px"><span class="badge" id="q-badge"></span></div>
+  <div class="qbox"><div id="q-text" style="font-size:1.2rem;font-weight:700;color:white;margin-bottom:10px;line-height:1.45"></div><div id="q-hint" style="color:#888;font-size:.78rem;font-style:italic"></div></div>
+  <div class="ibar" id="q-info" style="background:rgba(255,230,109,0.1);border:1px solid rgba(255,230,109,0.25);color:#FFE66D"></div>
+  <div style="text-align:center;margin-bottom:14px"><button class="peek-btn" id="peek-btn" onclick="togglePeek()"></button><div class="peek-ans hidden" id="peek-ans"></div></div>
+  <button class="btn" style="background:linear-gradient(90deg,#FF6B6B,#FFE66D);color:#111" onclick="goReveal()">REVELAR RESPUESTA OFICIAL 🔓</button>
+</div>
+
+<div class="card hidden" id="sc-reveal">
+  <div style="text-align:center;margin-bottom:14px"><span class="badge" id="rv-badge"></span><p id="rv-q" style="color:#ccc;margin:14px 0 0;font-size:.95rem"></p></div>
+  <div class="ansbox"><div style="color:#888;font-size:.75rem;margin-bottom:4px">RESPUESTA CORRECTA</div><div id="rv-ans" style="color:#4ECDC4;font-weight:900;font-size:1.35rem"></div></div>
+  <p id="rv-who" style="text-align:center;color:#FFE66D;font-weight:700;margin:0 0 16px"></p>
+  <div class="two-btns">
+    <button class="btn" style="background:linear-gradient(135deg,#4ECDC4,#44a08d);color:white;font-size:1.1rem" onclick="result(true)">CORRECTO<br><span id="rp" style="font-size:.72rem;opacity:.8"></span></button>
+    <button class="btn" style="background:linear-gradient(135deg,#FF6B6B,#ee0979);color:white;font-size:1.1rem" onclick="result(false)">INCORRECTO<br><span id="rm" style="font-size:.72rem;opacity:.8"></span></button>
+  </div>
+</div>
+
+<div class="card hidden" id="sc-result">
+  <div style="text-align:center"><div id="res-ico" style="font-size:3.5rem;margin-bottom:8px"></div><h2 id="res-h" style="font-size:1.7rem;margin:0 0 6px;font-weight:900"></h2><p id="res-m" style="color:#ccc;margin:0 0 20px"></p></div>
+  <div style="display:flex;gap:12px;margin-bottom:20px" id="res-sc"></div>
+  <div class="ibar" id="res-next" style="background:rgba(255,230,109,.1);border:1px solid rgba(255,230,109,.25);color:#FFE66D;margin-bottom:18px"></div>
+  <button class="btn" style="background:linear-gradient(90deg,#4ECDC4,#FFE66D);color:#111" onclick="nextRound()">SIGUIENTE RONDA →</button>
+</div>
+
+<div class="card hidden" id="sc-end" style="text-align:center">
+  <div style="font-size:3.5rem;margin-bottom:10px">🏆</div>
+  <h2 style="background:linear-gradient(90deg,#FFE66D,#FF6B6B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2rem;margin:0 0 18px">FIN DEL JUEGO!</h2>
+  <p id="end-w" style="font-size:1.15rem;font-weight:900"></p>
+  <div style="display:flex;gap:14px;margin:22px 0" id="end-sc"></div>
+  <button class="btn" style="background:linear-gradient(90deg,#FF6B6B,#FFE66D,#4ECDC4);color:#111" onclick="restart()">🔄 JUGAR DE NUEVO</button>
+</div>
+
+<script>
+const QQ=[
+{id:1,cat:"Saludos y Presentaciones",q:"Como se saluda en la mañana?",a:"Buenos días",h:"Piensa en el momento del día"},
+{id:2,cat:"Saludos y Presentaciones",q:"Completa: Como te ___? (pregunta por el nombre)",a:"llamas",h:"Me ___ Ana."},
+{id:3,cat:"Saludos y Presentaciones",q:"Como se dice 'boa tarde' en español?",a:"Buenas tardes",h:"Saludo de la tarde"},
+{id:4,cat:"Saludos y Presentaciones",q:"Como se despide informalmente?",a:"Adios / Chao / Hasta luego",h:"Al final de una conversacion"},
+{id:5,cat:"Saludos y Presentaciones",q:"Completa: Mucho ___, soy la profesora.",a:"gusto",h:"Expresion al conocer a alguien"},
+{id:6,cat:"Saludos y Presentaciones",q:"Que significa De donde eres?",a:"De onde voce e?",h:"Pregunta sobre el origen"},
+{id:7,cat:"Verbos Regulares",q:"Conjuga hablar con yo.",a:"hablo",h:"Yo ___ español."},
+{id:8,cat:"Verbos Regulares",q:"Conjuga comer con nosotros.",a:"comemos",h:"Nosotros ___ en el comedor."},
+{id:9,cat:"Verbos Regulares",q:"Conjuga vivir con ellos.",a:"viven",h:"Ellos ___ en Brasil."},
+{id:10,cat:"Verbos Regulares",q:"Cual es el infinitivo del verbo estudias?",a:"estudiar",h:"Terminacion -as → verbo -AR"},
+{id:11,cat:"Verbos Regulares",q:"Conjuga escribir con tu.",a:"escribes",h:"Tu ___ muy bien."},
+{id:12,cat:"Verbos Regulares",q:"Cuales son las 3 terminaciones del infinitivo?",a:"-AR, -ER, -IR",h:"hablar, comer, vivir..."},
+{id:13,cat:"Personalidad",q:"Cual es el antonimo de simpatico?",a:"antipatico",h:"Persona que no es agradable"},
+{id:14,cat:"Personalidad",q:"Como se dice engraçado/a en español?",a:"gracioso/a",h:"Persona que hace reir"},
+{id:15,cat:"Personalidad",q:"Que significa trabajador/a?",a:"trabalhador/a",h:"Lo contrario de perezoso"},
+{id:16,cat:"Personalidad",q:"Que significa extrovertido/a?",a:"Pessoa comunicativa",h:"Lo contrario de introvertido"},
+{id:17,cat:"Profesiones",q:"Como se llama la profesion de quien enseña?",a:"profesor / profesora",h:"Esta al frente del aula"},
+{id:18,cat:"Profesiones",q:"Como se dice advogado/a en español?",a:"abogado/a",h:"Trabaja con leyes"},
+{id:19,cat:"Profesiones",q:"Que hace un cocinero/a?",a:"Cozinha / prepara comida",h:"Trabaja en restaurante"},
+{id:20,cat:"Profesiones",q:"Como se dice engenheiro/a en español?",a:"ingeniero/a",h:"Diseña y construye"},
+{id:21,cat:"Objetos de Clase",q:"Como se dice lapis en español?",a:"lapiz",h:"Se puede borrar"},
+{id:22,cat:"Objetos de Clase",q:"Que es una mochila?",a:"mochila (igual en portugues)",h:"La llevas en la espalda"},
+{id:23,cat:"Objetos de Clase",q:"Como se dice borracha de apagar en español?",a:"borrador / goma",h:"Borra lo escrito con lapiz"},
+{id:24,cat:"Objetos de Clase",q:"Como se dice regua en español?",a:"regla",h:"Traza lineas rectas"},
+{id:25,cat:"Objetos de Clase",q:"Como se dice caderno en español?",a:"cuaderno",h:"Escribes los apuntes"},
+{id:26,cat:"Números",q:"Como se escribe 15 en español?",a:"quince",h:"Entre catorce y dieciseis"},
+{id:27,cat:"Números",q:"Cuanto es 10 + 10? Di en español.",a:"veinte",h:"10 + 10 = ___"},
+{id:28,cat:"Números",q:"Como se dice 100 en español?",a:"cien",h:"Numero redondo"},
+{id:29,cat:"Números",q:"Como se escribe 13 en español?",a:"trece",h:"Numero de mala suerte"},
+{id:30,cat:"Números",q:"Como se dice 1000 en español?",a:"mil",h:"Diez veces cien"},
+{id:31,cat:"Alfabeto",q:"Cuantas letras tiene el alfabeto español?",a:"27 letras",h:"Una mas que el portugues"},
+{id:32,cat:"Alfabeto",q:"Que letra especial tiene el español que el portugues no tiene?",a:"la N con tilde (eñe)",h:"Aparece en español y mañana"},
+{id:33,cat:"Alfabeto",q:"Como se llama la letra J en español?",a:"jota",h:"Sonido diferente al portugues"},
+{id:34,cat:"Alfabeto",q:"Deletrea la palabra CASA en español.",a:"C - A - S - A",h:"Es donde vives"},
+{id:35,cat:"Fonemas del Alfabeto",q:"La H en español suena como...?",a:"Es muda, no se pronuncia",h:"En hola, la H no suena"},
+{id:36,cat:"Fonemas del Alfabeto",q:"Como suena LL en Latinoamerica?",a:"Como Y — igual que en ya",h:"En ella, LL suena como Y"},
+{id:37,cat:"Fonemas del Alfabeto",q:"La C antes de e o i suena como...?",a:"Como S — cena, ciudad",h:"Diferente segun la vocal"},
+{id:38,cat:"Fonemas del Alfabeto",q:"Perro y pero se pronuncian igual?",a:"No. RR = vibracion fuerte; R = suave",h:"La diferencia esta en la intensidad"},
+{id:39,cat:"Aula y Escuela",q:"Como se dice lousa en español?",a:"pizarra / tablero",h:"El profesor escribe en ella"},
+{id:40,cat:"Aula y Escuela",q:"Que significa tarea en portugues?",a:"tarefa / licao de casa",h:"Lo que el profesor manda a casa"},
+{id:41,cat:"Aula y Escuela",q:"Como se dice recreio en español?",a:"recreo",h:"Tiempo de descanso entre clases"},
+{id:42,cat:"Aula y Escuela",q:"Como se dice sala de aula en español?",a:"aula / salon de clases",h:"Donde estudias con tu grupo"},
+{id:43,cat:"Aula y Escuela",q:"Como se dice diretor/diretora en español?",a:"director / directora",h:"Persona que dirige la escuela"},
+];
+const CM={"Saludos y Presentaciones":{c:"#FF6B6B",e:"👋"},"Verbos Regulares":{c:"#4ECDC4",e:"📝"},"Personalidad":{c:"#FFE66D",e:"😄"},"Profesiones":{c:"#A8E6CF",e:"💼"},"Objetos de Clase":{c:"#FF8B94",e:"✏️"},"Números":{c:"#C3A6FF",e:"🔢"},"Alfabeto":{c:"#F7D794",e:"🔤"},"Fonemas del Alfabeto":{c:"#74B9FF",e:"🎙️"},"Aula y Escuela":{c:"#55EFC4",e:"🏫"}};
+const TC=["#FF6B6B","#4ECDC4"];
+let nm=["",""],sc=[100,100],ask=0,cq=null,used=[],bet=10,rnd=1,pk=false;
+const ans=()=>ask===0?1:0;
+const $=id=>document.getElementById(id);
+const show=id=>{["setup","draw","bet","question","reveal","result","end"].forEach(s=>$("sc-"+s).classList.add("hidden"));$("sc-"+id).classList.remove("hidden");};
+function updSB(){
+  $("scorebar").classList.remove("hidden");
+  const a=ans();
+  [0,1].forEach(i=>{
+    const b=$("sbox"+i);
+    b.style.background=TC[i]+"18";
+    b.style.border=`2px solid ${i===ask?TC[i]:"rgba(255,255,255,0.08)"}`;
+    $("sname"+i).textContent=nm[i];$("sname"+i).style.color=TC[i];
+    $("snum"+i).textContent=sc[i];
+    const t=$("tag"+i);
+    if(i===ask){t.textContent="🎤 PREGUNTA";t.style.background=TC[i];t.style.display="block";}
+    else if(i===a){t.textContent="🎯 RESPONDE";t.style.background="#FFE66D";t.style.display="block";}
+    else t.style.display="none";
+  });
+}
+function startGame(){
+  nm[0]=$("n0").value.trim()||"Equipo 1";nm[1]=$("n1").value.trim()||"Equipo 2";
+  sc=[100,100];ask=0;used=[];rnd=1;updSB();goD();
+}
+function goD(){
+  updSB();
+  $("dr-round").textContent=`RONDA ${rnd} · ${QQ.length-used.length} preguntas restantes`;
+  $("dr-title").textContent="🎤 "+nm[ask];$("dr-title").style.color=TC[ask];
+  const g=$("cat-grid");g.innerHTML="";
+  Object.entries(CM).forEach(([cat,{c,e}])=>{
+    const b=document.createElement("button");b.className="cat-btn";b.textContent=e+" "+cat;
+    b.style.cssText=`background:${c}18;border:1.5px solid ${c}55;color:${c}`;
+    b.onmouseenter=()=>b.style.background=c+"33";b.onmouseleave=()=>b.style.background=c+"18";
+    b.onclick=()=>drawQ(cat);g.appendChild(b);
+  });
+  show("draw");
+}
+function drawQ(cat){
+  const pool=QQ.filter(q=>!used.includes(q.id)&&(!cat||q.cat===cat));
+  if(!pool.length){alert("No hay mas preguntas en esta categoria!");return;}
+  cq=pool[Math.floor(Math.random()*pool.length)];bet=10;goBet();
+}
+function goBet(){
+  const a=ans();const m=CM[cq.cat]||{c:"#fff",e:"📚"};
+  const bg=$("bet-badge");bg.textContent=m.e+" "+cq.cat;bg.style.cssText=`background:${m.c}28;border:1.5px solid ${m.c};color:${m.c}`;
+  $("bet-title").textContent="💰 "+nm[a];$("bet-title").style.color=TC[a];
+  $("bet-info").innerHTML=`Tienes <strong style="color:${TC[a]}">${sc[a]}</strong> puntos`;
+  const opts=[10,20,30,50].filter(b=>b<=sc[a]);if(!opts.length)opts.push(Math.max(5,Math.floor(sc[a]/2)));
+  renderOpts(opts);show("bet");
+}
+function renderOpts(opts){
+  const a=ans();const o=$("bet-opts");o.innerHTML="";
+  opts.forEach(b=>{
+    const btn=document.createElement("button");btn.className="bet-btn";btn.textContent=b;
+    btn.style.cssText=`border:2px solid ${bet===b?TC[a]:"rgba(255,255,255,0.18)"};background:${bet===b?TC[a]:"rgba(255,255,255,0.07)"};color:${bet===b?"#111":"white"}`;
+    btn.onclick=()=>{bet=b;renderOpts(opts);};o.appendChild(btn);
+  });
+  $("bp").textContent="+"+bet;$("bm").textContent="-"+bet;
+  const bb=$("bet-btn");bb.textContent=`APOSTAR ${bet} PUNTOS 🎯`;
+  bb.style.cssText=`background:linear-gradient(90deg,${TC[ans()]},#FFE66D);color:#111;border:none;border-radius:14px;font-weight:900;font-size:1rem;cursor:pointer;padding:14px 20px;width:100%;transition:transform .15s`;
+}
+function confirmBet(){
+  const a=ans();const m=CM[cq.cat]||{c:"#fff",e:"📚"};
+  const bg=$("q-badge");bg.textContent=m.e+" "+cq.cat;bg.style.cssText=`background:${m.c}28;border:1.5px solid ${m.c};color:${m.c}`;
+  $("q-text").textContent=cq.q;$("q-hint").textContent=cq.h?"💡 "+cq.h:"";
+  $("q-info").innerHTML=`<strong>${nm[ask]}</strong> lee · <strong>${nm[a]}</strong> responde · ${bet} pts en juego`;
+  $("peek-btn").textContent="👁️ "+nm[ask]+": ver respuesta";$("peek-ans").classList.add("hidden");pk=false;
+  show("question");
+}
+function togglePeek(){
+  pk=!pk;const pa=$("peek-ans"),pb=$("peek-btn");
+  if(pk){pa.classList.remove("hidden");pa.textContent="✅ "+cq.a;pb.textContent="🔒 Ocultar";}
+  else{pa.classList.add("hidden");pb.textContent="👁️ "+nm[ask]+": ver respuesta";}
+}
+function goReveal(){
+  const a=ans();const m=CM[cq.cat]||{c:"#fff",e:"📚"};
+  const bg=$("rv-badge");bg.textContent=m.e+" "+cq.cat;bg.style.cssText=`background:${m.c}28;border:1.5px solid ${m.c};color:${m.c}`;
+  $("rv-q").textContent=cq.q;$("rv-ans").textContent=cq.a;
+  $("rv-who").textContent=nm[a]+" respondio correctamente?";
+  $("rp").textContent="+"+bet+" pts";$("rm").textContent="-"+bet+" pts";
+  show("reveal");
+}
+function result(ok){
+  const a=ans();
+  if(ok)sc[a]+=bet;else{sc[a]-=bet;sc[ask]+=Math.floor(bet/2);}
+  used.push(cq.id);
+  $("res-ico").textContent=ok?"🎉":"😅";
+  const rh=$("res-h");rh.textContent=ok?"CORRECTO!":"INCORRECTO!";rh.style.color=ok?"#4ECDC4":"#FF6B6B";
+  $("res-m").textContent=ok?nm[a]+" gana "+bet+" puntos 🏆":nm[a]+" pierde "+bet+" puntos";
+  $("res-sc").innerHTML=[0,1].map(i=>`<div style="flex:1;background:${TC[i]}15;border:1.5px solid ${TC[i]};border-radius:14px;padding:12px 10px;text-align:center"><div style="color:${TC[i]};font-weight:700;font-size:.8rem">${nm[i]}</div><div style="font-size:2.2rem;font-weight:900">${sc[i]}</div><div style="font-size:.65rem;color:#888">pts</div></div>`).join("");
+  $("res-next").innerHTML="Proxima ronda → <strong>"+nm[a]+"</strong> pregunta 🎤";
+  updSB();show("result");
+}
+function nextRound(){
+  if(used.length>=QQ.length||rnd>=30){goEnd();return;}
+  ask=ans();rnd++;goD();
+}
+function goEnd(){
+  $("scorebar").classList.add("hidden");
+  const w=sc[0]>sc[1]?0:sc[1]>sc[0]?1:-1;
+  const wp=$("end-w");
+  if(w===-1){wp.textContent="EMPATE! Los dos equipos son campeones 🤝";wp.style.color="#FFE66D";}
+  else{wp.textContent="Campeon: "+nm[w]+"! 🥇";wp.style.color=TC[w];}
+  $("end-sc").innerHTML=[0,1].map(i=>`<div style="flex:1;border-radius:16px;padding:18px 10px;text-align:center;background:${w===i?TC[i]+"28":"rgba(255,255,255,0.04)"};border:2px solid ${w===i?TC[i]:"rgba(255,255,255,0.08)"}"><div style="font-size:1.4rem">${w===i?"🥇":""}</div><div style="color:${TC[i]};font-weight:700;font-size:.85rem;margin:6px 0 4px">${nm[i]}</div><div style="font-size:2.4rem;font-weight:900">${sc[i]}</div><div style="font-size:.65rem;color:#888">pts finais</div></div>`).join("");
+  show("end");
+}
+function restart(){
+  sc=[100,100];ask=0;used=[];rnd=1;cq=null;bet=10;
+  $("n0").value="";$("n1").value="";
+  $("scorebar").classList.add("hidden");show("setup");
+}
+</script>
+</body>
+</html>

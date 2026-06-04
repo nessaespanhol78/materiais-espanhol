@@ -1,1 +1,614 @@
-<iframe src="https://claude.site/public/artifacts/434c3f4c-4ecf-457b-a8d9-dd63f6b18fb0/embed" title="preterito-indefinido.html" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pretérito Indefinido — Español · IFB</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ar:#FF8C42;--er:#4ECDC4;--ir:#A78BFA;
+  --pt:#6BCB77;--hl:#FFE66D;
+  --bg:#080d18;--bg2:#0f1624;
+  --card:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.1);
+  --text:#e8eaed;--muted:#6b7280;
+}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",Tahoma,sans-serif;line-height:1.6}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,13,24,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:4px;overflow-x:auto}
+.nav-logo{font-weight:900;font-size:.95rem;margin-right:12px;white-space:nowrap;background:linear-gradient(90deg,var(--ar),var(--hl));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav a{color:var(--muted);text-decoration:none;padding:14px 11px;font-size:.82rem;font-weight:600;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;display:block}
+.nav a:hover,.nav a.active{color:var(--text);border-bottom-color:var(--hl)}
+
+/* LAYOUT */
+.container{max-width:860px;margin:0 auto;padding:40px 20px}
+section{margin-bottom:70px;scroll-margin-top:56px}
+h2{font-size:1.6rem;font-weight:900;margin-bottom:8px}
+h3{font-size:1rem;font-weight:700;margin-bottom:12px}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.card+.card,.card+.div-mt{margin-top:14px}
+
+/* BADGES */
+.badge{display:inline-block;border-radius:20px;padding:3px 12px;font-size:.72rem;font-weight:700}
+.b-ar{background:rgba(255,140,66,.15);border:1.5px solid var(--ar);color:var(--ar)}
+.b-er{background:rgba(78,205,196,.15);border:1.5px solid var(--er);color:var(--er)}
+.b-ir{background:rgba(167,139,250,.15);border:1.5px solid var(--ir);color:var(--ir)}
+.b-pt{background:rgba(107,203,119,.15);border:1.5px solid var(--pt);color:var(--pt)}
+
+/* TABLES */
+.ct{width:100%;border-collapse:collapse;margin-top:12px}
+.ct th{padding:8px 12px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);text-align:left;border-bottom:1px solid var(--border)}
+.ct td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:.93rem}
+.ct tr:last-child td{border-bottom:none}
+.ct tr:hover td{background:rgba(255,255,255,0.025)}
+.pron{color:var(--muted);font-size:.83rem}
+.vos-note{color:var(--muted);font-style:italic;font-size:.8rem}
+
+/* ALERT BOXES */
+.alert{border-radius:12px;padding:14px 16px;font-size:.88rem;line-height:1.55;margin-top:14px}
+.a-yellow{background:rgba(255,230,109,.1);border:1px solid rgba(255,230,109,.35);color:#FFE66D}
+.a-green{background:rgba(107,203,119,.1);border:1px solid rgba(107,203,119,.35);color:#6BCB77}
+.a-blue{background:rgba(74,165,220,.1);border:1px solid rgba(74,165,220,.35);color:#5BB8F5}
+.a-purple{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.4);color:#A78BFA;text-align:center;padding:16px}
+
+/* EXAMPLES */
+.ex-wrap{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.ex-line{background:rgba(255,255,255,0.03);border-left:3px solid;border-radius:0 10px 10px 0;padding:10px 14px;cursor:pointer;transition:background .2s}
+.ex-line:hover{background:rgba(255,255,255,0.05)}
+.ex-line .es{font-size:.93rem;margin-bottom:3px}
+.ex-line .pt-tr{color:var(--pt);font-size:.83rem;margin-top:4px;display:none}
+.ex-line .hint{color:#555;font-size:.75rem;margin-top:2px}
+
+/* SIGNAL WORDS */
+.signals{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sig{background:rgba(255,230,109,.08);border:1px solid rgba(255,230,109,.25);border-radius:8px;padding:6px 12px;font-size:.83rem}
+.sig .es{color:var(--hl);font-weight:700;display:block}
+.sig .pt{color:var(--pt);font-size:.75rem}
+
+/* COMPARE GRID */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:500px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-box{border-radius:14px;padding:16px}
+.cmp-es{background:rgba(255,230,109,.08);border:1px solid rgba(255,230,109,.25)}
+.cmp-pt{background:rgba(107,203,119,.08);border:1px solid rgba(107,203,119,.25)}
+.cmp-lang{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.cmp-line{font-size:.92rem;line-height:1.8}
+
+/* CONJUGADOR */
+.cj-form{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:0}
+.cj-form input{flex:1;min-width:150px;padding:11px 14px;border-radius:10px;border:2px solid var(--border);background:rgba(255,255,255,0.07);color:white;font-size:1rem;outline:none;transition:border .2s}
+.cj-form input:focus{border-color:var(--hl)}
+.type-grp{display:flex;gap:6px}
+.tp-btn{padding:10px 14px;border-radius:9px;border:2px solid;font-weight:700;font-size:.85rem;cursor:pointer;background:transparent;transition:all .2s}
+.tp-ar{border-color:var(--ar);color:var(--ar)}.tp-ar:hover,.tp-ar.act{background:var(--ar);color:#111}
+.tp-er{border-color:var(--er);color:var(--er)}.tp-er:hover,.tp-er.act{background:var(--er);color:#111}
+.tp-ir{border-color:var(--ir);color:var(--ir)}.tp-ir:hover,.tp-ir.act{background:var(--ir);color:#111}
+.cj-btn{padding:11px 22px;border-radius:10px;background:linear-gradient(90deg,var(--ar),var(--hl));border:none;color:#111;font-weight:900;cursor:pointer;font-size:.95rem;transition:transform .15s}
+.cj-btn:hover{transform:scale(1.04)}
+#cj-out{display:none;margin-top:18px}
+
+/* EXERCISES */
+.q-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:border .3s}
+.q-sent{font-size:.95rem;line-height:1.7;margin-bottom:8px}
+.q-inp{padding:7px 12px;border-radius:8px;border:2px solid var(--border);background:rgba(255,255,255,0.07);color:white;font-size:.92rem;outline:none;min-width:110px;max-width:150px;text-align:center;transition:all .3s}
+.q-inp.ok{border-color:#6BCB77!important;background:rgba(107,203,119,.15)!important;color:#6BCB77}
+.q-inp.err{border-color:#FF6B6B!important;background:rgba(255,107,107,.15)!important;color:#FF6B6B}
+.q-fb{font-size:.83rem;font-weight:600;margin-top:8px;display:none}
+.q-fb.ok{color:#6BCB77}.q-fb.err{color:#FF6B6B}
+.chk-btn{padding:7px 16px;border-radius:8px;border:none;background:var(--hl);color:#111;font-weight:700;cursor:pointer;font-size:.82rem;margin-top:8px;transition:opacity .2s}
+.chk-btn:hover{opacity:.88}
+.big-btn{display:block;width:100%;padding:14px;border-radius:12px;background:linear-gradient(90deg,var(--ar),var(--hl));border:none;color:#111;font-weight:900;cursor:pointer;font-size:.97rem;margin-top:6px;transition:transform .15s}
+.big-btn:hover{transform:scale(1.02)}
+.score-box{background:linear-gradient(135deg,rgba(255,230,109,.12),rgba(78,205,196,.08));border:1px solid var(--hl);border-radius:18px;padding:28px;text-align:center;margin-top:20px;display:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">🇪🇸 Pret. Indefinido</span>
+  <a href="#intro">Introdução</a>
+  <a href="#ar">Verbos -AR</a>
+  <a href="#er">Verbos -ER</a>
+  <a href="#ir">Verbos -IR</a>
+  <a href="#conjugador">Conjugador</a>
+  <a href="#exercicios">Exercícios</a>
+</nav>
+
+<div class="container">
+
+<!-- ══ INTRO ═══════════════════════════════════════════════════════ -->
+<section id="intro">
+  <div style="margin-bottom:24px">
+    <h2 style="font-size:2rem;background:linear-gradient(90deg,#FF8C42,#FFE66D,#4ECDC4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Pretérito Indefinido</h2>
+    <p style="color:#555;margin-top:4px">Español · IFB · Nível Básico</p>
+  </div>
+
+  <div class="card">
+    <h3>📌 O que é?</h3>
+    <p style="color:#ccc;margin-top:8px;line-height:1.75">
+      O <strong style="color:#FFE66D">pretérito indefinido</strong> é o passado simples em espanhol.<br>
+      Equivale ao <strong style="color:#6BCB77">pretérito perfeito simples</strong> do português —
+      usado para ações <strong>concluídas</strong> em um momento específico do passado.
+    </p>
+  </div>
+
+  <div class="cmp-grid">
+    <div class="cmp-box cmp-pt">
+      <div class="cmp-lang" style="color:#6BCB77">🇧🇷 Português</div>
+      <div class="cmp-line">
+        Ontem eu <strong>fal<u>ei</u></strong> com ela.<br>
+        Ela <strong>com<u>eu</u></strong> pizza.<br>
+        Nós <strong>viv<u>emos</u></strong> aqui.
+      </div>
+    </div>
+    <div class="cmp-box cmp-es">
+      <div class="cmp-lang" style="color:#FFE66D">🇪🇸 Español</div>
+      <div class="cmp-line">
+        Ayer yo <strong>habl<u>é</u></strong> con ella.<br>
+        Ella <strong>com<u>ió</u></strong> pizza.<br>
+        Nosotros <strong>viv<u>imos</u></strong> aquí.
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>🕐 Palavras-chave — quando usar?</h3>
+    <p style="color:#888;font-size:.83rem;margin-bottom:2px">Estas palavras indicam que o pretérito indefinido deve ser usado:</p>
+    <div class="signals">
+      <div class="sig"><span class="es">ayer</span><span class="pt">ontem</span></div>
+      <div class="sig"><span class="es">anoche</span><span class="pt">ontem à noite</span></div>
+      <div class="sig"><span class="es">la semana pasada</span><span class="pt">na semana passada</span></div>
+      <div class="sig"><span class="es">el año pasado</span><span class="pt">no ano passado</span></div>
+      <div class="sig"><span class="es">el mes pasado</span><span class="pt">no mês passado</span></div>
+      <div class="sig"><span class="es">hace (X) años</span><span class="pt">há (X) anos</span></div>
+      <div class="sig"><span class="es">el lunes / martes...</span><span class="pt">na segunda / terça...</span></div>
+      <div class="sig"><span class="es">en 2010 / en 1999...</span><span class="pt">em 2010 / em 1999...</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ -AR ══════════════════════════════════════════════════════════ -->
+<section id="ar">
+  <h2><span style="color:var(--ar)">Verbos -AR</span></h2>
+  <p style="color:#888;margin-bottom:16px">Modelo: <strong>habl-AR</strong> → <span style="color:var(--pt)">fal-AR</span></p>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span class="badge b-ar">-AR</span>
+      <span style="font-size:.83rem;color:#888">Terminações no pretérito indefinido</span>
+    </div>
+    <table class="ct">
+      <thead>
+        <tr>
+          <th>Pronome</th>
+          <th style="color:var(--ar)">🇪🇸 Español</th>
+          <th style="color:var(--pt)">🇧🇷 Português</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pron">yo / eu</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">é</strong></td>
+          <td style="color:var(--pt)">eu fal<strong>ei</strong></td>
+          <td style="font-size:.78rem;color:#888">acento obrigatório ✦</td>
+        </tr>
+        <tr>
+          <td><span class="pron">tú / você</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">aste</strong></td>
+          <td style="color:var(--pt)">você fal<strong>ou</strong></td>
+          <td style="font-size:.78rem;color:#888">PT: tu falaste / você falou</td>
+        </tr>
+        <tr>
+          <td><span class="pron">él / ella</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">ó</strong></td>
+          <td style="color:var(--pt)">fal<strong>ou</strong></td>
+          <td style="font-size:.78rem;color:#888">acento obrigatório ✦</td>
+        </tr>
+        <tr>
+          <td><span class="pron">nosotros / nós</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">amos</strong></td>
+          <td style="color:var(--pt)">fal<strong>amos</strong></td>
+          <td style="font-size:.78rem;color:var(--hl)">⚠ igual ao presente!</td>
+        </tr>
+        <tr>
+          <td><span class="pron">vosotros</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">asteis</strong></td>
+          <td class="vos-note">— (não existe no BR)</td>
+          <td style="font-size:.78rem;color:#888">só na Espanha</td>
+        </tr>
+        <tr>
+          <td><span class="pron">ellos / eles</span></td>
+          <td style="font-weight:700">habl<strong style="color:var(--ar)">aron</strong></td>
+          <td style="color:var(--pt)">fal<strong>aram</strong></td>
+          <td style="font-size:.78rem;color:#888">similar ao PT</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert a-yellow">
+    ⚠ <strong>Atenção com o acento!</strong><br>
+    <code>habl<strong>o</strong></code> (presente — eu falo agora) &nbsp;≠&nbsp; <code>habl<strong>ó</strong></code> (pretérito — ela falou ontem)<br>
+    O acento muda completamente o tempo verbal!
+  </div>
+  <div class="alert a-blue">
+    💡 <strong>Armadilha do nosotros:</strong> <code>hablamos</code> pode ser presente OU pretérito.<br>
+    O contexto (palavra-chave) é o que diferencia: <em>"ahora hablamos"</em> × <em>"ayer hablamos"</em>.
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="color:var(--ar)">📚 Exemplos — verbos -AR</h3>
+    <p style="color:#888;font-size:.8rem;margin-bottom:2px">👆 Clique em cada frase para ver a tradução</p>
+    <div class="ex-wrap">
+      <div class="ex-line" style="border-color:var(--ar)" onclick="rev(this)">
+        <div class="es">Ayer yo <strong style="color:var(--ar)">hablé</strong> con mi profesora.</div>
+        <div class="pt-tr">🇧🇷 Ontem eu falei com minha professora.</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--ar)" onclick="rev(this)">
+        <div class="es">El lunes, tú <strong style="color:var(--ar)">estudiaste</strong> mucho.</div>
+        <div class="pt-tr">🇧🇷 Na segunda-feira, você estudou muito.</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--ar)" onclick="rev(this)">
+        <div class="es">Ellos <strong style="color:var(--ar)">trabajaron</strong> hasta tarde anoche.</div>
+        <div class="pt-tr">🇧🇷 Eles trabalharam até tarde ontem à noite.</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--ar)" onclick="rev(this)">
+        <div class="es">Nosotros <strong style="color:var(--ar)">hablamos</strong> con el director <em>ayer</em>.</div>
+        <div class="pt-tr">🇧🇷 Nós falamos com o diretor ontem. (ayer = passado!)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ -ER ══════════════════════════════════════════════════════════ -->
+<section id="er">
+  <h2><span style="color:var(--er)">Verbos -ER</span></h2>
+  <p style="color:#888;margin-bottom:16px">Modelo: <strong>com-ER</strong> → <span style="color:var(--pt)">com-ER</span></p>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span class="badge b-er">-ER</span>
+      <span style="font-size:.83rem;color:#888">Terminações no pretérito indefinido</span>
+    </div>
+    <table class="ct">
+      <thead>
+        <tr>
+          <th>Pronome</th>
+          <th style="color:var(--er)">🇪🇸 Español</th>
+          <th style="color:var(--pt)">🇧🇷 Português</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pron">yo / eu</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">í</strong></td>
+          <td style="color:var(--pt)">eu com<strong>i</strong></td>
+          <td style="font-size:.78rem;color:#888">acento obrigatório ✦</td>
+        </tr>
+        <tr>
+          <td><span class="pron">tú / você</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">iste</strong></td>
+          <td style="color:var(--pt)">você com<strong>eu</strong></td>
+          <td style="font-size:.78rem;color:#888">terminação diferente do PT</td>
+        </tr>
+        <tr>
+          <td><span class="pron">él / ella</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">ió</strong></td>
+          <td style="color:var(--pt)">com<strong>eu</strong></td>
+          <td style="font-size:.78rem;color:#888">acento obrigatório ✦</td>
+        </tr>
+        <tr>
+          <td><span class="pron">nosotros / nós</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">imos</strong></td>
+          <td style="color:var(--pt)">com<strong>emos</strong></td>
+          <td style="font-size:.78rem;color:#888">≠ presente (comemos)</td>
+        </tr>
+        <tr>
+          <td><span class="pron">vosotros</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">isteis</strong></td>
+          <td class="vos-note">— (não existe no BR)</td>
+          <td style="font-size:.78rem;color:#888">só na Espanha</td>
+        </tr>
+        <tr>
+          <td><span class="pron">ellos / eles</span></td>
+          <td style="font-weight:700">com<strong style="color:var(--er)">ieron</strong></td>
+          <td style="color:var(--pt)">com<strong>eram</strong></td>
+          <td style="font-size:.78rem;color:#888">similar ao PT</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert a-green">
+    ✅ <strong>Boa notícia!</strong> Para -ER, o nosotros é diferente no presente e no passado:<br>
+    <code>com<strong>emos</strong></code> (presente) &nbsp;≠&nbsp; <code>com<strong>imos</strong></code> (pretérito) — mais fácil de distinguir!
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="color:var(--er)">📚 Exemplos — verbos -ER</h3>
+    <p style="color:#888;font-size:.8rem;margin-bottom:2px">👆 Clique em cada frase para ver a tradução</p>
+    <div class="ex-wrap">
+      <div class="ex-line" style="border-color:var(--er)" onclick="rev(this)">
+        <div class="es">Anoche nosotros <strong style="color:var(--er)">comimos</strong> pizza.</div>
+        <div class="pt-tr">🇧🇷 Ontem à noite nós comemos pizza.</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--er)" onclick="rev(this)">
+        <div class="es">¿Tú <strong style="color:var(--er)">bebiste</strong> agua en clase?</div>
+        <div class="pt-tr">🇧🇷 Você bebeu água na aula?</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--er)" onclick="rev(this)">
+        <div class="es">El año pasado, ellos <strong style="color:var(--er)">aprendieron</strong> mucho.</div>
+        <div class="pt-tr">🇧🇷 No ano passado, eles aprenderam muito.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ -IR ══════════════════════════════════════════════════════════ -->
+<section id="ir">
+  <h2><span style="color:var(--ir)">Verbos -IR</span></h2>
+  <p style="color:#888;margin-bottom:14px">Modelo: <strong>viv-IR</strong> → <span style="color:var(--pt)">viv-ER/IR</span></p>
+
+  <div class="alert a-purple">
+    🔑 <strong>Regra de ouro:</strong> Os verbos <strong>-ER</strong> e <strong>-IR</strong> têm as <em>mesmas terminações</em> no pretérito indefinido!<br>
+    <span style="font-size:.83rem;font-weight:400;color:#ccc;display:block;margin-top:4px">No português isso não acontece. No espanhol é mais simples: aprenda uma vez, vale para as duas!</span>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span class="badge b-ir">-IR</span>
+      <span style="font-size:.83rem;color:#888">Terminações no pretérito indefinido</span>
+    </div>
+    <table class="ct">
+      <thead>
+        <tr>
+          <th>Pronome</th>
+          <th style="color:var(--ir)">🇪🇸 Español</th>
+          <th style="color:var(--pt)">🇧🇷 Português</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pron">yo / eu</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">í</strong></td>
+          <td style="color:var(--pt)">eu viv<strong>i</strong></td>
+          <td style="font-size:.78rem;color:var(--er)">= -ER (comí)</td>
+        </tr>
+        <tr>
+          <td><span class="pron">tú / você</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">iste</strong></td>
+          <td style="color:var(--pt)">você viv<strong>eu</strong></td>
+          <td style="font-size:.78rem;color:var(--er)">= -ER (comiste)</td>
+        </tr>
+        <tr>
+          <td><span class="pron">él / ella</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">ió</strong></td>
+          <td style="color:var(--pt)">viv<strong>eu</strong></td>
+          <td style="font-size:.78rem;color:var(--er)">= -ER (comió)</td>
+        </tr>
+        <tr>
+          <td><span class="pron">nosotros / nós</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">imos</strong></td>
+          <td style="color:var(--pt)">viv<strong>emos</strong></td>
+          <td style="font-size:.78rem;color:var(--hl)">⚠ igual ao presente!</td>
+        </tr>
+        <tr>
+          <td><span class="pron">vosotros</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">isteis</strong></td>
+          <td class="vos-note">— (não existe no BR)</td>
+          <td style="font-size:.78rem;color:#888">só na Espanha</td>
+        </tr>
+        <tr>
+          <td><span class="pron">ellos / eles</span></td>
+          <td style="font-weight:700">viv<strong style="color:var(--ir)">ieron</strong></td>
+          <td style="color:var(--pt)">viv<strong>eram</strong></td>
+          <td style="font-size:.78rem;color:var(--er)">= -ER (comieron)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMPARATIVE TABLE -->
+  <div class="card" style="margin-top:16px">
+    <h3>📊 Quadro comparativo — as 3 conjugações</h3>
+    <table class="ct" style="margin-top:10px">
+      <thead>
+        <tr>
+          <th>Pronome</th>
+          <th style="color:var(--ar)">-AR (hablar)</th>
+          <th style="color:var(--er)">-ER (comer)</th>
+          <th style="color:var(--ir)">-IR (vivir)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="pron">yo</td><td style="color:var(--ar)">habl<strong>é</strong></td><td style="color:var(--er)">com<strong>í</strong></td><td style="color:var(--ir)">viv<strong>í</strong></td></tr>
+        <tr><td class="pron">tú</td><td style="color:var(--ar)">habl<strong>aste</strong></td><td style="color:var(--er)">com<strong>iste</strong></td><td style="color:var(--ir)">viv<strong>iste</strong></td></tr>
+        <tr><td class="pron">él/ella</td><td style="color:var(--ar)">habl<strong>ó</strong></td><td style="color:var(--er)">com<strong>ió</strong></td><td style="color:var(--ir)">viv<strong>ió</strong></td></tr>
+        <tr><td class="pron">nosotros</td><td style="color:var(--ar)">habl<strong>amos</strong></td><td style="color:var(--er)">com<strong>imos</strong></td><td style="color:var(--ir)">viv<strong>imos</strong></td></tr>
+        <tr><td class="pron">vosotros</td><td style="color:var(--ar)">habl<strong>asteis</strong></td><td style="color:var(--er)">com<strong>isteis</strong></td><td style="color:var(--ir)">viv<strong>isteis</strong></td></tr>
+        <tr><td class="pron">ellos</td><td style="color:var(--ar)">habl<strong>aron</strong></td><td style="color:var(--er)">com<strong>ieron</strong></td><td style="color:var(--ir)">viv<strong>ieron</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3 style="color:var(--ir)">📚 Exemplos — verbos -IR</h3>
+    <p style="color:#888;font-size:.8rem;margin-bottom:2px">👆 Clique em cada frase para ver a tradução</p>
+    <div class="ex-wrap">
+      <div class="ex-line" style="border-color:var(--ir)" onclick="rev(this)">
+        <div class="es">El año pasado yo <strong style="color:var(--ir)">viví</strong> en São Paulo.</div>
+        <div class="pt-tr">🇧🇷 No ano passado eu vivi em São Paulo.</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--ir)" onclick="rev(this)">
+        <div class="es">¿Tú <strong style="color:var(--ir)">escribiste</strong> la tarea ayer?</div>
+        <div class="pt-tr">🇧🇷 Você escreveu a tarefa ontem?</div>
+      </div>
+      <div class="ex-line" style="border-color:var(--ir)" onclick="rev(this)">
+        <div class="es">Ellos <strong style="color:var(--ir)">abrieron</strong> la escuela a las siete.</div>
+        <div class="pt-tr">🇧🇷 Eles abriram a escola às sete.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONJUGADOR ═══════════════════════════════════════════════════ -->
+<section id="conjugador">
+  <h2>🔧 Conjugador Interativo</h2>
+  <p style="color:#888;margin-bottom:18px">Digite qualquer verbo regular no infinitivo e veja a conjugação completa.</p>
+  <div class="card">
+    <div class="cj-form">
+      <input type="text" id="vi" placeholder="Ex: trabajar, beber, escribir..." oninput="autoType()"/>
+      <div class="type-grp">
+        <button class="tp-btn tp-ar" id="t-ar" onclick="pickType('ar')">-AR</button>
+        <button class="tp-btn tp-er" id="t-er" onclick="pickType('er')">-ER</button>
+        <button class="tp-btn tp-ir" id="t-ir" onclick="pickType('ir')">-IR</button>
+      </div>
+      <button class="cj-btn" onclick="doConj()">Conjugar ▶</button>
+    </div>
+    <div id="cj-out"></div>
+  </div>
+</section>
+
+<!-- ══ EXERCÍCIOS ═══════════════════════════════════════════════════ -->
+<section id="exercicios">
+  <h2>✏️ Exercícios</h2>
+  <p style="color:#888;margin-bottom:18px">Complete cada frase com o verbo no pretérito indefinido. Clique em <strong>Verificar</strong> para checar.</p>
+  <div id="qbox"></div>
+  <button class="big-btn" onclick="checkAll()">Verificar todas as respostas ✓</button>
+  <div class="score-box" id="sbox">
+    <div style="font-size:3rem;margin-bottom:8px" id="s-ico"></div>
+    <div style="font-size:1.5rem;font-weight:900;color:var(--hl)" id="s-txt"></div>
+    <div style="color:#888;margin-top:6px;font-size:.88rem" id="s-sub"></div>
+    <button class="cj-btn" style="margin-top:18px;width:auto;padding:10px 24px" onclick="resetAll()">🔄 Tentar novamente</button>
+  </div>
+</section>
+
+</div>
+
+<script>
+// ── NAV highlight on scroll ──────────────────────────────────────
+const secs=document.querySelectorAll("section");
+const nls=document.querySelectorAll(".nav a");
+const io=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){const id=e.target.id;nls.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+id));}});},{threshold:0.25});
+secs.forEach(s=>io.observe(s));
+
+// ── Example reveal ───────────────────────────────────────────────
+function rev(el){const t=el.querySelector(".pt-tr");t.style.display=t.style.display==="none"||!t.style.display?"block":"none";}
+
+// ── Conjugador ───────────────────────────────────────────────────
+let vtype=null;
+function autoType(){
+  const v=document.getElementById("vi").value.trim().toLowerCase();
+  if(v.endsWith("ar"))pickType("ar");
+  else if(v.endsWith("er"))pickType("er");
+  else if(v.endsWith("ir"))pickType("ir");
+}
+function pickType(t){
+  vtype=t;
+  ["ar","er","ir"].forEach(x=>{
+    const b=document.getElementById("t-"+x);
+    b.className="tp-btn tp-"+x;
+    b.classList.toggle("act",x===t);
+  });
+}
+const END={
+  ar:{yo:"é",tu:"aste",el:"ó",nos:"amos",vos:"asteis",ell:"aron"},
+  er:{yo:"í",tu:"iste",el:"ió",nos:"imos",vos:"isteis",ell:"ieron"},
+  ir:{yo:"í",tu:"iste",el:"ió",nos:"imos",vos:"isteis",ell:"ieron"}
+};
+function doConj(){
+  const verb=document.getElementById("vi").value.trim().toLowerCase();
+  if(!verb){alert("Digite um verbo!");return;}
+  let t=vtype;
+  if(!t){if(verb.endsWith("ar"))t="ar";else if(verb.endsWith("er"))t="er";else if(verb.endsWith("ir"))t="ir";else{alert("Selecione o tipo: -AR, -ER ou -IR");return;}}
+  const stem=verb.slice(0,-2);
+  const e=END[t];
+  const col=t==="ar"?"var(--ar)":t==="er"?"var(--er)":"var(--ir)";
+  const rows=[
+    ["yo",stem+e.yo],["tú",stem+e.tu],["él/ella",stem+e.el],
+    ["nosotros",stem+e.nos],["vosotros",stem+e.vos],["ellos/ellas",stem+e.ell]
+  ];
+  const o=document.getElementById("cj-out");
+  o.style.display="block";
+  o.innerHTML=`<hr style="border:none;border-top:1px solid var(--border);margin:16px 0"/>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
+    <span class="badge b-${t}">-${t.toUpperCase()}</span>
+    <span style="font-size:1.05rem;font-weight:700;color:${col}">${verb}</span>
+    <span style="color:#888;font-size:.83rem">— Pretérito Indefinido</span>
+  </div>
+  <table class="ct">
+    <thead><tr><th>Pronome</th><th style="color:${col}">Conjugação</th><th style="color:#888">Terminação</th></tr></thead>
+    <tbody>${rows.map(([p,f])=>`<tr><td class="pron">${p}</td><td style="font-weight:700;font-size:1rem">${f}</td><td style="color:${col};font-weight:700">-${f.slice(stem.length)}</td></tr>`).join("")}</tbody>
+  </table>`;
+}
+
+// ── Exercises ────────────────────────────────────────────────────
+const QS=[
+  {s:"Ayer yo _____ (hablar) con mi madre.",a:"hablé",t:"ar",d:"yo + hablar"},
+  {s:"El lunes, tú _____ (estudiar) mucho.",a:"estudiaste",t:"ar",d:"tú + estudiar"},
+  {s:"Ella _____ (trabajar) hasta tarde ayer.",a:"trabajó",t:"ar",d:"él/ella + trabajar"},
+  {s:"Nosotros _____ (hablar) con el director ayer.",a:"hablamos",t:"ar",d:"nosotros + hablar"},
+  {s:"Ellos _____ (escuchar) música anoche.",a:"escucharon",t:"ar",d:"ellos + escuchar"},
+  {s:"Anoche yo _____ (comer) pizza.",a:"comí",t:"er",d:"yo + comer"},
+  {s:"¿Tú _____ (beber) agua en clase?",a:"bebiste",t:"er",d:"tú + beber"},
+  {s:"Nosotros _____ (comer) juntos ayer.",a:"comimos",t:"er",d:"nosotros + comer"},
+  {s:"Ellos _____ (aprender) español el año pasado.",a:"aprendieron",t:"er",d:"ellos + aprender"},
+  {s:"El año pasado yo _____ (vivir) en Brasília.",a:"viví",t:"ir",d:"yo + vivir"},
+  {s:"¿Tú _____ (escribir) la tarea ayer?",a:"escribiste",t:"ir",d:"tú + escribir"},
+  {s:"Nosotros _____ (abrir) las ventanas ayer.",a:"abrimos",t:"ir",d:"nosotros + abrir"},
+];
+
+function buildQ(){
+  const box=document.getElementById("qbox");
+  box.innerHTML=QS.map((q,i)=>{
+    const c=q.t==="ar"?"var(--ar)":q.t==="er"?"var(--er)":"var(--ir)";
+    const s=q.s.replace("_____",`<input class="q-inp" id="qi${i}" placeholder="..." onkeydown="if(event.key==='Enter')chk(${i})"/>`);
+    return `<div class="q-item" id="qi-box${i}">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+        <span class="badge" style="background:${c}18;border:1.5px solid ${c};color:${c}">-${q.t.toUpperCase()}</span>
+        <span style="color:#888;font-size:.78rem">${i+1} / ${QS.length}</span>
+      </div>
+      <div class="q-sent">${s}</div>
+      <button class="chk-btn" onclick="chk(${i})">Verificar</button>
+      <div class="q-fb" id="qf${i}"></div>
+    </div>`;
+  }).join("");
+}
+
+function norm(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function chk(i){
+  const inp=document.getElementById("qi"+i);
+  const fb=document.getElementById("qf"+i);
+  const ok=norm(inp.value)===norm(QS[i].a);
+  inp.classList.toggle("ok",ok);inp.classList.toggle("err",!ok);
+  fb.style.display="block";
+  fb.className="q-fb "+(ok?"ok":"err");
+  fb.textContent=ok?"✅ Correto! — "+QS[i].a:"❌ Tente novamente. Dica: "+QS[i].d;
+}
+function checkAll(){
+  let sc=0;
+  QS.forEach((q,i)=>{chk(i);if(norm(document.getElementById("qi"+i).value)===norm(q.a))sc++;});
+  const sp=document.getElementById("sbox");sp.style.display="block";
+  const p=Math.round(sc/QS.length*100);
+  document.getElementById("s-ico").textContent=p>=80?"🎉":p>=50?"💪":"📚";
+  document.getElementById("s-txt").textContent=sc+" / "+QS.length+" corretas ("+p+"%)";
+  document.getElementById("s-sub").textContent=p>=80?"Excelente! Você dominou o pretérito indefinido!":p>=50?"Bom trabalho! Continue praticando.":"Revise as conjugações acima e tente novamente.";
+  sp.scrollIntoView({behavior:"smooth"});
+}
+function resetAll(){
+  document.getElementById("sbox").style.display="none";
+  QS.forEach((q,i)=>{const inp=document.getElementById("qi"+i);inp.value="";inp.className="q-inp";const fb=document.getElementById("qf"+i);fb.style.display="none";});
+  document.getElementById("qbox").scrollIntoView({behavior:"smooth"});
+}
+
+buildQ();
+</script>
+</body>
+</html>

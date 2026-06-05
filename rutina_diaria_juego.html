@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Español en Juego! — La Rutina Diaria · IFB</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0e1117;color:#f0efe8;min-height:100vh;font-size:18px}
+
+/* ── PANTALLA DE INICIO ── */
+#pantalla-inicio{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:2rem;text-align:center;
+}
+.titulo-juego{font-size:3rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.25rem}
+.titulo-juego span{color:#1D9E75}
+.subtitulo{font-size:1.1rem;color:#888;margin-bottom:2.5rem}
+
+.equipos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;width:100%;max-width:520px;margin-bottom:2rem}
+.equipo-card{background:#1a1f2e;border-radius:14px;padding:1.25rem 1.5rem;border:2px solid #2a2f3e}
+.equipo-card.eq1{border-color:#1D9E75}
+.equipo-card.eq2{border-color:#378ADD}
+.eq-label{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.equipo-card input{
+  width:100%;font-size:1.2rem;font-weight:700;border:none;
+  background:transparent;color:#f0efe8;outline:none;
+}
+.pts-inicio{font-size:.9rem;color:#666;margin-top:.4rem}
+
+.btn-comenzar{
+  background:#1D9E75;color:#fff;border:none;
+  padding:1rem 3rem;border-radius:10px;
+  font-size:1.2rem;font-weight:700;cursor:pointer;
+  transition:background .2s,transform .1s;
+  margin-bottom:1rem;
+}
+.btn-comenzar:hover{background:#0F6E56;transform:translateY(-2px)}
+
+.categorias-info{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:600px}
+.cat-tag{font-size:13px;padding:5px 12px;border-radius:20px;font-weight:600}
+
+/* ── JUEGO PRINCIPAL ── */
+#pantalla-juego{display:none;max-width:900px;margin:0 auto;padding:1.25rem}
+
+/* MARCADOR */
+.marcador{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:1rem;align-items:center;
+  background:#1a1f2e;border-radius:14px;
+  padding:1rem 1.5rem;margin-bottom:1.25rem;
+  border:.5px solid #2a2f3e;
+}
+.equipo-pts{text-align:center}
+.eq-nombre{font-size:.9rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.eq-score{font-size:2.8rem;font-weight:800;line-height:1}
+#score-eq1{color:#1D9E75}
+#score-eq2{color:#378ADD}
+.turno-info{text-align:center}
+.turno-label{font-size:.8rem;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.turno-nombre{font-size:1.1rem;font-weight:700;color:#f0efe8}
+.ronda-num{font-size:.85rem;color:#555;margin-top:4px}
+
+/* CATEGORÍAS */
+.seccion-cats{margin-bottom:1.25rem}
+.sec-titulo{font-size:.8rem;color:#555;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem}
+.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.cat-btn{
+  border:none;border-radius:10px;padding:.75rem .5rem;
+  font-size:.95rem;font-weight:700;cursor:pointer;
+  transition:transform .15s,filter .15s;
+  line-height:1.3;min-height:64px;
+}
+.cat-btn:hover{transform:translateY(-3px);filter:brightness(1.1)}
+
+.btn-aleatorio{
+  width:100%;border:none;border-radius:10px;padding:.9rem;
+  background:#2a2040;color:#c4b5fd;font-size:1.1rem;font-weight:700;
+  cursor:pointer;transition:all .2s;border:1px solid #4a3080;
+  margin-top:.5rem;
+}
+.btn-aleatorio:hover{background:#3a2f55;transform:translateY(-2px)}
+
+/* ── MODAL PREGUNTA ── */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  display:flex;align-items:center;justify-content:center;
+  z-index:100;padding:1rem;
+}
+.modal{
+  background:#1a1f2e;border-radius:18px;
+  width:100%;max-width:680px;
+  border:.5px solid #2a2f3e;overflow:hidden;
+}
+.modal-cabeza{
+  padding:1rem 1.5rem;border-bottom:.5px solid #2a2f3e;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-cat-nombre{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#888}
+.modal-turno{font-size:1rem;font-weight:700}
+
+/* FASE 1: APUESTA */
+#fase-apuesta .q-preview{
+  padding:1.5rem;text-align:center;
+}
+#fase-apuesta .pregunta-numero{
+  font-size:.85rem;color:#555;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem
+}
+#fase-apuesta .pregunta-texto{
+  font-size:1.5rem;font-weight:700;line-height:1.5;
+  color:#f0efe8;margin-bottom:1.75rem;
+}
+.apuesta-controles{padding:0 1.5rem 1.5rem;text-align:center}
+.apuesta-label{font-size:1rem;color:#aaa;margin-bottom:.75rem}
+.apuesta-opciones{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
+.apo-btn{
+  border:2px solid #2a2f3e;border-radius:8px;
+  padding:.6rem 1.25rem;font-size:1.1rem;font-weight:700;
+  background:transparent;color:#f0efe8;cursor:pointer;
+  transition:all .15s;
+}
+.apo-btn:hover,.apo-btn.sel{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.apo-custom{display:flex;gap:.5rem;justify-content:center;align-items:center;margin-bottom:1.25rem}
+.apo-custom input{
+  width:110px;text-align:center;font-size:1.1rem;font-weight:700;
+  background:#0e1117;border:2px solid #2a2f3e;border-radius:8px;
+  color:#f0efe8;padding:.5rem;outline:none;
+}
+.apo-custom input:focus{border-color:#1D9E75}
+.apuesta-resumen{
+  font-size:.95rem;color:#666;margin-bottom:1rem;min-height:1.5rem;
+}
+.apuesta-resumen b{color:#f0efe8}
+.btn-confirmar-apuesta{
+  background:#1D9E75;color:#fff;border:none;border-radius:10px;
+  padding:.85rem 2.5rem;font-size:1.1rem;font-weight:700;
+  cursor:pointer;transition:all .15s;
+}
+.btn-confirmar-apuesta:hover{background:#0F6E56}
+.btn-confirmar-apuesta:disabled{background:#333;color:#555;cursor:default}
+
+/* FASE 2: OPCIONES */
+#fase-opciones{display:none}
+#fase-opciones .pregunta-bloque{
+  padding:1.5rem 1.5rem 1rem;
+  border-bottom:.5px solid #2a2f3e;
+}
+#fase-opciones .pregunta-txt{
+  font-size:1.4rem;font-weight:700;line-height:1.55;color:#f0efe8;
+}
+.opciones-lista{padding:1rem 1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.opcion-btn{
+  border:1.5px solid #2a2f3e;border-radius:10px;
+  padding:.9rem 1.25rem;font-size:1.1rem;font-weight:600;
+  background:#0e1117;color:#f0efe8;
+  text-align:left;cursor:pointer;transition:all .15s;
+}
+.opcion-btn:hover:not(:disabled){background:#1e2030;border-color:#3a3f5e}
+.opcion-btn.correcta{background:#0d2e20!important;border-color:#1D9E75!important;color:#5deba3!important}
+.opcion-btn.incorreta{background:#2e0d0d!important;border-color:#D85A30!important;color:#f08060!important}
+.opcion-btn:disabled{pointer-events:none}
+
+.apuesta-info-bar{
+  padding:.75rem 1.5rem;background:#0e1117;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:.5px solid #2a2f3e;font-size:.95rem;
+}
+.aposta-exibe{color:#888}
+.aposta-exibe b{color:#f0efe8}
+.btn-revelar{
+  background:#7c3aed;color:#fff;border:none;border-radius:8px;
+  padding:.6rem 1.5rem;font-size:.95rem;font-weight:700;
+  cursor:pointer;transition:background .15s;
+}
+.btn-revelar:hover{background:#6d28d9}
+
+/* FASE 3: RESULTADO */
+#fase-resultado{display:none}
+.resultado-bloco{padding:1.5rem;text-align:center}
+.resultado-icon{font-size:3.5rem;margin-bottom:.5rem}
+.resultado-titulo{font-size:1.6rem;font-weight:800;margin-bottom:.25rem}
+.resultado-pts{font-size:1.1rem;color:#888;margin-bottom:1.25rem}
+.resposta-correta-box{
+  background:#0d2e20;border:1.5px solid #1D9E75;
+  border-radius:10px;padding:.9rem 1.25rem;
+  font-size:1rem;font-weight:600;color:#5deba3;
+  margin-bottom:1.5rem;text-align:left;
+}
+.dica-box{
+  background:#1a1420;border:1px solid #3a2f55;
+  border-radius:8px;padding:.75rem 1rem;
+  font-size:.9rem;color:#a89bc8;margin-bottom:1.5rem;text-align:left;
+}
+.resultado-btns{display:flex;gap:.75rem;justify-content:center}
+.btn-correto{
+  background:#1D9E75;color:#fff;border:none;border-radius:10px;
+  padding:.8rem 1.75rem;font-size:1rem;font-weight:700;cursor:pointer;
+}
+.btn-incorrecto{
+  background:#D85A30;color:#fff;border:none;border-radius:10px;
+  padding:.8rem 1.75rem;font-size:1rem;font-weight:700;cursor:pointer;
+}
+.btn-seguir{
+  background:#2a2f3e;color:#f0efe8;border:none;border-radius:10px;
+  padding:.8rem 1.75rem;font-size:1rem;font-weight:700;cursor:pointer;
+  margin-top:.5rem;
+}
+
+/* ── FIN ── */
+#pantalla-fin{
+  display:none;min-height:100vh;
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem;text-align:center;
+}
+.fin-trofeo{font-size:5rem;margin-bottom:.5rem}
+.fin-ganador{font-size:2.5rem;font-weight:800;margin-bottom:.25rem}
+.fin-sub{font-size:1.1rem;color:#888;margin-bottom:2rem}
+.fin-scores{display:flex;gap:1.25rem;justify-content:center;margin-bottom:2rem}
+.fin-box{padding:1.25rem 2rem;border-radius:14px;text-align:center}
+.fin-box.eq1{background:#0d2e20;border:1.5px solid #1D9E75}
+.fin-box.eq2{background:#0d1e35;border:1.5px solid #378ADD}
+.fin-box .fn{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem}
+.fin-box.eq1 .fn{color:#5deba3}
+.fin-box.eq2 .fn{color:#7ab8f5}
+.fin-box .fv{font-size:2.5rem;font-weight:800}
+.fin-box.eq1 .fv{color:#1D9E75}
+.fin-box.eq2 .fv{color:#378ADD}
+.btn-replay{
+  background:#1D9E75;color:#fff;border:none;border-radius:10px;
+  padding:.9rem 2.5rem;font-size:1.1rem;font-weight:700;cursor:pointer;
+}
+
+/* utils */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- ══ PANTALLA INICIO ══ -->
+<div id="pantalla-inicio">
+  <div class="titulo-juego">¡Español <span>en Juego!</span></div>
+  <div class="subtitulo">La Rutina Diaria · Verbos Reflexivos · IFB Espanhol FIC</div>
+
+  <div class="equipos-grid">
+    <div class="equipo-card eq1">
+      <div class="eq-label">Equipo 1</div>
+      <input id="nombre-eq1" value="Equipo Verde" maxlength="22" />
+      <div class="pts-inicio">Empieza con 100 puntos</div>
+    </div>
+    <div class="equipo-card eq2">
+      <div class="eq-label">Equipo 2</div>
+      <input id="nombre-eq2" value="Equipo Azul" maxlength="22" />
+      <div class="pts-inicio">Empieza con 100 puntos</div>
+    </div>
+  </div>
+
+  <button class="btn-comenzar" onclick="comenzarJuego()">¡COMENZAR EL JUEGO! 🚀</button>
+
+  <div class="categorias-info">
+    <span class="cat-tag" style="background:#0d2e20;color:#5deba3">🪥 Verbos reflexivos</span>
+    <span class="cat-tag" style="background:#0d1e35;color:#7ab8f5">🍳 Rutina del día</span>
+    <span class="cat-tag" style="background:#1e1500;color:#f0c060">⚡ ¿Reflexivo o no?</span>
+    <span class="cat-tag" style="background:#1a0e25;color:#c4a0f5">🕐 Horas y expresiones</span>
+    <span class="cat-tag" style="background:#2e0e18;color:#f09090">🧠 Vocabulario</span>
+  </div>
+</div>
+
+<!-- ══ JUEGO ══ -->
+<div id="pantalla-juego">
+  <div class="marcador">
+    <div class="equipo-pts">
+      <div class="eq-nombre" id="nombre-display-1">Equipo Verde</div>
+      <div class="eq-score" id="score-eq1">100</div>
+    </div>
+    <div class="turno-info">
+      <div class="turno-label">Turno</div>
+      <div class="turno-nombre" id="turno-nombre">—</div>
+      <div class="ronda-num" id="ronda-num">Ronda 1</div>
+    </div>
+    <div class="equipo-pts">
+      <div class="eq-nombre" id="nombre-display-2">Equipo Azul</div>
+      <div class="eq-score" id="score-eq2">100</div>
+    </div>
+  </div>
+
+  <div class="seccion-cats">
+    <div class="sec-titulo">Elige una categoría</div>
+    <div class="cats-grid" id="cats-grid"></div>
+    <button class="btn-aleatorio" onclick="preguntaAleatoria()">🎲 PREGUNTA ALEATORIA</button>
+  </div>
+</div>
+
+<!-- ══ PANTALLA FIN ══ -->
+<div id="pantalla-fin">
+  <div class="fin-trofeo" id="fin-trofeo">🏆</div>
+  <div class="fin-ganador" id="fin-ganador"></div>
+  <div class="fin-sub" id="fin-sub">¡Ganador del juego!</div>
+  <div class="fin-scores">
+    <div class="fin-box eq1">
+      <div class="fn" id="fin-n1"></div>
+      <div class="fv" id="fin-s1"></div>
+    </div>
+    <div class="fin-box eq2">
+      <div class="fn" id="fin-n2"></div>
+      <div class="fv" id="fin-s2"></div>
+    </div>
+  </div>
+  <button class="btn-replay" onclick="reiniciar()">🔄 JUGAR DE NUEVO</button>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div id="modal-overlay" class="overlay hidden" onclick="clickOverlay(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-cabeza">
+      <div class="modal-cat-nombre" id="modal-cat-nombre"></div>
+      <div class="modal-turno" id="modal-turno"></div>
+    </div>
+
+    <!-- Fase 1: apuesta -->
+    <div id="fase-apuesta">
+      <div class="q-preview">
+        <div class="pregunta-numero" id="q-numero"></div>
+        <div class="pregunta-texto" id="q-texto-pre"></div>
+      </div>
+      <div class="apuesta-controles">
+        <div class="apuesta-label">¿Cuántos puntos apuesta tu equipo?</div>
+        <div class="apuesta-opciones">
+          <button class="apo-btn" onclick="selApuesta(10)">10</button>
+          <button class="apo-btn" onclick="selApuesta(20)">20</button>
+          <button class="apo-btn" onclick="selApuesta(30)">30</button>
+          <button class="apo-btn" onclick="selApuesta(50)">50</button>
+          <button class="apo-btn" onclick="selApuesta(75)">75</button>
+          <button class="apo-btn" onclick="selApuesta(100)">100</button>
+        </div>
+        <div class="apo-custom">
+          <span style="color:#888;font-size:.95rem">Otro valor:</span>
+          <input type="number" id="apo-custom-val" min="1" placeholder="pts" oninput="selApuestaCustom()" />
+        </div>
+        <div class="apuesta-resumen" id="apuesta-resumen">Elige cuánto apostar para continuar.</div>
+        <button class="btn-confirmar-apuesta" id="btn-confirmar-apuesta" onclick="confirmarApuesta()" disabled>
+          VER LA PREGUNTA →
+        </button>
+      </div>
+    </div>
+
+    <!-- Fase 2: opciones -->
+    <div id="fase-opciones">
+      <div class="pregunta-bloque">
+        <div class="pregunta-txt" id="q-texto-main"></div>
+      </div>
+      <div class="opciones-lista" id="opciones-lista"></div>
+      <div class="apuesta-info-bar">
+        <div class="aposta-exibe">Apuesta: <b id="apuesta-display">—</b> puntos</div>
+        <button class="btn-revelar" onclick="revelarRespuesta()">REVELAR RESPUESTA OFICIAL 🔓</button>
+      </div>
+    </div>
+
+    <!-- Fase 3: resultado -->
+    <div id="fase-resultado">
+      <div class="resultado-bloco">
+        <div class="resultado-icon" id="res-icon"></div>
+        <div class="resultado-titulo" id="res-titulo"></div>
+        <div class="resultado-pts" id="res-pts"></div>
+        <div class="resposta-correta-box" id="res-correcta"></div>
+        <div class="dica-box" id="res-dica"></div>
+        <div class="resultado-btns">
+          <button class="btn-correto" onclick="aplicarResultado(true)">✅ CORRECTO</button>
+          <button class="btn-incorrecto" onclick="aplicarResultado(false)">❌ INCORRECTO</button>
+        </div>
+        <div style="text-align:center;margin-top:.75rem">
+          <button class="btn-seguir" onclick="aplicarResultado(null)">SIGUIENTE RONDA →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══ DATOS DEL JUEGO ═══
+const CATEGORIAS = [
+  {id:'A', nombre:'🪥 Verbos reflexivos',    bg:'#0d3022', color:'#5deba3', border:'#1D9E75'},
+  {id:'B', nombre:'🍳 Rutina del día',        bg:'#0a1e38', color:'#7ab8f5', border:'#378ADD'},
+  {id:'C', nombre:'⚡ ¿Reflexivo o no?',     bg:'#1e1500', color:'#f0c060', border:'#EF9F27'},
+  {id:'D', nombre:'🕐 Horas y expresiones',  bg:'#1a0e25', color:'#c4a0f5', border:'#9f6ef5'},
+  {id:'E', nombre:'🧠 Vocabulario',          bg:'#2e0e18', color:'#f09090', border:'#D85A30'},
+];
+
+const PREGUNTAS = {
+  A:[
+    {
+      q:"¿Cuál es la conjugación correcta de 'levantarse' para 'yo'?",
+      opts:["A) Me levanto","B) Te levantas","C) Se levanta","D) Nos levantamos"],
+      r:0, dica:"El pronombre reflexivo de 'yo' es 'me' → me levanto."
+    },
+    {
+      q:"Completa: 'Ella ___ a las 7 de la mañana todos los días.'",
+      opts:["A) despierta","B) se despierta","C) se despertar","D) despertamos"],
+      r:1, dica:"Despertar a sí mismo = verbo reflexivo. Ella → se despierta."
+    },
+    {
+      q:"¿Cuál es la forma correcta de 'ducharse' para 'nosotros'?",
+      opts:["A) duchamos","B) nos duchamos","C) se duchan","D) te duchas"],
+      r:1, dica:"Nosotros usa el pronombre reflexivo 'nos' → nos duchamos."
+    },
+    {
+      q:"Elige la oración correcta con verbo reflexivo:",
+      opts:[
+        "A) Yo me visto antes de desayunar.",
+        "B) Yo visto antes de desayunar.",
+        "C) Yo me vistir antes de desayunar.",
+        "D) Yo se visto antes de desayunar."
+      ],
+      r:0, dica:"Vestirse (reflexivo): yo → me visto. El pronombre va antes del verbo conjugado."
+    },
+    {
+      q:"¿Cuál oración usa correctamente el verbo 'acostarse'?",
+      opts:[
+        "A) Ella acuesta a las 10.",
+        "B) Ella se acuesta a las 10.",
+        "C) Ella se acostar a las 10.",
+        "D) Ella nos acuesta a las 10."
+      ],
+      r:1, dica:"Acostarse: pronombre + forma conjugada → ella se acuesta."
+    },
+    {
+      q:"'Ellos ___ los dientes después de cenar.' ¿Cuál es correcto?",
+      opts:[
+        "A) se lavan",
+        "B) lavan",
+        "C) nos lavamos",
+        "D) te lavas"
+      ],
+      r:0, dica:"Ellos → se lavan los dientes. Verbo reflexivo en 3ª persona plural."
+    },
+  ],
+  B:[
+    {
+      q:"¿Qué hace alguien que 'desayuna a las 8'?",
+      opts:["A) Almuza a las 8","B) Toma café da manhã a las 8","C) Cena a las 8","D) Se acuesta a las 8"],
+      r:1, dica:"Desayunar = tomar café da manhã, la primera comida del día."
+    },
+    {
+      q:"Ordena la rutina en orden correcto:",
+      opts:[
+        "A) Desayunar → Almorzar → Cenar",
+        "B) Cenar → Almorzar → Desayunar",
+        "C) Almorzar → Desayunar → Cenar",
+        "D) Desayunar → Cenar → Almorzar"
+      ],
+      r:0, dica:"Desayuno (manhã) → almuerzo (meio-dia) → cena (noite). Ese es el orden temporal."
+    },
+    {
+      q:"¿Cuál actividad es típica de la mañana?",
+      opts:[
+        "A) Cenar y ver televisión",
+        "B) Ducharse y desayunar",
+        "C) Salir a una fiesta",
+        "D) Acostarse temprano"
+      ],
+      r:1, dica:"La rutina matutina incluye: ducharse, desayunar y prepararse para salir."
+    },
+    {
+      q:"'Hacer la cama' significa:",
+      opts:[
+        "A) Fabricar una cama",
+        "B) Arrumar a cama",
+        "C) Dormir en la cama",
+        "D) Comprar sábanas"
+      ],
+      r:1, dica:"'Hacer la cama' es una expresión = arrumar/fazer a cama."
+    },
+    {
+      q:"¿Qué significa 'preparar el almuerzo'?",
+      opts:[
+        "A) Preparar o café da manhã",
+        "B) Preparar o jantar",
+        "C) Preparar o almoço",
+        "D) Preparar o lanche"
+      ],
+      r:2, dica:"El almuerzo = o almoço. Es la comida del mediodía."
+    },
+    {
+      q:"Después de levantarse, Juan se ducha. ¿Qué hace DESPUÉS normalmente?",
+      opts:[
+        "A) Se acuesta de nuevo",
+        "B) Cena y ve televisión",
+        "C) Se viste y desayuna",
+        "D) Sale a hacer ejercicio sin comer"
+      ],
+      r:2, dica:"La secuencia típica: levantarse → ducharse → vestirse → desayunar → salir."
+    },
+  ],
+  C:[
+    {
+      q:"¿Cuál es la diferencia entre 'lavar la ropa' y 'lavarse'?",
+      opts:[
+        "A) Son exactamente iguales",
+        "B) Lavar la ropa = lavar roupas; lavarse = lavar a si mesmo",
+        "C) Lavarse = lavar a otra persona",
+        "D) Lavarse solo se usa para objetos"
+      ],
+      r:1, dica:"Con pronombre reflexivo (-se) = acción sobre sí mismo. Sin pronombre = acción sobre otra cosa."
+    },
+    {
+      q:"'Peinar al niño' vs. 'peinarse': ¿qué diferencia hay?",
+      opts:[
+        "A) Peinar al niño = pentear a criança; peinarse = pentear a si mesmo",
+        "B) Son exactamente iguales",
+        "C) Peinarse = pentear outra pessoa",
+        "D) No hay diferencia de significado"
+      ],
+      r:0, dica:"Con pronombre reflexivo = el sujeto hace la acción sobre sí mismo. Sin pronombre = la acción va hacia otra persona."
+    },
+    {
+      q:"Elige la oración con verbo reflexivo CORRECTO:",
+      opts:[
+        "A) Cada mañana mi padre afeita.",
+        "B) Cada mañana mi padre se afeita.",
+        "C) Cada mañana mi padre me afeita.",
+        "D) Cada mañana mi padre se afeitamos."
+      ],
+      r:1, dica:"Afeitarse = se barbear (acción sobre sí mismo). Mi padre → se afeita."
+    },
+    {
+      q:"¿En cuál oración el verbo reflexivo está MAL usado?",
+      opts:[
+        "A) Me cepillo los dientes cada noche.",
+        "B) Ella se baña todos los días.",
+        "C) Me despiertas a las 6. (= eu acordo às 6)",
+        "D) Me peino antes de salir."
+      ],
+      r:2, dica:"'Me despiertas' = VOCÊ me acorda. Para 'yo me despierto' = eu acordo. El pronombre no corresponde al sujeto."
+    },
+    {
+      q:"¿Cuál verbo SÍ es reflexivo en su uso normal?",
+      opts:[
+        "A) Preparar el desayuno",
+        "B) Lavar los platos",
+        "C) Maquillarse",
+        "D) Cocinar la cena"
+      ],
+      r:2, dica:"Maquillarse siempre lleva pronombre reflexivo porque la acción recae sobre uno mismo."
+    },
+    {
+      q:"'Acostar al bebé' vs. 'acostarse': ¿cuál usas para decir 'voy a dormir'?",
+      opts:[
+        "A) Acostar al bebé",
+        "B) Acostarse / me acuesto",
+        "C) Las dos son correctas",
+        "D) Ninguna de las dos"
+      ],
+      r:1, dica:"Acostarse (reflexivo) = deitar-se/ir dormir. Acostar al bebé = deitar o bebê (outra pessoa)."
+    },
+  ],
+  D:[
+    {
+      q:"¿Cómo respondes correctamente a '¿A qué hora te despiertas?'",
+      opts:[
+        "A) Me despierto a las 7 de la mañana.",
+        "B) Despierto 7.",
+        "C) Se despierta las 7.",
+        "D) Me despertar a las 7."
+      ],
+      r:0, dica:"Estructura: me despierto + a las + hora. Verbo reflexivo en 1ª persona."
+    },
+    {
+      q:"¿Cuál expresión indica hábito o rutina diaria?",
+      opts:["A) A veces","B) Nunca","C) Todos los días","D) De vez en cuando"],
+      r:2, dica:"'Todos los días' = expressão de frequência que indica hábito cotidiano."
+    },
+    {
+      q:"'Me acuesto tarde los fines de semana' significa:",
+      opts:[
+        "A) Durmo cedo nos fins de semana.",
+        "B) Acordo tarde nos fins de semana.",
+        "C) Durmo tarde nos fins de semana.",
+        "D) Me deito cedo durante a semana."
+      ],
+      r:2, dica:"Acostarse = deitar/dormir. Tarde = tarde (horário). Fines de semana = fins de semana."
+    },
+    {
+      q:"¿Qué período del día es 'por la tarde'?",
+      opts:[
+        "A) Entre las 6h y las 12h",
+        "B) Entre las 12h y las 18h (aprox.)",
+        "C) Entre las 0h y las 6h",
+        "D) Después de las 22h"
+      ],
+      r:1, dica:"Por la mañana = manhã / Por la tarde = tarde / Por la noche = noite."
+    },
+    {
+      q:"¿Cómo dices 'eles vão para a escola às 7h30'?",
+      opts:[
+        "A) Van a la escuela a las siete y media.",
+        "B) Van a la escuela a las siete y treinta.",
+        "C) Van a la escuela a las ocho menos treinta.",
+        "D) A y C son correctas."
+      ],
+      r:3, dica:"7:30 = las siete y media O las ocho menos treinta. Las dos formas son correctas."
+    },
+    {
+      q:"'Normalmente me ducho ___ la mañana.' ¿Qué preposición va?",
+      opts:["A) en","B) de","C) por","D) a"],
+      r:2, dica:"Con partes del día usamos 'por': por la mañana, por la tarde, por la noche."
+    },
+  ],
+  E:[
+    {
+      q:"¿Qué significa 'cepillarse los dientes'?",
+      opts:[
+        "A) Lavar o rosto",
+        "B) Escovar os dentes",
+        "C) Pentear os cabelos",
+        "D) Lavar as mãos"
+      ],
+      r:1, dica:"El cepillo = a escova → cepillarse los dientes = escovar os dentes."
+    },
+    {
+      q:"'Maquillarse' se refiere a:",
+      opts:[
+        "A) Fazer a barba",
+        "B) Lavar o cabelo",
+        "C) Se maquiar",
+        "D) Pentear o cabelo"
+      ],
+      r:2, dica:"El maquillaje = maquiagem → maquillarse = se maquiar. Siempre es reflexivo."
+    },
+    {
+      q:"¿Qué es 'el despertador'?",
+      opts:["A) Travesseiro","B) Cobertor","C) Despertador","D) Pijama"],
+      r:2, dica:"Despertar = acordar → el despertador = o despertador (objeto que acorda)."
+    },
+    {
+      q:"¿Qué significa 'afeitarse'?",
+      opts:[
+        "A) Tomar banho",
+        "B) Se barbear",
+        "C) Lavar o rosto",
+        "D) Cortar o cabelo"
+      ],
+      r:1, dica:"La afeitadora = a barbeadora → afeitarse = se barbear / fazer a barba."
+    },
+    {
+      q:"¿Cuál es el sinónimo más cercano de 'dormirse'?",
+      opts:[
+        "A) Despertarse",
+        "B) Levantarse",
+        "C) Quedarse dormido/a",
+        "D) Acostarse"
+      ],
+      r:2, dica:"Dormirse / quedarse dormido = pegar no sono. Diferente de acostarse (deitar-se)."
+    },
+    {
+      q:"¿Qué significa 'peinarse'?",
+      opts:[
+        "A) Lavar o cabelo",
+        "B) Cortar o cabelo",
+        "C) Pentear o cabelo",
+        "D) Secar o cabelo"
+      ],
+      r:2, dica:"El peine / el cepillo = o pente/escova → peinarse = pentear o próprio cabelo."
+    },
+  ],
+};
+
+// ═══ ESTADO ═══
+let estado = {
+  eq1:{nombre:'',pts:100},
+  eq2:{nombre:'',pts:100},
+  turno:1,
+  ronda:1,
+  usadas:{A:[],B:[],C:[],D:[],E:[]},
+  apuesta:0,
+  preguntaActual:null,
+  catActual:null,
+  idxActual:-1,
+};
+
+function comenzarJuego(){
+  estado.eq1.nombre = document.getElementById('nombre-eq1').value.trim() || 'Equipo Verde';
+  estado.eq2.nombre = document.getElementById('nombre-eq2').value.trim() || 'Equipo Azul';
+  estado.eq1.pts = 100; estado.eq2.pts = 100;
+  estado.turno = 1; estado.ronda = 1;
+  estado.usadas = {A:[],B:[],C:[],D:[],E:[]};
+
+  document.getElementById('nombre-display-1').textContent = estado.eq1.nombre;
+  document.getElementById('nombre-display-2').textContent = estado.eq2.nombre;
+  actualizarMarcador();
+  renderCats();
+
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('pantalla-juego').style.display = 'block';
+}
+
+function actualizarMarcador(){
+  document.getElementById('score-eq1').textContent = estado.eq1.pts;
+  document.getElementById('score-eq2').textContent = estado.eq2.pts;
+  const eq = estado.turno === 1 ? estado.eq1 : estado.eq2;
+  document.getElementById('turno-nombre').textContent = eq.nombre;
+  document.getElementById('ronda-num').textContent = 'Ronda ' + estado.ronda;
+}
+
+function renderCats(){
+  const grid = document.getElementById('cats-grid');
+  grid.innerHTML = '';
+  CATEGORIAS.forEach(cat => {
+    const total = PREGUNTAS[cat.id].length;
+    const usadas = estado.usadas[cat.id].length;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.style.cssText = `background:${cat.bg};color:${cat.color};border:1.5px solid ${cat.border}`;
+    if(usadas >= total) btn.style.opacity = '.3';
+    btn.innerHTML = `${cat.nombre}<br><small style="font-size:.75rem;opacity:.7">${total-usadas} preguntas</small>`;
+    btn.onclick = () => abrirPregunta(cat.id);
+    grid.appendChild(btn);
+  });
+}
+
+function preguntaAleatoria(){
+  const disponibles = CATEGORIAS.filter(cat => {
+    const total = PREGUNTAS[cat.id].length;
+    return estado.usadas[cat.id].length < total;
+  });
+  if(disponibles.length === 0){ verificarFin(); return; }
+  const cat = disponibles[Math.floor(Math.random()*disponibles.length)];
+  abrirPregunta(cat.id);
+}
+
+function abrirPregunta(catId){
+  const pregs = PREGUNTAS[catId];
+  const disponibles = pregs.map((_,i)=>i).filter(i=>!estado.usadas[catId].includes(i));
+  if(disponibles.length === 0){ alert('¡No quedan preguntas en esta categoría!'); return; }
+
+  const idx = disponibles[Math.floor(Math.random()*disponibles.length)];
+  const p = pregs[idx];
+  estado.preguntaActual = p;
+  estado.catActual = catId;
+  estado.idxActual = idx;
+  estado.apuesta = 0;
+
+  const cat = CATEGORIAS.find(c=>c.id===catId);
+  const eq = estado.turno===1?estado.eq1:estado.eq2;
+
+  document.getElementById('modal-cat-nombre').textContent = cat.nombre;
+  document.getElementById('modal-cat-nombre').style.color = cat.color;
+  document.getElementById('modal-turno').textContent = eq.nombre;
+
+  const total = pregs.length;
+  const num = estado.usadas[catId].length + 1;
+  document.getElementById('q-numero').textContent = `Pregunta ${num} de ${total} — ${cat.nombre}`;
+  document.getElementById('q-texto-pre').textContent = p.q;
+
+  // reset apuesta
+  document.querySelectorAll('.apo-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('apo-custom-val').value = '';
+  document.getElementById('apuesta-resumen').textContent = 'Elige cuánto apostar para continuar.';
+  document.getElementById('btn-confirmar-apuesta').disabled = true;
+
+  mostrarFase('apuesta');
+  document.getElementById('modal-overlay').classList.remove('hidden');
+}
+
+function selApuesta(val){
+  estado.apuesta = val;
+  document.querySelectorAll('.apo-btn').forEach(b=>{
+    b.classList.toggle('sel', parseInt(b.textContent)===val);
+  });
+  document.getElementById('apo-custom-val').value = '';
+  actualizarResumenApuesta(val);
+}
+
+function selApuestaCustom(){
+  const v = parseInt(document.getElementById('apo-custom-val').value);
+  if(v>0){
+    estado.apuesta = v;
+    document.querySelectorAll('.apo-btn').forEach(b=>b.classList.remove('sel'));
+    actualizarResumenApuesta(v);
+  }
+}
+
+function actualizarResumenApuesta(val){
+  const eq = estado.turno===1?estado.eq1:estado.eq2;
+  document.getElementById('apuesta-resumen').innerHTML =
+    `Si <b>${eq.nombre}</b> acierta: +${val} pts &nbsp;|&nbsp; Si falla: -${val} pts`;
+  document.getElementById('btn-confirmar-apuesta').disabled = false;
+}
+
+function confirmarApuesta(){
+  if(!estado.apuesta) return;
+  const p = estado.preguntaActual;
+
+  document.getElementById('q-texto-main').textContent = p.q;
+  const lista = document.getElementById('opciones-lista');
+  lista.innerHTML = '';
+  p.opts.forEach((o,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opcion-btn';
+    b.textContent = o;
+    b.onclick = () => {};
+    lista.appendChild(b);
+  });
+
+  document.getElementById('apuesta-display').textContent = estado.apuesta;
+  mostrarFase('opciones');
+}
+
+function revelarRespuesta(){
+  const p = estado.preguntaActual;
+  const btns = document.querySelectorAll('.opcion-btn');
+  btns.forEach((b,i)=>{
+    b.disabled = true;
+    if(i===p.r) b.classList.add('correcta');
+  });
+
+  const cat = CATEGORIAS.find(c=>c.id===estado.catActual);
+  document.getElementById('res-correcta').textContent = '✅ Respuesta correcta: ' + p.opts[p.r];
+  document.getElementById('res-dica').textContent = '💡 ' + p.dica;
+  document.getElementById('res-icon').textContent = '🎯';
+  document.getElementById('res-titulo').textContent = '¿Acertó tu equipo?';
+  document.getElementById('res-pts').textContent =
+    `Acierto: +${estado.apuesta} pts | Fallo: -${estado.apuesta} pts`;
+
+  mostrarFase('resultado');
+}
+
+function aplicarResultado(acerto){
+  if(acerto === true){
+    if(estado.turno===1) estado.eq1.pts += estado.apuesta;
+    else estado.eq2.pts += estado.apuesta;
+  } else if(acerto === false){
+    if(estado.turno===1) estado.eq1.pts -= estado.apuesta;
+    else estado.eq2.pts -= estado.apuesta;
+  }
+
+  // marcar usada
+  estado.usadas[estado.catActual].push(estado.idxActual);
+  // cambiar turno
+  estado.turno = estado.turno===1?2:1;
+  estado.ronda++;
+
+  document.getElementById('modal-overlay').classList.add('hidden');
+  actualizarMarcador();
+  renderCats();
+
+  if(verificarFin()) return;
+}
+
+function verificarFin(){
+  const todasUsadas = CATEGORIAS.every(cat => {
+    return estado.usadas[cat.id].length >= PREGUNTAS[cat.id].length;
+  });
+  if(todasUsadas){ mostrarFin(); return true; }
+  return false;
+}
+
+function mostrarFin(){
+  document.getElementById('pantalla-juego').style.display = 'none';
+  const fin = document.getElementById('pantalla-fin');
+  fin.style.display = 'flex';
+
+  document.getElementById('fin-n1').textContent = estado.eq1.nombre;
+  document.getElementById('fin-n2').textContent = estado.eq2.nombre;
+  document.getElementById('fin-s1').textContent = estado.eq1.pts + ' pts';
+  document.getElementById('fin-s2').textContent = estado.eq2.pts + ' pts';
+
+  let ganador, trofeo, sub;
+  if(estado.eq1.pts > estado.eq2.pts){
+    ganador = estado.eq1.nombre; trofeo = '🏆'; sub = '¡Ganador del juego!';
+  } else if(estado.eq2.pts > estado.eq1.pts){
+    ganador = estado.eq2.nombre; trofeo = '🏆'; sub = '¡Ganador del juego!';
+  } else {
+    ganador = '¡Empate!'; trofeo = '🤝'; sub = '¡Los dos equipos son campeones!';
+  }
+  document.getElementById('fin-ganador').textContent = ganador;
+  document.getElementById('fin-trofeo').textContent = trofeo;
+  document.getElementById('fin-sub').textContent = sub;
+}
+
+function reiniciar(){
+  document.getElementById('pantalla-fin').style.display = 'none';
+  document.getElementById('pantalla-inicio').style.display = 'flex';
+}
+
+function mostrarFase(fase){
+  document.getElementById('fase-apuesta').style.display = fase==='apuesta'?'block':'none';
+  document.getElementById('fase-opciones').style.display = fase==='opciones'?'block':'none';
+  document.getElementById('fase-resultado').style.display = fase==='resultado'?'block':'none';
+}
+
+function clickOverlay(e){
+  if(e.target === document.getElementById('modal-overlay')){
+    // no cerrar con click externo — professor controls
+  }
+}
+</script>
+</body>
+</html>

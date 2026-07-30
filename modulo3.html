@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MÓDULO III — Español Básico · PROEJA en Marketing</title>
+<style>
+:root{
+  --red:#8B0000;
+  --red-dark:#5C0000;
+  --yellow:#F4A900;
+  --yellow-dark:#C17F00;
+  --black:#1A1A1A;
+  --cream:#FFF8E7;
+  --lightcard:#FFF3D6;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--white);color:#2b2b2b;}
+h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;}
+.topnav{
+  background:var(--red-dark); color:var(--white); display:flex; align-items:center;
+  justify-content:space-between; padding:0.9rem 1.6rem; flex-wrap:wrap; gap:.6rem;
+}
+.topnav .brand{font-weight:bold; letter-spacing:.5px; font-size:1.05rem;}
+.topnav .brand span{color:var(--yellow);}
+.topnav .modlinks a{
+  color:var(--white); text-decoration:none; margin-left:1rem; font-size:.92rem;
+  padding:.35rem .8rem; border-radius:20px; border:1px solid rgba(255,255,255,.35);
+}
+.topnav .modlinks a.active{background:var(--yellow); color:var(--red-dark); border-color:var(--yellow); font-weight:bold;}
+.topnav .modlinks a:hover{border-color:var(--yellow);}
+
+.layout{display:flex; align-items:flex-start; min-height:100vh;}
+.sidebar{
+  width:270px; flex-shrink:0; background:var(--cream); padding:1.4rem 1.1rem;
+  position:sticky; top:0; height:100vh; overflow-y:auto; border-right:3px solid var(--yellow);
+}
+.sidebar .modcard{
+  background:var(--red); color:var(--white); border-radius:12px; padding:1rem;
+  margin-bottom:1.2rem;
+}
+.sidebar .modcard .tag{color:var(--yellow); letter-spacing:2px; font-size:.72rem; font-weight:bold;}
+.sidebar .modcard h3{margin:.3rem 0 .5rem 0; font-size:1.15rem;}
+.sidebar .modcard p{margin:.15rem 0; font-size:.82rem; color:#FFF3D6;}
+.sidebar nav a{
+  display:block; padding:.55rem .7rem; margin-bottom:.4rem; border-radius:8px;
+  color:var(--red-dark); text-decoration:none; font-size:.88rem; font-weight:bold;
+  border-left:4px solid transparent;
+}
+.sidebar nav a.entrega{color:var(--yellow-dark);}
+.sidebar nav a:hover, .sidebar nav a.current{background:var(--lightcard); border-left:4px solid var(--red);}
+.sidebar .progress-wrap{margin-top:1.2rem;}
+.sidebar .progress-wrap .label{font-size:.75rem; color:var(--black); margin-bottom:.3rem;}
+.sidebar .progress-bar{background:#EADFC8; border-radius:20px; height:10px; overflow:hidden;}
+.sidebar .progress-fill{background:var(--red); height:100%; width:0%; transition:width .4s;}
+
+main{flex:1; padding:2.2rem 3rem 4rem 3rem; max-width:920px;}
+.hero{margin-bottom:2.2rem;}
+.hero .tag{color:var(--red); letter-spacing:3px; font-weight:bold; font-size:.85rem;}
+.hero h1{color:var(--red-dark); font-size:2.3rem; margin:.3rem 0 .4rem 0;}
+.hero .sub{color:#555; font-style:italic; font-size:1.05rem; margin-bottom:.6rem;}
+.hero .meta{display:flex; gap:1.2rem; flex-wrap:wrap; font-size:.85rem; color:var(--black);}
+.hero .meta b{color:var(--red);}
+
+section.encuentro{
+  border-top:3px solid var(--yellow); padding-top:1.8rem; margin-top:2.4rem; scroll-margin-top:1rem;
+}
+section.encuentro h2{
+  color:var(--white); background:var(--red); display:inline-block; padding:.35rem 1rem;
+  border-radius:8px 8px 0 0; font-size:1.3rem; margin:0;
+}
+section.encuentro .encdate{color:var(--yellow-dark); font-weight:bold; font-size:.85rem; margin:.5rem 0 1rem 0;}
+.objetivo-box{
+  background:var(--lightcard); border-left:5px solid var(--red); padding:.9rem 1.1rem;
+  border-radius:0 8px 8px 0; margin-bottom:1.3rem;
+}
+.objetivo-box b{color:var(--red-dark);}
+.contenido h4{color:var(--red-dark); margin-bottom:.3rem; font-size:1.05rem;}
+.contenido table{border-collapse:collapse; width:100%; margin:.8rem 0 1.2rem 0; font-size:.92rem;}
+.contenido table th{background:var(--red); color:var(--white); padding:.5rem .7rem; text-align:left;}
+.contenido table td{padding:.5rem .7rem; border-bottom:1px solid #eee;}
+.contenido table tr:nth-child(even) td{background:#FFFBF2;}
+.example-box{
+  background:var(--white); border:2px dashed var(--yellow-dark); border-radius:10px;
+  padding:1rem 1.2rem; margin:1rem 0; display:flex; align-items:center; gap:.9rem;
+}
+.example-box .txt{flex:1; font-style:italic; color:#333;}
+.ttsbtn{
+  background:var(--red); color:var(--white); border:none; border-radius:50%;
+  width:42px; height:42px; font-size:1.1rem; cursor:pointer; flex-shrink:0;
+}
+.ttsbtn:hover{background:var(--red-dark);}
+.activity{
+  background:var(--cream); border-radius:12px; padding:1.2rem 1.4rem; margin:1.4rem 0;
+}
+.activity h4{color:var(--red); margin-top:0;}
+.quiz-q{margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #EADFC8;}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-q p.qtext{font-weight:bold; margin-bottom:.5rem; color:#2b2b2b;}
+.quiz-q label{display:block; margin-bottom:.35rem; cursor:pointer; font-size:.95rem;}
+.quiz-q input[type=radio]{margin-right:.5rem;}
+.checkbtn{
+  background:var(--red-dark); color:var(--white); border:none; padding:.5rem 1.1rem;
+  border-radius:20px; cursor:pointer; font-size:.85rem; font-weight:bold;
+}
+.checkbtn:hover{background:var(--red);}
+.feedback{margin-top:.5rem; font-size:.9rem; font-weight:bold; min-height:1.2rem;}
+.feedback.ok{color:#2e7d32;}
+.feedback.bad{color:var(--red);}
+.entrega-box{
+  background:var(--red-dark); color:var(--white); border-radius:12px; padding:1.2rem 1.4rem;
+  margin:1.6rem 0; display:flex; align-items:center; gap:1rem;
+}
+.entrega-box .pct{
+  background:var(--yellow); color:var(--red-dark); font-weight:bold; font-size:1.4rem;
+  border-radius:50%; width:64px; height:64px; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.entrega-box .txt b{color:var(--yellow);}
+.checklist label{display:block; margin-bottom:.5rem; font-size:.95rem;}
+.checklist input{margin-right:.6rem;}
+.alphabet-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(84px,1fr)); gap:.6rem;
+  margin:1rem 0 1.4rem 0;
+}
+.letter-card{
+  background:var(--white); border:2px solid var(--yellow); border-radius:10px;
+  padding:.7rem .4rem; text-align:center; cursor:pointer; transition:transform .15s, background .15s;
+}
+.letter-card:hover{background:var(--lightcard); transform:translateY(-2px);}
+.letter-card.playing{background:var(--red); border-color:var(--red-dark);}
+.letter-card.playing .big, .letter-card.playing .name{color:var(--white);}
+.letter-card .big{font-size:1.7rem; font-weight:bold; color:var(--red-dark); line-height:1.1;}
+.letter-card .name{font-size:.72rem; color:#666; margin-top:.15rem;}
+.letter-card .spk{font-size:.85rem; margin-top:.2rem;}
+.video-wrap{
+  position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+  border-radius:12px; margin:1.1rem 0 1.4rem 0; box-shadow:0 4px 14px rgba(0,0,0,.18);
+  border:3px solid var(--yellow);
+}
+.video-wrap iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0;}
+.video-note{
+  background:var(--lightcard); border-left:5px solid var(--yellow-dark); padding:.7rem 1rem;
+  border-radius:0 8px 8px 0; font-size:.85rem; color:#555; margin-bottom:1.1rem;
+}
+.video-questions .vq{margin-bottom:1.1rem;}
+.video-questions .vq p.qtext{font-weight:bold; margin-bottom:.4rem; color:#2b2b2b;}
+.video-questions textarea{
+  width:100%; min-height:70px; border:2px solid var(--yellow); border-radius:8px;
+  padding:.6rem .7rem; font-family:Calibri,Arial,sans-serif; font-size:.92rem; resize:vertical;
+}
+.video-questions textarea:focus{outline:none; border-color:var(--red);}
+.savebtn{
+  background:var(--red-dark); color:var(--white); border:none; padding:.4rem 1rem;
+  border-radius:20px; cursor:pointer; font-size:.82rem; font-weight:bold; margin-top:.4rem;
+}
+.savebtn:hover{background:var(--red);}
+.saved-note{font-size:.78rem; color:#2e7d32; margin-left:.6rem; font-weight:bold;}
+.gender-game{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:.8rem; margin:1rem 0;}
+.gword{
+  background:var(--white); border:2px solid var(--yellow); border-radius:10px;
+  padding:.8rem .9rem; text-align:center;
+}
+.gword .word{display:block; font-size:1.15rem; font-weight:bold; color:var(--red-dark); margin-bottom:.5rem;}
+.gword button{
+  background:var(--cream); border:2px solid var(--red); color:var(--red-dark); font-weight:bold;
+  border-radius:20px; padding:.3rem .8rem; margin:0 .2rem; cursor:pointer; font-size:.85rem;
+}
+.gword button:hover{background:var(--red); color:var(--white);}
+.gword.correct{border-color:#2e7d32; background:#F3FBF3;}
+.gword.incorrect{border-color:var(--red); background:#FBEEEE;}
+.gword .gfeedback{display:block; margin-top:.4rem; font-size:.85rem; font-weight:bold; min-height:1.1rem;}
+.plural-game .pword{
+  display:flex; align-items:center; gap:.6rem; margin-bottom:.7rem; flex-wrap:wrap;
+}
+.plural-game .pword label{font-weight:bold; color:#333;}
+.plural-game input[type=text]{
+  border:2px solid var(--yellow); border-radius:8px; padding:.35rem .6rem; font-size:.95rem;
+  width:140px; font-family:Calibri,Arial,sans-serif;
+}
+.plural-game input[type=text]:focus{outline:none; border-color:var(--red);}
+footer.pagefoot{
+  border-top:3px solid var(--yellow); margin-top:3rem; padding-top:1.4rem; font-size:.85rem; color:#666;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:.8rem;
+}
+.nextmod{
+  display:inline-block; margin-top:1rem; background:var(--red); color:var(--white);
+  text-decoration:none; padding:.6rem 1.3rem; border-radius:24px; font-weight:bold; font-size:.9rem;
+}
+.nextmod:hover{background:var(--red-dark);}
+@media (max-width:900px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid var(--yellow);}
+  main{padding:1.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <div class="brand">Español Básico <span>· PROEJA en Marketing</span></div>
+  <div class="modlinks"><a href="modulo1.html">Módulo I</a><a href="modulo2.html">Módulo II</a><a href="modulo3.html" class="active">Módulo III</a></div>
+</div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="modcard">
+      <div class="tag">MÓDULO III</div>
+      <h3>Comunicación, publicidad y proyecto final</h3>
+      <p>Encuentros 7 a 10 · 22/10, 05/11, 19/11 y 03/12</p>
+      <p>16 horas</p>
+      <p><b>Entrega:</b> Evaluación Escrita (30%) + Proyecto Final (40%)</p>
+    </div>
+    <nav>
+      <a href="#encuentro-7" data-target="encuentro-7">Encuentro 7 · Publicidad</a>
+<a href="#encuentro-8" data-target="encuentro-8" class="entrega">Encuentro 8 · Futuro simple</a>
+<a href="#encuentro-9" data-target="encuentro-9" class="entrega">Encuentro 9 · Pret. perfecto (entrega)</a>
+<a href="#encuentro-10" data-target="encuentro-10" class="entrega">Encuentro 10 · Proyecto Final</a>
+    </nav>
+    <div class="progress-wrap">
+      <div class="label" id="progressLabel">Progreso: 0 / 10 actividades</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </aside>
+  <main>
+    <div class="hero">
+      <div class="tag">MÓDULO III</div>
+      <h1>Comunicación, publicidad y proyecto final</h1>
+      <div class="sub">Publicidad, futuro simple, pretérito perfecto compuesto y elaboración del Proyecto Final</div>
+      <div class="meta"><span><b>Fechas:</b> Encuentros 7 a 10 · 22/10, 05/11, 19/11 y 03/12</span><span><b>Carga horaria:</b> 16 horas</span></div>
+    </div>
+    
+<section class="encuentro" id="encuentro-7">
+  <h2>Encuentro 7</h2>
+  <div class="encdate">22/10/2026 · Español para publicidad</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Producir textos publicitarios simples en español.</div>
+  <div class="contenido">
+    
+      <h4>Adjetivos calificativos para publicidad</h4>
+      <p>increíble, único/a, exclusivo/a, imperdible, innovador/a, imprescindible</p>
+      <h4>Estructura de eslóganes (imperativo)</h4>
+      <table><tr><th>Eslogan</th><th>Función</th></tr>
+    <tr><td>¡Compra ya!</td><td>Invitar a la acción de comprar</td></tr>
+<tr><td>¡No te lo pierdas!</td><td>Generar urgencia</td></tr>
+<tr><td>¡Descúbrelo hoy!</td><td>Invitar a descubrir el producto</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('¡Descubre la nueva colección! Calidad única, precio increíble.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«¡Descubre la nueva colección! Calidad única, precio increíble.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Descubra a nova coleção! Qualidade única, preço incrível.)</span></div>
+  </div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: crear un eslogan</h4><div class="quiz-q" id="q7-1">
+    <p class="qtext">1. ¿Cuál de estas frases es un imperativo adecuado para un eslogan?</p>
+    <label><input type="radio" name="q7-1-r" value="a"> Compras el producto</label>
+<label><input type="radio" name="q7-1-r" value="b"> ¡Compra ya!</label>
+<label><input type="radio" name="q7-1-r" value="c"> Comprando el producto</label>
+    <button class="checkbtn" onclick="checkQuiz('q7-1','b','El imperativo (¡Compra ya!) invita directamente a la acción.')">Comprobar</button>
+    <div class="feedback" id="q7-1-fb"></div>
+  </div><div class="quiz-q" id="q7-2">
+    <p class="qtext">2. Elige el adjetivo más adecuado: "Una oferta ______, solo por hoy."</p>
+    <label><input type="radio" name="q7-2-r" value="a"> aburrida</label>
+<label><input type="radio" name="q7-2-r" value="b"> imperdible</label>
+<label><input type="radio" name="q7-2-r" value="c"> normal</label>
+    <button class="checkbtn" onclick="checkQuiz('q7-2','b','"Imperdible" genera urgencia y atractivo, ideal para publicidad.')">Comprobar</button>
+    <div class="feedback" id="q7-2-fb"></div>
+  </div></div>
+  
+</section>
+<section class="encuentro" id="encuentro-8">
+  <h2>Encuentro 8</h2>
+  <div class="encdate">05/11/2026 · Futuro simple y planificación de campañas</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Planificar acciones de marketing empleando el futuro simple.</div>
+  <div class="contenido">
+    
+      <h4>Futuro simple — verbos regulares</h4>
+      <p>Se forma con el infinitivo + terminación: <b>-é, -ás, -á, -emos, -éis, -án</b>. Ejemplo: <i>lanzar → lanzaré, lanzarás, lanzará...</i></p>
+      <h4>Futuro simple — verbos irregulares frecuentes</h4>
+      <table><tr><th>Verbo</th><th>Conjugación</th></tr>
+    <tr><td>hacer</td><td>haré, harás, hará...</td></tr>
+<tr><td>tener</td><td>tendré, tendrás, tendrá...</td></tr>
+<tr><td>poder</td><td>podré, podrás, podrá...</td></tr>
+<tr><td>decir</td><td>diré, dirás, dirá...</td></tr>
+<tr><td>venir</td><td>vendré, vendrás, vendrá...</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('El mes que viene lanzaremos una nueva campaña. Ofreceremos descuentos especiales.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«El mes que viene lanzaremos una nueva campaña. Ofreceremos descuentos especiales.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(No mês que vem lançaremos uma nova campanha. Ofereceremos descontos especiais.)</span></div>
+  </div>
+      <h4>La rutina diaria... pero en el futuro</h4>
+      <p>Vamos a recuperar el vocabulario de la rutina diaria para practicarlo con el futuro simple, imaginando cómo cambiará tu rutina profesional el año que viene.</p>
+      <table><tr><th>Verbo (rutina)</th><th>Futuro simple</th></tr>
+    <tr><td>levantarse</td><td>me levantaré, te levantarás, se levantará...</td></tr>
+<tr><td>ducharse</td><td>me ducharé, te ducharás, se duchará...</td></tr>
+<tr><td>desayunar</td><td>desayunaré, desayunarás, desayunará...</td></tr>
+<tr><td>salir (irregular)</td><td>saldré, saldrás, saldrá...</td></tr>
+<tr><td>almorzar</td><td>almorzaré, almorzarás, almorzará...</td></tr>
+<tr><td>acostarse</td><td>me acostaré, te acostarás, se acostará...</td></tr>
+  </table>
+      <p>Y recordando la hora: <i>Son las tres. / Es la una. / Son las ocho y media. / Son las diez menos cuarto.</i></p>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('El año que viene me levantaré más temprano y trabajaré desde casa. Empezaré a las ocho y almorzaré a la una.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«El año que viene me levantaré más temprano y trabajaré desde casa. Empezaré a las ocho y almorzaré a la una.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(No ano que vem, levantarei mais cedo e trabalharei de casa. Começarei às oito e almoçarei à uma.)</span></div>
+  </div>
+      <div class="objetivo-box" style="border-left-color:var(--yellow-dark);"><b>Aviso:</b> en este encuentro se realiza la <b>Evaluación Escrita</b>, que integra los contenidos de los tres módulos y equivale al 30% de la nota final.</div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: futuro simple</h4><div class="quiz-q" id="q8-1">
+    <p class="qtext">1. "El año que viene, nosotros _____ (hacer) una nueva campaña."</p>
+    <label><input type="radio" name="q8-1-r" value="a"> haremos</label>
+<label><input type="radio" name="q8-1-r" value="b"> haceremos</label>
+<label><input type="radio" name="q8-1-r" value="c"> hacimos</label>
+    <button class="checkbtn" onclick="checkQuiz('q8-1','a','"Hacer" es irregular en futuro: haré, harás, hará, haremos...')">Comprobar</button>
+    <div class="feedback" id="q8-1-fb"></div>
+  </div><div class="quiz-q" id="q8-2">
+    <p class="qtext">2. "La empresa _____ (tener) más clientes el próximo año."</p>
+    <label><input type="radio" name="q8-2-r" value="a"> tenerá</label>
+<label><input type="radio" name="q8-2-r" value="b"> tendrá</label>
+<label><input type="radio" name="q8-2-r" value="c"> tiene</label>
+    <button class="checkbtn" onclick="checkQuiz('q8-2','b','"Tener" es irregular en futuro: tendré, tendrás, tendrá...')">Comprobar</button>
+    <div class="feedback" id="q8-2-fb"></div>
+  </div><div class="quiz-q" id="q8-3">
+    <p class="qtext">3. "El año que viene, yo _____ (levantarse) más temprano."</p>
+    <label><input type="radio" name="q8-3-r" value="a"> me levanto</label>
+<label><input type="radio" name="q8-3-r" value="b"> me levantaré</label>
+<label><input type="radio" name="q8-3-r" value="c"> me levantará</label>
+    <button class="checkbtn" onclick="checkQuiz('q8-3','b','Primera persona singular del futuro simple: me levantaré.')">Comprobar</button>
+    <div class="feedback" id="q8-3-fb"></div>
+  </div></div>
+  
+</section>
+<section class="encuentro" id="encuentro-9">
+  <h2>Encuentro 9</h2>
+  <div class="encdate">19/11/2026 · Pretérito perfecto compuesto y orientación del Proyecto Final</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Relatar experiencias y campañas de marketing realizadas empleando el pretérito perfecto compuesto; recibir orientación para el Proyecto Final.</div>
+  <div class="contenido">
+    
+      <h4>Pretérito perfecto compuesto</h4>
+      <p>Se forma con <b>haber</b> (presente) + <b>participio</b>: he/has/ha/hemos/habéis/han + hablado / vendido / hecho...</p>
+      <table><tr><th>Infinitivo → Participio</th><th>Ejemplo</th></tr>
+    <tr><td>hablar → hablado</td><td>he hablado con el cliente</td></tr>
+<tr><td>vender → vendido</td><td>hemos vendido más este mes</td></tr>
+<tr><td>hacer → hecho (irregular)</td><td>hemos hecho una nueva campaña</td></tr>
+<tr><td>escribir → escrito (irregular)</td><td>he escrito el anuncio</td></tr>
+<tr><td>poner → puesto (irregular)</td><td>hemos puesto la oferta en la tienda</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('Este año hemos lanzado tres campañas nuevas. Hemos aumentado las ventas.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«Este año hemos lanzado tres campañas nuevas. Hemos aumentado las ventas.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Este ano lançamos três novas campanhas. Aumentamos as vendas.)</span></div>
+  </div>
+      <h4>🎬 Video: Hostal Babel — Episodio 9, "Cajas y cajas y cajas"</h4>
+      <div class="video-note">Este episodio muestra a los personajes hablando de cosas que ya han hecho y de cambios que se acercan. Presta atención a cómo usan el pretérito perfecto compuesto para contar lo que ha pasado recientemente.</div>
+      <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/Q7hcDpaHkkA" title="Hostal Babel - Episodio 9 - Cajas y cajas y cajas" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+      <div class="video-questions">
+    <div class="vq">
+      <p class="qtext">1. ¿Qué ha pasado recientemente en la historia del video? Resume la situación con tus palabras.</p>
+      <textarea id="v9-q1" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v9-q1')">Guardar respuesta</button>
+      <span class="saved-note" id="v9-q1-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">2. Escribe dos frases del video que usen el pretérito perfecto compuesto (haber + participio).</p>
+      <textarea id="v9-q2" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v9-q2')">Guardar respuesta</button>
+      <span class="saved-note" id="v9-q2-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">3. ¿Qué participios (regulares o irregulares) escuchaste en el video?</p>
+      <textarea id="v9-q3" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v9-q3')">Guardar respuesta</button>
+      <span class="saved-note" id="v9-q3-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">4. Relaciona la situación del video con tu Proyecto Final: ¿qué ha hecho tu marca/producto hasta ahora?</p>
+      <textarea id="v9-q4" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v9-q4')">Guardar respuesta</button>
+      <span class="saved-note" id="v9-q4-note"></span>
+    </div></div>
+      <h4>Orientación para el Proyecto Final</h4>
+      <p>En el próximo y último encuentro presentarás tu <b>Proyecto Final</b>: una pequeña campaña de marketing en español. Usa el checklist a continuación para prepararte.</p>
+      <div class="activity checklist">
+        <h4>✅ Checklist del Proyecto Final</h4>
+        <label><input type="checkbox" onchange="markChecklist()"> Elegí un producto o servicio (real o ficticio)</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Creé un nombre de marca</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Escribí un eslogan con imperativo</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Describí el producto en presente (es/tiene + adjetivo)</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Conté una acción pasada de la campaña (pretérito perfecto compuesto)</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Anuncié un plan futuro (futuro simple)</label>
+        <label><input type="checkbox" onchange="markChecklist()"> Practiqué la presentación oral</label>
+      </div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: pretérito perfecto compuesto</h4><div class="quiz-q" id="q9-1">
+    <p class="qtext">1. "Nosotros _____ (vender) más productos este mes."</p>
+    <label><input type="radio" name="q9-1-r" value="a"> hemos vendido</label>
+<label><input type="radio" name="q9-1-r" value="b"> habemos vendido</label>
+<label><input type="radio" name="q9-1-r" value="c"> hemos vender</label>
+    <button class="checkbtn" onclick="checkQuiz('q9-1','a','Haber (hemos) + participio regular (vendido).')">Comprobar</button>
+    <div class="feedback" id="q9-1-fb"></div>
+  </div><div class="quiz-q" id="q9-2">
+    <p class="qtext">2. "Yo _____ (hacer) una campaña nueva."</p>
+    <label><input type="radio" name="q9-2-r" value="a"> he hacido</label>
+<label><input type="radio" name="q9-2-r" value="b"> he hecho</label>
+<label><input type="radio" name="q9-2-r" value="c"> he hace</label>
+    <button class="checkbtn" onclick="checkQuiz('q9-2','b','"Hacer" tiene participio irregular: hecho.')">Comprobar</button>
+    <div class="feedback" id="q9-2-fb"></div>
+  </div></div>
+  <div class="entrega-box"><div class="pct">10%</div><div class="txt"><b>Entrega del módulo:</b> Actividad Oral — Módulo III. Esta actividad se realiza en clase con la profesora y equivale al 10% de la nota final.</div></div>
+</section>
+<section class="encuentro" id="encuentro-10">
+  <h2>Encuentro 10</h2>
+  <div class="encdate">03/12/2026 · Presentación del Proyecto Final</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Consolidar las competencias desarrolladas y presentar el Proyecto Final del curso.</div>
+  <div class="contenido">
+    
+      <p>Hoy es el último encuentro del curso. Cada estudiante presentará su <b>Proyecto Final</b>: una pieza de comunicación/campaña de marketing en español, integrando todo lo aprendido en los tres módulos.</p>
+      <h4>Estructura sugerida para la presentación (2–3 minutos)</h4>
+      <table><tr><th>Parte</th><th>Estructura gramatical</th></tr>
+    <tr><td>1. Presentación personal/profesional</td><td>Me llamo... / Soy...</td></tr>
+<tr><td>2. Presentación del producto/marca</td><td>Este/Esta... es/tiene...</td></tr>
+<tr><td>3. Eslogan publicitario</td><td>¡Imperativo!</td></tr>
+<tr><td>4. Relato de una acción pasada de la campaña</td><td>Hemos hecho / hemos lanzado...</td></tr>
+<tr><td>5. Plan futuro de la marca</td><td>Lanzaremos / ofreceremos...</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('¡Mucha suerte a todos y todas! Cada trayectoria de vida y de trabajo es un punto de partida valioso para aprender español.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«¡Mucha suerte a todos y todas! Cada trayectoria de vida y de trabajo es un punto de partida valioso para aprender español.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Boa sorte a todos e todas! Cada trajetória de vida e de trabalho é um ponto de partida valioso para aprender espanhol.)</span></div>
+  </div>
+    
+  </div>
+  
+  <div class="entrega-box"><div class="pct">40%</div><div class="txt"><b>Entrega final:</b> Proyecto Final — elaboración y presentación de una pieza de comunicación/campaña de marketing en español. Equivale al 40% de la nota final. ¡Felicidades por llegar hasta aquí!</div></div>
+</section>
+    <footer class="pagefoot">
+      <div>Profesora Vanessa Cristina Silva · Instituto Federal de Brasília — Campus Brasília</div>
+      <div><a class="nextmod" href="modulo2.html" style="background:var(--yellow-dark);">← Módulo II</a> </div>
+    </footer>
+  </main>
+</div>
+<script>
+function speak(text, btn){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta la lectura en voz alta.'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  if(esVoice) u.voice = esVoice;
+  u.lang = 'es-ES';
+  u.rate = 0.95;
+  if(btn){ btn.classList.add('speaking'); u.onend = () => btn.classList.remove('speaking'); }
+  window.speechSynthesis.speak(u);
+}
+
+function speakLetter(cardId, name){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta la lectura en voz alta.'); return; }
+  window.speechSynthesis.cancel();
+  const card = document.getElementById(cardId);
+  const u = new SpeechSynthesisUtterance(name);
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  if(esVoice) u.voice = esVoice;
+  u.lang = 'es-ES';
+  u.rate = 0.85;
+  if(card){
+    card.classList.add('playing');
+    u.onend = () => card.classList.remove('playing');
+  }
+  window.speechSynthesis.speak(u);
+  if(!completedActivities.includes('alphabet')){ completedActivities.push('alphabet'); updateProgress(); }
+}
+
+let completedActivities = JSON.parse(localStorage.getItem('progress_mod3') || '[]');
+const TOTAL_ACTIVITIES = 10;
+
+function updateProgress(){
+  const bar = document.getElementById('progressFill');
+  const label = document.getElementById('progressLabel');
+  if(!bar) return;
+  const pct = Math.round((completedActivities.length / TOTAL_ACTIVITIES) * 100);
+  bar.style.width = pct + '%';
+  if(label) label.textContent = 'Progreso: ' + completedActivities.length + ' / ' + TOTAL_ACTIVITIES + ' actividades';
+  localStorage.setItem('progress_mod3', JSON.stringify(completedActivities));
+}
+
+function checkQuiz(qid, correct, explanation){
+  const form = document.getElementById(qid);
+  const selected = form.querySelector('input[type=radio]:checked');
+  const fb = document.getElementById(qid + '-fb');
+  if(!selected){ fb.textContent = 'Por favor, selecciona una opción.'; fb.className = 'feedback bad'; return; }
+  if(selected.value === correct){
+    fb.textContent = '¡Correcto! ' + explanation;
+    fb.className = 'feedback ok';
+    if(!completedActivities.includes(qid)){ completedActivities.push(qid); updateProgress(); }
+  } else {
+    fb.textContent = 'Todavía no. ' + explanation;
+    fb.className = 'feedback bad';
+  }
+}
+
+function markChecklist(){
+  const boxes = document.querySelectorAll('.checklist input[type=checkbox]');
+  const checked = Array.from(boxes).filter(b => b.checked).length;
+  const cid = 'checklist-final';
+  if(checked === boxes.length && boxes.length > 0 && !completedActivities.includes(cid)){
+    completedActivities.push(cid); updateProgress();
+  }
+}
+
+function saveVideoAnswer(qid){
+  const ta = document.getElementById(qid);
+  localStorage.setItem('answer_' + qid, ta.value);
+  const note = document.getElementById(qid + '-note');
+  note.textContent = '✓ Guardado';
+  setTimeout(() => { note.textContent = ''; }, 2000);
+  checkVideoActivity();
+}
+
+function checkVideoActivity(){
+  const textareas = document.querySelectorAll('.video-questions textarea');
+  if(textareas.length === 0) return;
+  const allFilled = Array.from(textareas).every(t => t.value.trim().length > 0);
+  if(allFilled && !completedActivities.includes('video-guiado')){
+    completedActivities.push('video-guiado'); updateProgress();
+  }
+}
+
+function restoreVideoAnswers(){
+  document.querySelectorAll('.video-questions textarea').forEach(ta => {
+    const saved = localStorage.getItem('answer_' + ta.id);
+    if(saved) ta.value = saved;
+  });
+  checkVideoActivity();
+}
+
+function classifyGender(wid, chosen){
+  const el = document.getElementById(wid);
+  const correct = el.dataset.correct;
+  const fb = document.getElementById(wid + '-fb');
+  if(chosen === correct){
+    el.classList.remove('incorrect'); el.classList.add('correct');
+    fb.textContent = '¡Correcto!';
+    if(!completedActivities.includes(wid)){ completedActivities.push(wid); updateProgress(); }
+  } else {
+    el.classList.remove('correct'); el.classList.add('incorrect');
+    fb.textContent = 'Intenta de nuevo.';
+  }
+}
+
+function checkPlural(pid, correct){
+  const input = document.getElementById(pid);
+  const fb = document.getElementById(pid + '-fb');
+  const val = input.value.trim().toLowerCase();
+  if(val === correct.toLowerCase()){
+    fb.textContent = '¡Correcto!'; fb.className = 'feedback ok';
+    if(!completedActivities.includes(pid)){ completedActivities.push(pid); updateProgress(); }
+  } else {
+    fb.textContent = 'Todavía no. Inténtalo de nuevo.'; fb.className = 'feedback bad';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgress();
+  restoreVideoAnswers();
+  const sections = document.querySelectorAll('section.encuentro');
+  const navLinks = document.querySelectorAll('.sidebar nav a[data-target]');
+  function highlight(){
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => a.classList.toggle('current', a.dataset.target === current));
+  }
+  window.addEventListener('scroll', highlight);
+  highlight();
+  window.speechSynthesis.onvoiceschanged = () => {};
+});
+</script>
+</body>
+</html>

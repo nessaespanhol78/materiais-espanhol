@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MÓDULO II — Español Básico · PROEJA en Marketing</title>
+<style>
+:root{
+  --red:#8B0000;
+  --red-dark:#5C0000;
+  --yellow:#F4A900;
+  --yellow-dark:#C17F00;
+  --black:#1A1A1A;
+  --cream:#FFF8E7;
+  --lightcard:#FFF3D6;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--white);color:#2b2b2b;}
+h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;}
+.topnav{
+  background:var(--red-dark); color:var(--white); display:flex; align-items:center;
+  justify-content:space-between; padding:0.9rem 1.6rem; flex-wrap:wrap; gap:.6rem;
+}
+.topnav .brand{font-weight:bold; letter-spacing:.5px; font-size:1.05rem;}
+.topnav .brand span{color:var(--yellow);}
+.topnav .modlinks a{
+  color:var(--white); text-decoration:none; margin-left:1rem; font-size:.92rem;
+  padding:.35rem .8rem; border-radius:20px; border:1px solid rgba(255,255,255,.35);
+}
+.topnav .modlinks a.active{background:var(--yellow); color:var(--red-dark); border-color:var(--yellow); font-weight:bold;}
+.topnav .modlinks a:hover{border-color:var(--yellow);}
+
+.layout{display:flex; align-items:flex-start; min-height:100vh;}
+.sidebar{
+  width:270px; flex-shrink:0; background:var(--cream); padding:1.4rem 1.1rem;
+  position:sticky; top:0; height:100vh; overflow-y:auto; border-right:3px solid var(--yellow);
+}
+.sidebar .modcard{
+  background:var(--red); color:var(--white); border-radius:12px; padding:1rem;
+  margin-bottom:1.2rem;
+}
+.sidebar .modcard .tag{color:var(--yellow); letter-spacing:2px; font-size:.72rem; font-weight:bold;}
+.sidebar .modcard h3{margin:.3rem 0 .5rem 0; font-size:1.15rem;}
+.sidebar .modcard p{margin:.15rem 0; font-size:.82rem; color:#FFF3D6;}
+.sidebar nav a{
+  display:block; padding:.55rem .7rem; margin-bottom:.4rem; border-radius:8px;
+  color:var(--red-dark); text-decoration:none; font-size:.88rem; font-weight:bold;
+  border-left:4px solid transparent;
+}
+.sidebar nav a.entrega{color:var(--yellow-dark);}
+.sidebar nav a:hover, .sidebar nav a.current{background:var(--lightcard); border-left:4px solid var(--red);}
+.sidebar .progress-wrap{margin-top:1.2rem;}
+.sidebar .progress-wrap .label{font-size:.75rem; color:var(--black); margin-bottom:.3rem;}
+.sidebar .progress-bar{background:#EADFC8; border-radius:20px; height:10px; overflow:hidden;}
+.sidebar .progress-fill{background:var(--red); height:100%; width:0%; transition:width .4s;}
+
+main{flex:1; padding:2.2rem 3rem 4rem 3rem; max-width:920px;}
+.hero{margin-bottom:2.2rem;}
+.hero .tag{color:var(--red); letter-spacing:3px; font-weight:bold; font-size:.85rem;}
+.hero h1{color:var(--red-dark); font-size:2.3rem; margin:.3rem 0 .4rem 0;}
+.hero .sub{color:#555; font-style:italic; font-size:1.05rem; margin-bottom:.6rem;}
+.hero .meta{display:flex; gap:1.2rem; flex-wrap:wrap; font-size:.85rem; color:var(--black);}
+.hero .meta b{color:var(--red);}
+
+section.encuentro{
+  border-top:3px solid var(--yellow); padding-top:1.8rem; margin-top:2.4rem; scroll-margin-top:1rem;
+}
+section.encuentro h2{
+  color:var(--white); background:var(--red); display:inline-block; padding:.35rem 1rem;
+  border-radius:8px 8px 0 0; font-size:1.3rem; margin:0;
+}
+section.encuentro .encdate{color:var(--yellow-dark); font-weight:bold; font-size:.85rem; margin:.5rem 0 1rem 0;}
+.objetivo-box{
+  background:var(--lightcard); border-left:5px solid var(--red); padding:.9rem 1.1rem;
+  border-radius:0 8px 8px 0; margin-bottom:1.3rem;
+}
+.objetivo-box b{color:var(--red-dark);}
+.contenido h4{color:var(--red-dark); margin-bottom:.3rem; font-size:1.05rem;}
+.contenido table{border-collapse:collapse; width:100%; margin:.8rem 0 1.2rem 0; font-size:.92rem;}
+.contenido table th{background:var(--red); color:var(--white); padding:.5rem .7rem; text-align:left;}
+.contenido table td{padding:.5rem .7rem; border-bottom:1px solid #eee;}
+.contenido table tr:nth-child(even) td{background:#FFFBF2;}
+.example-box{
+  background:var(--white); border:2px dashed var(--yellow-dark); border-radius:10px;
+  padding:1rem 1.2rem; margin:1rem 0; display:flex; align-items:center; gap:.9rem;
+}
+.example-box .txt{flex:1; font-style:italic; color:#333;}
+.ttsbtn{
+  background:var(--red); color:var(--white); border:none; border-radius:50%;
+  width:42px; height:42px; font-size:1.1rem; cursor:pointer; flex-shrink:0;
+}
+.ttsbtn:hover{background:var(--red-dark);}
+.activity{
+  background:var(--cream); border-radius:12px; padding:1.2rem 1.4rem; margin:1.4rem 0;
+}
+.activity h4{color:var(--red); margin-top:0;}
+.quiz-q{margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #EADFC8;}
+.quiz-q:last-child{border-bottom:none;}
+.quiz-q p.qtext{font-weight:bold; margin-bottom:.5rem; color:#2b2b2b;}
+.quiz-q label{display:block; margin-bottom:.35rem; cursor:pointer; font-size:.95rem;}
+.quiz-q input[type=radio]{margin-right:.5rem;}
+.checkbtn{
+  background:var(--red-dark); color:var(--white); border:none; padding:.5rem 1.1rem;
+  border-radius:20px; cursor:pointer; font-size:.85rem; font-weight:bold;
+}
+.checkbtn:hover{background:var(--red);}
+.feedback{margin-top:.5rem; font-size:.9rem; font-weight:bold; min-height:1.2rem;}
+.feedback.ok{color:#2e7d32;}
+.feedback.bad{color:var(--red);}
+.entrega-box{
+  background:var(--red-dark); color:var(--white); border-radius:12px; padding:1.2rem 1.4rem;
+  margin:1.6rem 0; display:flex; align-items:center; gap:1rem;
+}
+.entrega-box .pct{
+  background:var(--yellow); color:var(--red-dark); font-weight:bold; font-size:1.4rem;
+  border-radius:50%; width:64px; height:64px; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.entrega-box .txt b{color:var(--yellow);}
+.checklist label{display:block; margin-bottom:.5rem; font-size:.95rem;}
+.checklist input{margin-right:.6rem;}
+.alphabet-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(84px,1fr)); gap:.6rem;
+  margin:1rem 0 1.4rem 0;
+}
+.letter-card{
+  background:var(--white); border:2px solid var(--yellow); border-radius:10px;
+  padding:.7rem .4rem; text-align:center; cursor:pointer; transition:transform .15s, background .15s;
+}
+.letter-card:hover{background:var(--lightcard); transform:translateY(-2px);}
+.letter-card.playing{background:var(--red); border-color:var(--red-dark);}
+.letter-card.playing .big, .letter-card.playing .name{color:var(--white);}
+.letter-card .big{font-size:1.7rem; font-weight:bold; color:var(--red-dark); line-height:1.1;}
+.letter-card .name{font-size:.72rem; color:#666; margin-top:.15rem;}
+.letter-card .spk{font-size:.85rem; margin-top:.2rem;}
+.video-wrap{
+  position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+  border-radius:12px; margin:1.1rem 0 1.4rem 0; box-shadow:0 4px 14px rgba(0,0,0,.18);
+  border:3px solid var(--yellow);
+}
+.video-wrap iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0;}
+.video-note{
+  background:var(--lightcard); border-left:5px solid var(--yellow-dark); padding:.7rem 1rem;
+  border-radius:0 8px 8px 0; font-size:.85rem; color:#555; margin-bottom:1.1rem;
+}
+.video-questions .vq{margin-bottom:1.1rem;}
+.video-questions .vq p.qtext{font-weight:bold; margin-bottom:.4rem; color:#2b2b2b;}
+.video-questions textarea{
+  width:100%; min-height:70px; border:2px solid var(--yellow); border-radius:8px;
+  padding:.6rem .7rem; font-family:Calibri,Arial,sans-serif; font-size:.92rem; resize:vertical;
+}
+.video-questions textarea:focus{outline:none; border-color:var(--red);}
+.savebtn{
+  background:var(--red-dark); color:var(--white); border:none; padding:.4rem 1rem;
+  border-radius:20px; cursor:pointer; font-size:.82rem; font-weight:bold; margin-top:.4rem;
+}
+.savebtn:hover{background:var(--red);}
+.saved-note{font-size:.78rem; color:#2e7d32; margin-left:.6rem; font-weight:bold;}
+.gender-game{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:.8rem; margin:1rem 0;}
+.gword{
+  background:var(--white); border:2px solid var(--yellow); border-radius:10px;
+  padding:.8rem .9rem; text-align:center;
+}
+.gword .word{display:block; font-size:1.15rem; font-weight:bold; color:var(--red-dark); margin-bottom:.5rem;}
+.gword button{
+  background:var(--cream); border:2px solid var(--red); color:var(--red-dark); font-weight:bold;
+  border-radius:20px; padding:.3rem .8rem; margin:0 .2rem; cursor:pointer; font-size:.85rem;
+}
+.gword button:hover{background:var(--red); color:var(--white);}
+.gword.correct{border-color:#2e7d32; background:#F3FBF3;}
+.gword.incorrect{border-color:var(--red); background:#FBEEEE;}
+.gword .gfeedback{display:block; margin-top:.4rem; font-size:.85rem; font-weight:bold; min-height:1.1rem;}
+.plural-game .pword{
+  display:flex; align-items:center; gap:.6rem; margin-bottom:.7rem; flex-wrap:wrap;
+}
+.plural-game .pword label{font-weight:bold; color:#333;}
+.plural-game input[type=text]{
+  border:2px solid var(--yellow); border-radius:8px; padding:.35rem .6rem; font-size:.95rem;
+  width:140px; font-family:Calibri,Arial,sans-serif;
+}
+.plural-game input[type=text]:focus{outline:none; border-color:var(--red);}
+footer.pagefoot{
+  border-top:3px solid var(--yellow); margin-top:3rem; padding-top:1.4rem; font-size:.85rem; color:#666;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:.8rem;
+}
+.nextmod{
+  display:inline-block; margin-top:1rem; background:var(--red); color:var(--white);
+  text-decoration:none; padding:.6rem 1.3rem; border-radius:24px; font-weight:bold; font-size:.9rem;
+}
+.nextmod:hover{background:var(--red-dark);}
+@media (max-width:900px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid var(--yellow);}
+  main{padding:1.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <div class="brand">Español Básico <span>· PROEJA en Marketing</span></div>
+  <div class="modlinks"><a href="modulo1.html">Módulo I</a><a href="modulo2.html" class="active">Módulo II</a><a href="modulo3.html">Módulo III</a></div>
+</div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="modcard">
+      <div class="tag">MÓDULO II</div>
+      <h3>Español para el comercio y el marketing</h3>
+      <p>Encuentros 4 a 6 · 10/09, 24/09 y 08/10</p>
+      <p>12 horas</p>
+      <p><b>Entrega:</b> Actividad Oral (10%) — Encuentro 6</p>
+    </div>
+    <nav>
+      <a href="#encuentro-4" data-target="encuentro-4">Encuentro 4 · Vocabulario</a>
+<a href="#encuentro-5" data-target="encuentro-5">Encuentro 5 · Verbos irregulares</a>
+<a href="#encuentro-6" data-target="encuentro-6" class="entrega">Encuentro 6 · Atención (entrega)</a>
+    </nav>
+    <div class="progress-wrap">
+      <div class="label" id="progressLabel">Progreso: 0 / 7 actividades</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </aside>
+  <main>
+    <div class="hero">
+      <div class="tag">MÓDULO II</div>
+      <h1>Español para el comercio y el marketing</h1>
+      <div class="sub">Vocabulario comercial, verbos regulares e irregulares, descripción de productos, atención al cliente</div>
+      <div class="meta"><span><b>Fechas:</b> Encuentros 4 a 6 · 10/09, 24/09 y 08/10</span><span><b>Carga horaria:</b> 12 horas</span></div>
+    </div>
+    
+<section class="encuentro" id="encuentro-4">
+  <h2>Encuentro 4</h2>
+  <div class="encdate">10/09/2026 · Vocabulario del comercio y del marketing</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Reconocer y emplear vocabulario del comercio y del marketing; usar el presente de indicativo de los verbos regulares.</div>
+  <div class="contenido">
+    
+      <h4>Vocabulario esencial de marketing</h4>
+      <table><tr><th>Palabra</th><th>Ejemplo</th></tr>
+    <tr><td>producto</td><td>el producto que vendemos</td></tr>
+<tr><td>precio</td><td>¿Cuál es el precio de este producto?</td></tr>
+<tr><td>promoción</td><td>Tenemos una promoción especial hoy</td></tr>
+<tr><td>punto de venta</td><td>El punto de venta está en el centro</td></tr>
+<tr><td>público objetivo</td><td>Nuestro público objetivo son los jóvenes</td></tr>
+<tr><td>marca / cliente / oferta</td><td>Esta marca tiene una oferta para clientes nuevos</td></tr>
+  </table>
+      <h4>Presente de indicativo — verbos regulares</h4>
+      <table><tr><th>Terminación</th><th>Conjugación</th></tr>
+    <tr><td>-AR (comprar)</td><td>compro, compras, compra, compramos, compráis, compran</td></tr>
+<tr><td>-ER (vender)</td><td>vendo, vendes, vende, vendemos, vendéis, venden</td></tr>
+<tr><td>-IR (describir)</td><td>describo, describes, describe, describimos, describís, describen</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('Este producto cuesta veinte euros. Vendemos ropa y accesorios para jóvenes.', this)" title="Escuchar">🔊</button>
+    <div class="txt">«Este producto cuesta veinte euros. Vendemos ropa y accesorios para jóvenes.»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Este produto custa vinte euros. Vendemos roupas e acessórios para jovens.)</span></div>
+  </div>
+      <h4>🎬 Video: Hostal Babel — Episodio 2, "Este barrio"</h4>
+      <div class="video-note">Este episodio muestra a los personajes describiendo su barrio: los comercios, las tiendas y los lugares del día a día. Presta atención al vocabulario relacionado con negocios y productos.</div>
+      <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/6OsYoK9mbro" title="Hostal Babel - Episodio 2 - Este barrio" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+      <div class="video-questions">
+    <div class="vq">
+      <p class="qtext">1. ¿Qué tipos de comercios o negocios aparecen o se mencionan en el barrio del video?</p>
+      <textarea id="v4-q1" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v4-q1')">Guardar respuesta</button>
+      <span class="saved-note" id="v4-q1-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">2. ¿Qué productos o servicios ofrecen esos negocios?</p>
+      <textarea id="v4-q2" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v4-q2')">Guardar respuesta</button>
+      <span class="saved-note" id="v4-q2-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">3. Escribe dos frases del video en las que se describa un lugar o un producto.</p>
+      <textarea id="v4-q3" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v4-q3')">Guardar respuesta</button>
+      <span class="saved-note" id="v4-q3-note"></span>
+    </div>
+    <div class="vq">
+      <p class="qtext">4. Imagina que trabajas en uno de esos negocios: escribe cómo describirías tu producto a un cliente.</p>
+      <textarea id="v4-q4" placeholder="Escribe tu respuesta aquí..."></textarea><br>
+      <button class="savebtn" onclick="saveVideoAnswer('v4-q4')">Guardar respuesta</button>
+      <span class="saved-note" id="v4-q4-note"></span>
+    </div></div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: vocabulario y verbos regulares</h4><div class="quiz-q" id="q4-1">
+    <p class="qtext">1. "Nosotros _____ (vender) productos de buena calidad."</p>
+    <label><input type="radio" name="q4-1-r" value="a"> vendemos</label>
+<label><input type="radio" name="q4-1-r" value="b"> vende</label>
+<label><input type="radio" name="q4-1-r" value="c"> venden</label>
+    <button class="checkbtn" onclick="checkQuiz('q4-1','a','Primera persona plural: vendemos.')">Comprobar</button>
+    <div class="feedback" id="q4-1-fb"></div>
+  </div><div class="quiz-q" id="q4-2">
+    <p class="qtext">2. El grupo de personas al que se dirige una campaña se llama...</p>
+    <label><input type="radio" name="q4-2-r" value="a"> punto de venta</label>
+<label><input type="radio" name="q4-2-r" value="b"> público objetivo</label>
+<label><input type="radio" name="q4-2-r" value="c"> promoción</label>
+    <button class="checkbtn" onclick="checkQuiz('q4-2','b','"Público objetivo" es el grupo destinatario de la campaña.')">Comprobar</button>
+    <div class="feedback" id="q4-2-fb"></div>
+  </div></div>
+  
+</section>
+<section class="encuentro" id="encuentro-5">
+  <h2>Encuentro 5</h2>
+  <div class="encdate">24/09/2026 · Verbos irregulares y descripción de productos</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Emplear verbos irregulares frecuentes en presente; describir productos y servicios.</div>
+  <div class="contenido">
+    
+      <h4>Verbos irregulares frecuentes</h4>
+      <table><tr><th>Verbo</th><th>Conjugación</th></tr>
+    <tr><td>querer (e→ie)</td><td>quiero, quieres, quiere, queremos, queréis, quieren</td></tr>
+<tr><td>poder (o→ue)</td><td>puedo, puedes, puede, podemos, podéis, pueden</td></tr>
+<tr><td>ir</td><td>voy, vas, va, vamos, vais, van</td></tr>
+<tr><td>hacer (irregular en yo)</td><td>hago, haces, hace, hacemos, hacéis, hacen</td></tr>
+  </table>
+      <h4>Describir productos</h4>
+      <p>Estructura: <i>Este/Esta + sustantivo + es/tiene + adjetivo.</i> Adjetivos útiles: <b>bueno/a, práctico/a, moderno/a, resistente, elegante, innovador/a</b>.</p>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('Quiero comprar un producto práctico y moderno. ¿Puede usted mostrarme las opciones?', this)" title="Escuchar">🔊</button>
+    <div class="txt">«Quiero comprar un producto práctico y moderno. ¿Puede usted mostrarme las opciones?»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Quero comprar um produto prático e moderno. Você pode me mostrar as opções?)</span></div>
+  </div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: verbos irregulares y descripción</h4><div class="quiz-q" id="q5-1">
+    <p class="qtext">1. "Yo _____ (querer) un producto más económico."</p>
+    <label><input type="radio" name="q5-1-r" value="a"> quero</label>
+<label><input type="radio" name="q5-1-r" value="b"> quiero</label>
+<label><input type="radio" name="q5-1-r" value="c"> queo</label>
+    <button class="checkbtn" onclick="checkQuiz('q5-1','b','Verbo "querer" con diptongación e→ie: quiero.')">Comprobar</button>
+    <div class="feedback" id="q5-1-fb"></div>
+  </div><div class="quiz-q" id="q5-2">
+    <p class="qtext">2. "Este teléfono _____ muy resistente."</p>
+    <label><input type="radio" name="q5-2-r" value="a"> es</label>
+<label><input type="radio" name="q5-2-r" value="b"> tiene</label>
+<label><input type="radio" name="q5-2-r" value="c"> hace</label>
+    <button class="checkbtn" onclick="checkQuiz('q5-2','a','Característica permanente del producto: usamos "ser".')">Comprobar</button>
+    <div class="feedback" id="q5-2-fb"></div>
+  </div></div>
+  
+</section>
+<section class="encuentro" id="encuentro-6">
+  <h2>Encuentro 6</h2>
+  <div class="encdate">08/10/2026 · Atención al cliente y cierre del Módulo II</div>
+  <div class="objetivo-box"><b>Objetivo:</b> Emplear el español en situaciones simuladas de atención al cliente.</div>
+  <div class="contenido">
+    
+      <h4>Frases clave de atención al cliente</h4>
+      <table><tr><th>Frase</th><th>Uso</th></tr>
+    <tr><td>¿En qué puedo ayudarle?</td><td>Al recibir al cliente</td></tr>
+<tr><td>¿Busca algo en especial?</td><td>Para orientar la búsqueda</td></tr>
+<tr><td>¿Cómo desea pagar?</td><td>Al finalizar la compra</td></tr>
+<tr><td>Aquí tiene su cambio / factura</td><td>Al entregar el vuelto o el recibo</td></tr>
+<tr><td>Que tenga un buen día</td><td>Al despedirse</td></tr>
+  </table>
+      <div class="example-box">
+    <button class="ttsbtn" onclick="speak('Buenos días, ¿en qué puedo ayudarle? — Busco un regalo para mi madre. — Claro, tenemos varias opciones. ¿Cómo desea pagar?', this)" title="Escuchar">🔊</button>
+    <div class="txt">«Buenos días, ¿en qué puedo ayudarle? — Busco un regalo para mi madre. — Claro, tenemos varias opciones. ¿Cómo desea pagar?»<br><span style="font-style:normal;color:#888;font-size:.85rem;">(Bom dia, em que posso ajudá-lo? — Procuro um presente para minha mãe. — Claro, temos várias opções. Como deseja pagar?)</span></div>
+  </div>
+    
+  </div>
+  <div class="activity"><h4>✏️ Práctica: atención al cliente</h4><div class="quiz-q" id="q6-1">
+    <p class="qtext">1. Un cliente termina de elegir un producto. ¿Qué preguntas a continuación?</p>
+    <label><input type="radio" name="q6-1-r" value="a"> ¿En qué puedo ayudarle?</label>
+<label><input type="radio" name="q6-1-r" value="b"> ¿Cómo desea pagar?</label>
+<label><input type="radio" name="q6-1-r" value="c"> ¿Busca algo en especial?</label>
+    <button class="checkbtn" onclick="checkQuiz('q6-1','b','Tras la elección, se pregunta la forma de pago.')">Comprobar</button>
+    <div class="feedback" id="q6-1-fb"></div>
+  </div><div class="quiz-q" id="q6-2">
+    <p class="qtext">2. ¿Cuál es la expresión más formal para despedirse de un cliente?</p>
+    <label><input type="radio" name="q6-2-r" value="a"> Chao, nos vemos</label>
+<label><input type="radio" name="q6-2-r" value="b"> Que tenga un buen día</label>
+<label><input type="radio" name="q6-2-r" value="c"> Hasta luego, tío</label>
+    <button class="checkbtn" onclick="checkQuiz('q6-2','b','Es la fórmula de cortesía más adecuada en atención al público.')">Comprobar</button>
+    <div class="feedback" id="q6-2-fb"></div>
+  </div></div>
+  <div class="entrega-box"><div class="pct">10%</div><div class="txt"><b>Entrega del módulo:</b> Actividad Oral — simulación de atención al cliente. Esta actividad se realiza en clase con la profesora y equivale al 10% de la nota final.</div></div>
+</section>
+    <footer class="pagefoot">
+      <div>Profesora Vanessa Cristina Silva · Instituto Federal de Brasília — Campus Brasília</div>
+      <div><a class="nextmod" href="modulo1.html" style="background:var(--yellow-dark);">← Módulo I</a> <a class="nextmod" href="modulo3.html">Módulo III →</a></div>
+    </footer>
+  </main>
+</div>
+<script>
+function speak(text, btn){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta la lectura en voz alta.'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  if(esVoice) u.voice = esVoice;
+  u.lang = 'es-ES';
+  u.rate = 0.95;
+  if(btn){ btn.classList.add('speaking'); u.onend = () => btn.classList.remove('speaking'); }
+  window.speechSynthesis.speak(u);
+}
+
+function speakLetter(cardId, name){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no soporta la lectura en voz alta.'); return; }
+  window.speechSynthesis.cancel();
+  const card = document.getElementById(cardId);
+  const u = new SpeechSynthesisUtterance(name);
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+  if(esVoice) u.voice = esVoice;
+  u.lang = 'es-ES';
+  u.rate = 0.85;
+  if(card){
+    card.classList.add('playing');
+    u.onend = () => card.classList.remove('playing');
+  }
+  window.speechSynthesis.speak(u);
+  if(!completedActivities.includes('alphabet')){ completedActivities.push('alphabet'); updateProgress(); }
+}
+
+let completedActivities = JSON.parse(localStorage.getItem('progress_mod2') || '[]');
+const TOTAL_ACTIVITIES = 7;
+
+function updateProgress(){
+  const bar = document.getElementById('progressFill');
+  const label = document.getElementById('progressLabel');
+  if(!bar) return;
+  const pct = Math.round((completedActivities.length / TOTAL_ACTIVITIES) * 100);
+  bar.style.width = pct + '%';
+  if(label) label.textContent = 'Progreso: ' + completedActivities.length + ' / ' + TOTAL_ACTIVITIES + ' actividades';
+  localStorage.setItem('progress_mod2', JSON.stringify(completedActivities));
+}
+
+function checkQuiz(qid, correct, explanation){
+  const form = document.getElementById(qid);
+  const selected = form.querySelector('input[type=radio]:checked');
+  const fb = document.getElementById(qid + '-fb');
+  if(!selected){ fb.textContent = 'Por favor, selecciona una opción.'; fb.className = 'feedback bad'; return; }
+  if(selected.value === correct){
+    fb.textContent = '¡Correcto! ' + explanation;
+    fb.className = 'feedback ok';
+    if(!completedActivities.includes(qid)){ completedActivities.push(qid); updateProgress(); }
+  } else {
+    fb.textContent = 'Todavía no. ' + explanation;
+    fb.className = 'feedback bad';
+  }
+}
+
+function markChecklist(){
+  const boxes = document.querySelectorAll('.checklist input[type=checkbox]');
+  const checked = Array.from(boxes).filter(b => b.checked).length;
+  const cid = 'checklist-final';
+  if(checked === boxes.length && boxes.length > 0 && !completedActivities.includes(cid)){
+    completedActivities.push(cid); updateProgress();
+  }
+}
+
+function saveVideoAnswer(qid){
+  const ta = document.getElementById(qid);
+  localStorage.setItem('answer_' + qid, ta.value);
+  const note = document.getElementById(qid + '-note');
+  note.textContent = '✓ Guardado';
+  setTimeout(() => { note.textContent = ''; }, 2000);
+  checkVideoActivity();
+}
+
+function checkVideoActivity(){
+  const textareas = document.querySelectorAll('.video-questions textarea');
+  if(textareas.length === 0) return;
+  const allFilled = Array.from(textareas).every(t => t.value.trim().length > 0);
+  if(allFilled && !completedActivities.includes('video-guiado')){
+    completedActivities.push('video-guiado'); updateProgress();
+  }
+}
+
+function restoreVideoAnswers(){
+  document.querySelectorAll('.video-questions textarea').forEach(ta => {
+    const saved = localStorage.getItem('answer_' + ta.id);
+    if(saved) ta.value = saved;
+  });
+  checkVideoActivity();
+}
+
+function classifyGender(wid, chosen){
+  const el = document.getElementById(wid);
+  const correct = el.dataset.correct;
+  const fb = document.getElementById(wid + '-fb');
+  if(chosen === correct){
+    el.classList.remove('incorrect'); el.classList.add('correct');
+    fb.textContent = '¡Correcto!';
+    if(!completedActivities.includes(wid)){ completedActivities.push(wid); updateProgress(); }
+  } else {
+    el.classList.remove('correct'); el.classList.add('incorrect');
+    fb.textContent = 'Intenta de nuevo.';
+  }
+}
+
+function checkPlural(pid, correct){
+  const input = document.getElementById(pid);
+  const fb = document.getElementById(pid + '-fb');
+  const val = input.value.trim().toLowerCase();
+  if(val === correct.toLowerCase()){
+    fb.textContent = '¡Correcto!'; fb.className = 'feedback ok';
+    if(!completedActivities.includes(pid)){ completedActivities.push(pid); updateProgress(); }
+  } else {
+    fb.textContent = 'Todavía no. Inténtalo de nuevo.'; fb.className = 'feedback bad';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgress();
+  restoreVideoAnswers();
+  const sections = document.querySelectorAll('section.encuentro');
+  const navLinks = document.querySelectorAll('.sidebar nav a[data-target]');
+  function highlight(){
+    let current = '';
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 140) current = sec.id;
+    });
+    navLinks.forEach(a => a.classList.toggle('current', a.dataset.target === current));
+  }
+  window.addEventListener('scroll', highlight);
+  highlight();
+  window.speechSynthesis.onvoiceschanged = () => {};
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 3 · Vamos de viaje — Español para la Tercera Edad</title>
+<style>
+  :root{
+    --rojo:#AA151B; --rojo-suave:#fdecec;
+    --gualda:#F1BF00; --gualda-suave:#fff8e1;
+    --azulejo:#1B6CA8; --azulejo-suave:#e3f0fa;
+    --terracota:#C1440E; --terracota-suave:#fdeee7;
+    --oliva:#6B8E23; --oliva-suave:#f0f6e4;
+    --morado:#7D3C98; --morado-suave:#f4ecf7;
+    --crema:#FFFDF7; --texto:#2B1B17; --gris:#6E5B55;
+  }
+  *{box-sizing:border-box;}
+  body{ font-family:'Segoe UI', Verdana, Arial, sans-serif; background:var(--crema); color:var(--texto); margin:0; padding:0; font-size:20px; line-height:1.65; }
+  header{ background:linear-gradient(135deg,var(--rojo) 0%, #c9302c 45%, var(--gualda) 100%); color:#fff; padding:34px 20px 30px; text-align:center; border-bottom:8px solid var(--gualda); }
+  header h1{ font-size:2.2em; margin:0 0 8px; text-shadow:2px 2px 4px rgba(0,0,0,.3); }
+  header p{ font-size:1.15em; margin:0; }
+  .banderita{ font-size:1.8em; letter-spacing:6px; margin-bottom:6px; }
+  nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px; background:#7d1014; padding:14px 10px; position:sticky; top:0; z-index:50; border-bottom:5px solid var(--gualda); }
+  nav button{ font-size:.95em; padding:11px 16px; border:2px solid transparent; border-radius:30px; background:#a8272c; color:#fff; cursor:pointer; font-weight:600; transition:.2s; }
+  nav button:hover{ background:var(--gualda); color:var(--rojo); }
+  nav button.activo{ background:var(--gualda); color:#7d1014; border-color:#fff; }
+  main{ max-width:920px; margin:0 auto; padding:26px 18px 70px; }
+  section{ display:none; animation:fade .4s ease; }
+  section.activa{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  h2{ color:var(--rojo); font-size:1.65em; border-bottom:5px solid var(--gualda); padding-bottom:8px; margin-top:0; }
+  h3{ color:var(--azulejo); font-size:1.3em; margin-top:30px; }
+  .caja{ background:var(--azulejo-suave); border-left:7px solid var(--azulejo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-roja{ background:var(--rojo-suave); border-left:7px solid var(--rojo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-oliva{ background:var(--oliva-suave); border-left:7px solid var(--oliva); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .cultura{ background:var(--gualda-suave); border-left:7px solid var(--gualda); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .terra{ background:var(--terracota-suave); border-left:7px solid var(--terracota); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .instrucciones{ font-weight:600; color:#fff; background:linear-gradient(90deg,var(--azulejo),#2e86c1); padding:13px 18px; border-radius:10px; margin-bottom:16px; }
+  table{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.94em; border-radius:10px; overflow:hidden; }
+  th,td{ border:1px solid #e8d9c5; padding:11px; text-align:center; }
+  th{ background:var(--rojo); color:#fff; }
+  tr:nth-child(even){ background:var(--gualda-suave); }
+  .opciones{ display:flex; flex-wrap:wrap; gap:12px; margin:14px 0; }
+  .opcion-btn{ font-size:1em; padding:14px 20px; border:3px solid var(--azulejo); border-radius:14px; background:#fff; color:var(--azulejo); cursor:pointer; font-weight:700; min-width:120px; }
+  .opcion-btn:hover{ background:var(--azulejo-suave); }
+  .opcion-btn.correcta{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; }
+  .opcion-btn.incorrecta{ background:var(--rojo-suave); border-color:var(--rojo); color:var(--rojo); }
+  .opcion-btn:disabled{ cursor:default; }
+  .feedback{ margin-top:12px; padding:13px 18px; border-radius:10px; font-weight:700; display:none; }
+  .feedback.ok{ display:block; background:var(--oliva-suave); color:#4a6b12; border-left:6px solid var(--oliva); }
+  .feedback.no{ display:block; background:var(--rojo-suave); color:var(--rojo); border-left:6px solid var(--rojo); }
+  input[type="text"]{ font-size:1em; padding:10px 12px; border:3px solid var(--azulejo); border-radius:10px; width:180px; margin:5px; }
+  input[type="text"].ok{ border-color:var(--oliva); background:var(--oliva-suave); }
+  input[type="text"].no{ border-color:var(--rojo); background:var(--rojo-suave); }
+  .btn-grande{ font-size:1.08em; padding:15px 30px; background:linear-gradient(135deg,var(--rojo),var(--terracota)); color:#fff; border:none; border-radius:32px; cursor:pointer; font-weight:700; margin-top:14px; box-shadow:0 4px 10px rgba(170,21,27,.28); }
+  .btn-grande:hover{ background:linear-gradient(135deg,var(--terracota),var(--rojo)); }
+  .btn-amarillo{ background:linear-gradient(135deg,var(--gualda),#e6a700); color:#5b4200; box-shadow:0 4px 10px rgba(241,191,0,.35); }
+  .flashcards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:14px; margin:18px 0; }
+  .letra-card{ border-radius:16px; padding:16px 8px 14px; text-align:center; color:#fff; cursor:pointer; transition:.2s; box-shadow:0 3px 8px rgba(0,0,0,.16); }
+  .letra-card:hover{ transform:translateY(-4px) scale(1.03); }
+  .letra-card .grande{ font-size:2em; font-weight:800; line-height:1.1; }
+  .letra-card .nombre{ font-size:.92em; font-weight:600; opacity:.95; }
+  .letra-card .altavoz{ font-size:1.1em; margin-top:4px; }
+  .video-wrap{ position:relative; padding-bottom:56.25%; height:0; border-radius:16px; overflow:hidden; margin:18px 0; border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2); }
+  .video-wrap iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .video-link-card{ display:block; position:relative; border-radius:16px; overflow:hidden; margin:18px 0; border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2); text-decoration:none; }
+  .video-link-card img{ display:block; width:100%; height:auto; }
+  .video-link-card .play-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.25); transition:.2s; }
+  .video-link-card:hover .play-overlay{ background:rgba(0,0,0,.4); }
+  .video-link-card .play-circle{ width:76px; height:76px; border-radius:50%; background:#FF0000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:2em; box-shadow:0 4px 12px rgba(0,0,0,.4); }
+  .video-link-card .caption{ position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:#fff; padding:10px 16px; font-weight:700; font-size:.95em; }
+  .emparejar{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin:16px 0; }
+  .columna{ display:flex; flex-direction:column; gap:10px; min-width:200px; }
+  .item-emparejar{ padding:14px 16px; border:3px solid var(--azulejo); border-radius:12px; background:#fff; cursor:pointer; font-weight:700; text-align:center; }
+  .item-emparejar.seleccionado{ background:var(--azulejo); color:#fff; }
+  .item-emparejar.acertado{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; cursor:default; }
+  .puntuacion{ background:linear-gradient(135deg,var(--oliva),#8bb32e); color:#fff; padding:15px 22px; border-radius:12px; font-size:1.15em; font-weight:800; text-align:center; margin:20px 0; }
+  footer{ text-align:center; padding:26px; color:var(--gris); font-size:.95em; background:var(--gualda-suave); border-top:6px solid var(--rojo); }
+  .avanzar-wrap{ text-align:center; margin-top:34px; }
+  @media(max-width:600px){ body{font-size:18px;} header h1{font-size:1.5em;} nav button{font-size:.84em; padding:9px 12px;} .emparejar{gap:14px;} .columna{min-width:145px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="banderita">✈️ 🚆 🚌 🇲🇽 🇬🇹</div>
+  <h1>Unidad 3 · Vamos de viaje</h1>
+  <p>Curso de Español · Tercera Edad · Nivel A1</p>
+</header>
+
+<nav id="menu">
+  <button data-seccion="s0" class="activo">Bienvenida</button>
+  <button data-seccion="s1">Transportes</button>
+  <button data-seccion="s2">Lugares</button>
+  <button data-seccion="s3">Tipos de turismo</button>
+  <button data-seccion="s4">Ir y viajar</button>
+  <button data-seccion="s5">Poder, preferir, querer</button>
+  <button data-seccion="s6">Hay, ser, estar</button>
+  <button data-seccion="s7">Indicaciones</button>
+  <button data-seccion="s8">Vídeo: Hostal Babel</button>
+  <button data-seccion="s9">Cultura</button>
+  <button data-seccion="s10">Evaluación</button>
+</nav>
+
+<main>
+
+<!-- 0 · BIENVENIDA -->
+<section id="s0" class="activa">
+  <h2>¡Bienvenido/a a la Unidad 3!</h2>
+  <div class="caja-roja">
+    <p><strong>En esta unidad vas a aprender a:</strong></p>
+    <p>➤ Localizar personas, objetos y lugares<br>
+    ➤ Expresar preferencias<br>
+    ➤ Pedir y dar instrucciones para traslados en medios de transporte<br>
+    ➤ Pedir y dar información espacial<br>
+    ➤ Preguntar y decir el precio<br>
+    ➤ Conocer Ciudad de México</p>
+  </div>
+  <div class="cultura">
+    <p>¿Te gusta viajar? ¿A dónde? ¿Cómo viajas? ¿Qué llevas siempre en tu maleta? Vamos a hablar de viajes, <strong>paso a paso</strong>.</p>
+  </div>
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s1')">Empezar → Transportes</button></div>
+</section>
+
+<!-- 1 · TRANSPORTES -->
+<section id="s1">
+  <h2>1. Medios de transporte</h2>
+  <p class="instrucciones">Toca cada tarjeta para escuchar el medio de transporte.</p>
+  <div class="flashcards" id="tarjetas-transporte"></div>
+  <div class="cultura">
+    <strong>Variación del español:</strong> <em>coche</em> (España) = <em>carro/auto</em> (América) · <em>metro</em> (España) = <em>subte</em> (Argentina) · <em>autobús</em> (España) = <em>camión</em> (México).
+  </div>
+
+  <h3>Actividad · ¿Cuál prefieres?</h3>
+  <p class="instrucciones">Elige la opción correcta según el adjetivo.</p>
+  <div id="quiz-transporte"></div>
+  <div class="puntuacion" id="puntos-transporte" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s2')">Continuar → Lugares</button></div>
+</section>
+
+<!-- 2 · LUGARES -->
+<section id="s2">
+  <h2>2. Lugares de interés y camping</h2>
+  <div class="caja">
+    <p><strong>Lugares de interés:</strong> museo · iglesia · ruinas · plaza · parque · mirador</p>
+    <button class="btn-grande btn-amarillo" onclick="hablar('museo, iglesia, ruinas, plaza, parque, mirador')">🔊 Escuchar los lugares</button>
+  </div>
+  <div class="terra">
+    <p><strong>En un camping:</strong> aparcamiento · duchas · recepción 24h · wifi · baños · piscina · parque infantil · supermercado · zona de acampada</p>
+  </div>
+
+  <h3>Actividad · Empareja el icono con el lugar</h3>
+  <p class="instrucciones">Une cada palabra con su descripción.</p>
+  <div class="emparejar" id="emparejar-lugares"></div>
+  <div class="puntuacion" id="puntos-lugares" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s3')">Continuar → Tipos de turismo</button></div>
+</section>
+
+<!-- 3 · TIPOS DE TURISMO -->
+<section id="s3">
+  <h2>3. Tipos de turismo</h2>
+  <table>
+    <tr><th>Turismo de naturaleza</th><th>Turismo cultural</th><th>Turismo de sol y playa</th></tr>
+    <tr><td>ir a la montaña, hacer una excursión, ver animales, visitar un parque natural</td>
+        <td>ver monumentos, visitar un museo, ir a un mercado de artesanía, ver un espectáculo</td>
+        <td>ir a la playa, tomar el sol, hacer surf, hacer submarinismo</td></tr>
+  </table>
+  <div class="cultura">
+    <em>Cuando viajo, prefiero descansar, ir a la playa y tomar el sol.</em>
+  </div>
+
+  <h3>Actividad · ¿Qué tipo de turismo es?</h3>
+  <p class="instrucciones">Elige el tipo de turismo correcto para cada actividad.</p>
+  <div id="quiz-turismo"></div>
+  <div class="puntuacion" id="puntos-turismo" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s4')">Continuar → Ir y viajar</button></div>
+</section>
+
+<!-- 4 · IR Y VIAJAR -->
+<section id="s4">
+  <h2>4. Verbos ir y viajar · preposiciones a / en</h2>
+  <table>
+    <tr><th></th><th>ir</th><th>viajar</th></tr>
+    <tr><td>yo</td><td>voy</td><td>viajo</td></tr>
+    <tr><td>tú</td><td>vas</td><td>viajas</td></tr>
+    <tr><td>él/ella/usted</td><td>va</td><td>viaja</td></tr>
+    <tr><td>nosotros/as</td><td>vamos</td><td>viajamos</td></tr>
+    <tr><td>vosotros/as</td><td>vais</td><td>viajáis</td></tr>
+    <tr><td>ellos/as/ustedes</td><td>van</td><td>viajan</td></tr>
+  </table>
+  <div class="caja">
+    <p><strong>a</strong> → dirección/destino: <em>Este verano voy a Cuba.</em> También distancia/tiempo: <em>El centro está a tres kilómetros.</em><br>
+    <strong>en</strong> → localización: <em>El hotel está en el centro.</em> También medio de transporte: <em>Voy a Sevilla en tren.</em></p>
+    <p><em>Fíjate en las excepciones:</em> ir a pie / ir andando / ir a caballo.</p>
+  </div>
+
+  <h3>Actividad · ¿A o en?</h3>
+  <p class="instrucciones">Completa cada frase con la preposición correcta.</p>
+  <div id="ejercicio-prep"></div>
+  <button class="btn-grande" onclick="corregirPrep()">Corregir</button>
+  <div class="feedback" id="feedback-prep"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s5')">Continuar → Poder, preferir, querer</button></div>
+</section>
+
+<!-- 5 · PODER, PREFERIR, QUERER -->
+<section id="s5">
+  <h2>5. Verbos poder, preferir y querer</h2>
+  <table>
+    <tr><th></th><th>poder</th><th>preferir</th><th>querer</th></tr>
+    <tr><td>yo</td><td>puedo</td><td>prefiero</td><td>quiero</td></tr>
+    <tr><td>tú</td><td>puedes</td><td>prefieres</td><td>quieres</td></tr>
+    <tr><td>él/ella/usted</td><td>puede</td><td>prefiere</td><td>quiere</td></tr>
+    <tr><td>nosotros/as</td><td>podemos</td><td>preferimos</td><td>queremos</td></tr>
+    <tr><td>vosotros/as</td><td>podéis</td><td>preferís</td><td>queréis</td></tr>
+    <tr><td>ellos/as/ustedes</td><td>pueden</td><td>prefieren</td><td>quieren</td></tr>
+  </table>
+  <div class="terra">
+    <p><strong>poder + infinitivo</strong> → posibilidad: <em>En Guatemala puedes ver volcanes y ruinas.</em><br>
+    <strong>preferir + nombre/infinitivo</strong> → preferencias: <em>Prefiero viajar a Punta Cana porque es barato.</em><br>
+    <strong>querer + nombre/infinitivo</strong> → deseos: <em>Quiero un viaje cultural y visitar museos.</em></p>
+    <p><em>¿Por qué...?</em> se usa para preguntar la causa y <em>porque</em> para responder: ¿Por qué prefieres viajar en avión? — Porque es más seguro.</p>
+  </div>
+
+  <h3>Actividad · Completa con el verbo correcto</h3>
+  <p class="instrucciones">Elige poder, preferir o querer, y conjúgalo correctamente.</p>
+  <div id="ejercicio-verbos3"></div>
+  <button class="btn-grande" onclick="corregirVerbos3()">Corregir</button>
+  <div class="feedback" id="feedback-verbos3"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s6')">Continuar → Hay, ser, estar</button></div>
+</section>
+
+<!-- 6 · HAY SER ESTAR -->
+<section id="s6">
+  <h2>6. Hay, ser y estar</h2>
+  <div class="caja">
+    <p><strong>Hay</strong> → existencia o inexistencia: <em>Cerca del museo hay un parque. En el hotel no hay restaurante.</em><br>
+    <strong>Ser + adjetivo</strong> → describir: <em>El hotel es céntrico/grande/limpio.</em><br>
+    <strong>Estar</strong> → localizar: <em>¿Dónde está la estación de trenes? — Está cerca del hotel.</em></p>
+  </div>
+  <div class="cultura">
+    <strong>Adjetivos frecuentes para medios de transporte:</strong> ecológico, rápido, lento, caro, peligroso, cansado, práctico, seguro, cómodo, económico, puntual, contaminante, barato.
+  </div>
+
+  <h3>Actividad · Elige hay, es/son o está(n)</h3>
+  <p class="instrucciones">Completa las frases sobre un hotel.</p>
+  <div id="ejercicio-hayserstar"></div>
+  <button class="btn-grande" onclick="corregirHaySerEstar()">Corregir</button>
+  <div class="feedback" id="feedback-hayserstar"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s7')">Continuar → Indicaciones</button></div>
+</section>
+
+<!-- 7 · INDICACIONES -->
+<section id="s7">
+  <h2>7. Pedir indicaciones y decir el precio</h2>
+  <div class="caja">
+    <h3 style="margin-top:0;">Pedir/dar información para ir a un lugar</h3>
+    <p>Perdón/Por favor, ¿cómo puedo/podemos ir a…?<br>
+    Puede(s)/Pueden + tomar/coger/ir en + medio de transporte.</p>
+  </div>
+  <div class="terra">
+    <h3 style="margin-top:0; color:var(--terracota);">Pedir/dar información espacial</h3>
+    <p>Perdón/Por favor, ¿dónde está/están…?<br>
+    Gira/Gire a la derecha/izquierda… cruza/cruce la calle… sigue/siga todo recto…</p>
+    <p><em>Formal (usted):</em> mire, gire, cruce, siga · <em>Informal (tú):</em> mira, gira, cruza, sigue</p>
+  </div>
+  <div class="cultura">
+    <strong>Preguntar/decir el precio</strong> — usamos el verbo <em>costar</em>: ¿Cuánto cuesta la excursión? — Cuesta 20 €.
+    <br><strong>Cercanía/lejanía:</strong> aquí (cerca) · ahí (distancia intermedia) · allí (lejos). En Hispanoamérica: acá / allá.
+  </div>
+
+  <h3>Actividad · Indicaciones</h3>
+  <p class="instrucciones">Elige la palabra correcta.</p>
+  <div id="quiz-indicaciones"></div>
+  <div class="puntuacion" id="puntos-indicaciones" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s8')">Continuar → Vídeo Hostal Babel</button></div>
+</section>
+
+<!-- 8 · VÍDEO -->
+<section id="s8">
+  <h2>8. Vídeo · Hostal Babel — «Días de fiesta»</h2>
+  <div class="caja-roja">
+    <strong>Sobre el vídeo:</strong> Tere, Carla, Leo y Bea hablan de sus planes de viaje para un puente (fin de semana largo): a dónde van, cómo viajan y dónde se alojan.
+  </div>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/xshPFdcxRiY" title="Hostal Babel - Episodio 3 - Días de fiesta" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <h3>🟡 Antes del vídeo</h3>
+  <div class="cultura">
+    <p>Se mencionan estos lugares: Londres, Cudillero, Barcelona y Cádiz. ¿Cuál de estos lugares prefieres para pasar unos días? ¿Por qué?</p>
+    <p><em>Ejemplo: Yo prefiero ir a Cádiz, porque tiene playa y puedes tomar el sol.</em></p>
+  </div>
+
+  <h3>🔵 Durante el vídeo</h3>
+  <p class="instrucciones">Según el vídeo, ¿quién hace qué? Marca la persona correcta.</p>
+  <div id="quiz-video-personajes"></div>
+  <div class="puntuacion" id="puntos-video-personajes" style="display:none;"></div>
+
+  <h3>🟢 Comprensión — ¿Verdadero o falso?</h3>
+  <div id="quiz-video2"></div>
+  <div class="puntuacion" id="puntos-video2" style="display:none;"></div>
+
+  <h3>🟠 Después del vídeo · Reflexión</h3>
+  <div class="terra">
+    <p><strong>Para conversar:</strong> ¿Dónde quieres viajar las próximas vacaciones? ¿En qué medio de transporte? ¿Dónde quieres alojarte? ¿Qué quieres hacer en ese lugar?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s9')">Continuar → Cultura</button></div>
+</section>
+
+<!-- 9 · CULTURA -->
+<section id="s9">
+  <h2>9. México lindo y bonito</h2>
+  <div class="cultura">
+    <p><strong>¿Qué visitar?</strong> Centro histórico: la plaza de la Constitución (el Zócalo), la Catedral Metropolitana, el Palacio Nacional y la basílica de Guadalupe. También la plaza Garibaldi, donde se puede comer y escuchar música de mariachis.</p>
+    <p><strong>No te lo puedes perder:</strong> la Casa Azul (Museo Frida Kahlo) en Coyoacán · las pirámides de Teotihuacán (Patrimonio de la Humanidad) · Mundo Chocolate (MUCHO).</p>
+    <p><strong>¿Qué comer?</strong> El maíz, los frijoles, el arroz y los chiles son alimentos básicos; nunca faltan las tortillas, quesadillas, moles o tacos.</p>
+    <p><strong>¿Cómo trasladarse?</strong> El metro cuesta 5 pesos mexicanos. Los camiones cuestan 5-6 pesos. Los ciclotaxis cuestan entre 20 y 30 pesos. ¡Los bicibuses son gratuitos!</p>
+  </div>
+
+  <h3>Actividad · ¿Verdadero o falso?</h3>
+  <div id="quiz-cultura"></div>
+  <div class="puntuacion" id="puntos-cultura" style="display:none;"></div>
+
+  <h3>📺 Reportaje de TVE · Españoles en el mundo: Ciudad de México</h3>
+  <div class="caja-roja">
+    <strong>Sobre el reportaje:</strong> Programa completo de Televisión Española (RTVE) sobre Ciudad de México, contado por españoles que viven allí.
+  </div>
+  <a class="video-link-card" href="https://www.youtube.com/watch?v=orMCEDqxaKA" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/orMCEDqxaKA/hqdefault.jpg" alt="Españoles en el mundo: Ciudad de México">
+    <div class="play-overlay"><div class="play-circle">▶</div></div>
+    <div class="caption">▶ Ver en YouTube: Españoles en el mundo — Ciudad de México (RTVE)</div>
+  </a>
+  <p style="text-align:center; font-size:.9em; color:var(--gris);">Este vídeo se abre directamente en YouTube (RTVE no permite insertarlo en otras páginas).</p>
+  <div class="terra">
+    <strong>Preguntas para debatir en clase:</strong>
+    <p>1. ¿Qué lugares o costumbres de Ciudad de México aparecen en el reportaje?<br>
+    2. ¿Qué medios de transporte se mencionan?<br>
+    3. Compara lo que ves en el vídeo con la información de "México lindo y bonito" que acabas de leer. ¿Coincide?<br>
+    4. Si pudieras viajar a México mañana, ¿qué lugar de los mencionados en esta unidad visitarías primero?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s10')">Continuar → Evaluación final</button></div>
+</section>
+
+<!-- 10 · EVALUACIÓN -->
+<section id="s10">
+  <h2>10. Evaluación final de la Unidad 3</h2>
+  <p class="instrucciones">Responde a las 15 preguntas y descubre tu resultado.</p>
+  <div id="evaluacion-final"></div>
+  <button class="btn-grande" onclick="corregirEvaluacion()">Ver mi resultado</button>
+  <div class="puntuacion" id="resultado-final" style="display:none;"></div>
+  <div class="avanzar-wrap">
+    <div class="cultura"><p style="margin:0;">🎉 ¡Felicidades! Has completado las 3 unidades del curso de Español Básico-Intermedio.</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Curso de Español · Lengua, Cultura y Arte · Tercera Edad · Unidad 3 de 3<br>
+  Vídeo: <em>Hostal Babel</em> — Editorial Edinumen
+</footer>
+
+<script>
+/* NAVEGACIÓN */
+function irA(id){
+  pararAudio();
+  document.querySelectorAll('main section').forEach(s=>s.classList.remove('activa'));
+  const destino = document.getElementById(id);
+  if(destino) destino.classList.add('activa');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('activo'));
+  const btn = document.querySelector('nav button[data-seccion="'+id+'"]');
+  if(btn) btn.classList.add('activo');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('nav button').forEach(b=> b.addEventListener('click', ()=> irA(b.dataset.seccion)));
+
+/* AUDIO */
+let vozES = null;
+function cargarVoces(){
+  if(!('speechSynthesis' in window)) return;
+  const voces = window.speechSynthesis.getVoices();
+  vozES = voces.find(v=>v.lang==='es-ES') || voces.find(v=>v.lang && v.lang.startsWith('es')) || null;
+}
+if('speechSynthesis' in window){ cargarVoces(); window.speechSynthesis.onvoiceschanged = cargarVoces; }
+function hablar(texto, velocidad){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no permite el audio. Prueba con Chrome, Edge o Safari.'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang='es-ES'; u.rate = velocidad || 0.85; u.pitch=1;
+  if(vozES) u.voice = vozES;
+  window.speechSynthesis.speak(u);
+}
+function pararAudio(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+
+/* QUIZ GENÉRICO */
+function crearQuiz(contenedorId, preguntas, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  let aciertos = 0;
+  preguntas.forEach((p, idx)=>{
+    const bloque = document.createElement('div');
+    bloque.className = 'caja';
+    bloque.innerHTML = '<p><strong>'+(idx+1)+'. '+p.pregunta+'</strong></p>';
+    const opciones = document.createElement('div');
+    opciones.className = 'opciones';
+    p.opciones.forEach(op=>{
+      const btn = document.createElement('button');
+      btn.className='opcion-btn';
+      btn.textContent = op;
+      btn.onclick = ()=>{
+        if(btn.disabled) return;
+        opciones.querySelectorAll('button').forEach(b=>b.disabled=true);
+        if(op === p.correcta){ btn.classList.add('correcta'); aciertos++; }
+        else{
+          btn.classList.add('incorrecta');
+          opciones.querySelectorAll('button').forEach(b=>{ if(b.textContent===p.correcta) b.classList.add('correcta'); });
+        }
+        const el = document.getElementById(idPuntos);
+        if(el){ el.style.display='block'; el.textContent = '✔ Aciertos: '+aciertos+' de '+preguntas.length; }
+      };
+      opciones.appendChild(btn);
+    });
+    bloque.appendChild(opciones);
+    cont.appendChild(bloque);
+  });
+}
+
+/* EMPAREJAR */
+function crearEmparejar(contenedorId, pares, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  const colIzq = document.createElement('div'); colIzq.className='columna';
+  const colDer = document.createElement('div'); colDer.className='columna';
+  let seleccionIzq = null, aciertos = 0;
+  const derechas = pares.map(p=>p.der).slice().sort(()=>Math.random()-0.5);
+  pares.forEach(p=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar'; el.textContent = p.izq;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado')) return;
+      colIzq.querySelectorAll('.item-emparejar').forEach(x=>x.classList.remove('seleccionado'));
+      el.classList.add('seleccionado');
+      seleccionIzq = {texto:p.izq, el:el};
+    };
+    colIzq.appendChild(el);
+  });
+  derechas.forEach(txt=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar'; el.textContent = txt;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado') || !seleccionIzq) return;
+      const correcto = pares.find(p=>p.izq===seleccionIzq.texto).der;
+      if(correcto === txt){ el.classList.add('acertado'); seleccionIzq.el.classList.add('acertado'); aciertos++; }
+      else{ el.style.background='#fdecec'; setTimeout(()=>{ el.style.background=''; }, 450); }
+      seleccionIzq.el.classList.remove('seleccionado'); seleccionIzq = null;
+      const pt = document.getElementById(idPuntos);
+      if(pt){ pt.style.display='block'; pt.textContent = '✔ Parejas correctas: '+aciertos+' de '+pares.length; }
+    };
+    colDer.appendChild(el);
+  });
+  cont.appendChild(colIzq); cont.appendChild(colDer);
+}
+
+/* ===== 1. TRANSPORTES ===== */
+const transportes = [
+  {emoji:'🚢', nombre:'barco'}, {emoji:'🚆', nombre:'tren'}, {emoji:'🚇', nombre:'metro'},
+  {emoji:'✈️', nombre:'avión'}, {emoji:'🚌', nombre:'autobús'}, {emoji:'🚲', nombre:'bicicleta'},
+  {emoji:'🚗', nombre:'coche'}, {emoji:'🚕', nombre:'taxi'}
+];
+const paleta = ['#AA151B','#C1440E','#1B6CA8','#6B8E23','#7D3C98','#D68910'];
+const contTrans = document.getElementById('tarjetas-transporte');
+transportes.forEach((t,i)=>{
+  const card = document.createElement('div');
+  card.className='letra-card';
+  card.style.background = paleta[i % paleta.length];
+  card.innerHTML = '<div class="grande" style="font-size:2.2em;">'+t.emoji+'</div><div class="nombre">'+t.nombre+'</div><div class="altavoz">🔊</div>';
+  card.onclick = ()=> hablar(t.nombre, 0.8);
+  contTrans.appendChild(card);
+});
+
+crearQuiz('quiz-transporte', [
+  {pregunta:'El medio de transporte más ecológico normalmente es…', opciones:['la bicicleta','el avión','el coche'], correcta:'la bicicleta'},
+  {pregunta:'El medio de transporte más rápido para distancias largas es…', opciones:['el avión','la bicicleta','a pie'], correcta:'el avión'},
+  {pregunta:'Para cruzar el mar u océano usamos…', opciones:['el barco','el metro','el tren'], correcta:'el barco'},
+  {pregunta:'Un medio de transporte individual y rápido en ciudad es…', opciones:['el taxi','el barco','la bicicleta'], correcta:'el taxi'}
+], 'puntos-transporte');
+
+/* ===== 2. LUGARES ===== */
+crearEmparejar('emparejar-lugares', [
+  {izq:'museo', der:'lugar con obras de arte o historia'},
+  {izq:'iglesia', der:'edificio religioso'},
+  {izq:'mirador', der:'lugar con buenas vistas'},
+  {izq:'zona de acampada', der:'lugar para poner la tienda de campaña'},
+  {izq:'recepción 24h', der:'atención en cualquier momento del día'}
+], 'puntos-lugares');
+
+/* ===== 3. TIPOS DE TURISMO ===== */
+crearQuiz('quiz-turismo', [
+  {pregunta:'"Hacer surf" es turismo de…', opciones:['sol y playa','cultural','naturaleza'], correcta:'sol y playa'},
+  {pregunta:'"Visitar un museo" es turismo…', opciones:['cultural','de naturaleza','de sol y playa'], correcta:'cultural'},
+  {pregunta:'"Ir a la montaña" es turismo de…', opciones:['naturaleza','cultural','de sol y playa'], correcta:'naturaleza'},
+  {pregunta:'"Ver animales" es turismo de…', opciones:['naturaleza','cultural','de sol y playa'], correcta:'naturaleza'}
+], 'puntos-turismo');
+
+/* ===== 4. IR Y VIAJAR ===== */
+const ejerciciosPrep = [
+  {frase:'Este verano voy _____ Cuba.', respuesta:'a'},
+  {frase:'El hotel está _____ el centro de la ciudad.', respuesta:'en'},
+  {frase:'¿Por qué no vas _____ Sevilla en tren?', respuesta:'a'},
+  {frase:'Viajamos _____ tren porque es cómodo.', respuesta:'en'},
+  {frase:'El centro está _____ tres kilómetros del hotel.', respuesta:'a'}
+];
+const contPrep = document.getElementById('ejercicio-prep');
+ejerciciosPrep.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja';
+  div.innerHTML = (i+1)+'. ' + it.frase.replace('_____', '<input type="text" id="prep-'+i+'" style="width:90px;">');
+  contPrep.appendChild(div);
+});
+function corregirPrep(){
+  let ok=0;
+  ejerciciosPrep.forEach((it,i)=>{
+    const input = document.getElementById('prep-'+i);
+    if(input.value.trim().toLowerCase()===it.respuesta){ input.className='ok'; ok++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-prep');
+  fb.className = ok===ejerciciosPrep.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+ejerciciosPrep.length+'.';
+}
+
+/* ===== 5. PODER PREFERIR QUERER ===== */
+const ejerciciosVerbos3 = [
+  {frase:'Yo _____ (querer) un viaje cultural.', respuesta:'quiero'},
+  {frase:'En Guatemala _____ (poder, tú) ver volcanes.', respuesta:'puedes'},
+  {frase:'Nosotros _____ (preferir) viajar en tren.', respuesta:'preferimos'},
+  {frase:'Ellos _____ (poder) visitar el museo mañana.', respuesta:'pueden'},
+  {frase:'¿Tú _____ (querer) ir a la playa?', respuesta:'quieres'}
+];
+const contVerbos3 = document.getElementById('ejercicio-verbos3');
+ejerciciosVerbos3.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja-oliva';
+  div.innerHTML = (i+1)+'. ' + it.frase.replace('_____', '<input type="text" id="v3-'+i+'">');
+  contVerbos3.appendChild(div);
+});
+function corregirVerbos3(){
+  let ok=0;
+  ejerciciosVerbos3.forEach((it,i)=>{
+    const input = document.getElementById('v3-'+i);
+    if(input.value.trim().toLowerCase()===it.respuesta){ input.className='ok'; ok++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-verbos3');
+  fb.className = ok===ejerciciosVerbos3.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+ejerciciosVerbos3.length+'.';
+}
+
+/* ===== 6. HAY SER ESTAR ===== */
+const ejerciciosHSE = [
+  {frase:'El hotel _____ en el centro.', respuesta:'está'},
+  {frase:'_____ una parada de autobús delante del hotel.', respuesta:'hay'},
+  {frase:'En las habitaciones _____ aire acondicionado y minibar.', respuesta:'hay'},
+  {frase:'El restaurante _____ agradable.', respuesta:'es'},
+  {frase:'La ciudad _____ muy interesante, con muchas iglesias.', respuesta:'es'},
+  {frase:'El cerro de la Cruz _____ a 10 minutos en coche.', respuesta:'está'}
+];
+const contHSE = document.getElementById('ejercicio-hayserstar');
+ejerciciosHSE.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja';
+  div.innerHTML = (i+1)+'. ' + it.frase.replace('_____', '<input type="text" id="hse-'+i+'" style="width:100px;">');
+  contHSE.appendChild(div);
+});
+function corregirHaySerEstar(){
+  let ok=0;
+  ejerciciosHSE.forEach((it,i)=>{
+    const input = document.getElementById('hse-'+i);
+    if(input.value.trim().toLowerCase()===it.respuesta){ input.className='ok'; ok++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-hayserstar');
+  fb.className = ok===ejerciciosHSE.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+ejerciciosHSE.length+'.';
+}
+
+/* ===== 7. INDICACIONES ===== */
+crearQuiz('quiz-indicaciones', [
+  {pregunta:'"¿Cuánto ____ la excursión?" (precio)', opciones:['cuesta','está','es'], correcta:'cuesta'},
+  {pregunta:'Forma formal (usted) de "mira"…', opciones:['mire','mirad','miras'], correcta:'mire'},
+  {pregunta:'"Aquí" significa…', opciones:['más cerca del hablante','más lejos del hablante','distancia intermedia'], correcta:'más cerca del hablante'},
+  {pregunta:'En Hispanoamérica, en vez de "aquí" se prefiere…', opciones:['acá','ahí','allí'], correcta:'acá'}
+], 'puntos-indicaciones');
+
+/* ===== 8. VÍDEO ===== */
+crearQuiz('quiz-video-personajes', [
+  {pregunta:'¿Quién viaja a Cádiz con unas amigas?', opciones:['Tere','Carla','Leo'], correcta:'Tere'},
+  {pregunta:'¿Quién viaja a Barcelona en furgoneta?', opciones:['Carla','Tere','Bea'], correcta:'Carla'},
+  {pregunta:'¿Quién prefiere viajar con comodidades y ya tiene los billetes de avión?', opciones:['Leo','Tere','Carla'], correcta:'Leo'}
+], 'puntos-video-personajes');
+
+crearQuiz('quiz-video2', [
+  {pregunta:'Todos los personajes viajan al mismo lugar.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'Se habla de diferentes medios de transporte para viajar.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'Bea cuenta qué va a hacer durante el puente al final del vídeo.', opciones:['Verdadero','Falso'], correcta:'Verdadero'}
+], 'puntos-video2');
+
+/* ===== 9. CULTURA ===== */
+crearQuiz('quiz-cultura', [
+  {pregunta:'El Zócalo es la plaza principal de Ciudad de México.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'Teotihuacán está a menos de 5 km del centro de Ciudad de México.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'Los bicibuses son gratuitos en Ciudad de México.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'La Casa Azul es el Museo Frida Kahlo.', opciones:['Verdadero','Falso'], correcta:'Verdadero'}
+], 'puntos-cultura');
+
+/* ===== 10. EVALUACIÓN FINAL (15 ítems) ===== */
+const preguntasFinales = [
+  {pregunta:'¿Cuál es el medio de transporte más ecológico?', opciones:['la bicicleta','el avión','el coche'], correcta:'la bicicleta'},
+  {pregunta:'"Visitar un museo" es turismo…', opciones:['cultural','de naturaleza','de sol y playa'], correcta:'cultural'},
+  {pregunta:'"Voy ____ Cuba" (destino)', opciones:['a','en'], correcta:'a'},
+  {pregunta:'"El hotel está ____ el centro" (localización)', opciones:['en','a'], correcta:'en'},
+  {pregunta:'"Viajo ____ tren" (medio de transporte)', opciones:['en','a'], correcta:'en'},
+  {pregunta:'"Yo ____ (querer) un viaje cultural."', opciones:['quiero','quiere','quieres'], correcta:'quiero'},
+  {pregunta:'"En Guatemala ____ (poder) ver volcanes."', opciones:['puedes','puede','pueden'], correcta:'puedes'},
+  {pregunta:'Para expresar existencia usamos…', opciones:['hay','está'], correcta:'hay'},
+  {pregunta:'Para localizar algo usamos…', opciones:['está / están','hay'], correcta:'está / están'},
+  {pregunta:'"¿Cuánto ____ la excursión?"', opciones:['cuesta','está'], correcta:'cuesta'},
+  {pregunta:'Forma formal (usted) de "gira"…', opciones:['gire','giras','girad'], correcta:'gire'},
+  {pregunta:'La Casa Azul es el museo de…', opciones:['Frida Kahlo','Pablo Picasso','Diego Rivera'], correcta:'Frida Kahlo'},
+  {pregunta:'La plaza principal de Ciudad de México se llama…', opciones:['el Zócalo','la Boquería','las Ramblas'], correcta:'el Zócalo'},
+  {pregunta:'En "Hostal Babel — Días de fiesta", los personajes hablan de…', opciones:['sus planes de viaje','su trabajo','sus estudios'], correcta:'sus planes de viaje'},
+  {pregunta:'"Aquí" significa…', opciones:['más cerca del hablante','más lejos'], correcta:'más cerca del hablante'}
+];
+crearQuiz('evaluacion-final', preguntasFinales, null);
+
+function corregirEvaluacion(){
+  const bloques = document.querySelectorAll('#evaluacion-final .caja');
+  let aciertos=0;
+  bloques.forEach(b=>{
+    const correcta = b.querySelector('.opcion-btn.correcta');
+    const incorrecta = b.querySelector('.opcion-btn.incorrecta');
+    if(correcta && !incorrecta) aciertos++;
+  });
+  const el = document.getElementById('resultado-final');
+  el.style.display='block';
+  let msg;
+  if(aciertos >= 13) msg = '🏆 ¡Excelente! Dominas muy bien la Unidad 3 y todo el curso.';
+  else if(aciertos >= 9) msg = '👏 ¡Muy bien! Repasa los temas con menos aciertos.';
+  else msg = '💪 Buen intento. Te recomiendo repasar las secciones antes de continuar.';
+  el.textContent = 'Resultado: '+aciertos+' de '+preguntasFinales.length+' correctas. '+msg;
+}
+</script>
+</body>
+</html>

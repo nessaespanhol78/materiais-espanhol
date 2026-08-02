@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 1 · ¡Hola! Nos presentamos — Español para la Tercera Edad</title>
+<style>
+  :root{
+    --rojo:#AA151B;
+    --rojo-suave:#fdecec;
+    --gualda:#F1BF00;
+    --gualda-suave:#fff8e1;
+    --azulejo:#1B6CA8;
+    --azulejo-suave:#e3f0fa;
+    --terracota:#C1440E;
+    --terracota-suave:#fdeee7;
+    --oliva:#6B8E23;
+    --oliva-suave:#f0f6e4;
+    --morado:#7D3C98;
+    --morado-suave:#f4ecf7;
+    --crema:#FFFDF7;
+    --texto:#2B1B17;
+    --gris:#6E5B55;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI', Verdana, Arial, sans-serif;
+    background:var(--crema);
+    color:var(--texto);
+    margin:0; padding:0;
+    font-size:20px; line-height:1.65;
+  }
+
+  header{
+    background:linear-gradient(135deg,var(--rojo) 0%, #c9302c 45%, var(--gualda) 100%);
+    color:#fff;
+    padding:34px 20px 30px;
+    text-align:center;
+    border-bottom:8px solid var(--gualda);
+  }
+  header h1{ font-size:2.2em; margin:0 0 8px; text-shadow:2px 2px 4px rgba(0,0,0,.3); }
+  header p{ font-size:1.15em; margin:0; }
+  .banderita{ font-size:1.8em; letter-spacing:6px; margin-bottom:6px; }
+
+  nav{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:9px;
+    background:#7d1014; padding:14px 10px;
+    position:sticky; top:0; z-index:50;
+    border-bottom:5px solid var(--gualda);
+  }
+  nav button{
+    font-size:.98em; padding:11px 17px; border:2px solid transparent;
+    border-radius:30px; background:#a8272c; color:#fff;
+    cursor:pointer; font-weight:600; transition:.2s;
+  }
+  nav button:hover{ background:var(--gualda); color:var(--rojo); }
+  nav button.activo{ background:var(--gualda); color:#7d1014; border-color:#fff; }
+
+  main{ max-width:920px; margin:0 auto; padding:26px 18px 70px; }
+  section{ display:none; animation:fade .4s ease; }
+  section.activa{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+  h2{
+    color:var(--rojo); font-size:1.65em;
+    border-bottom:5px solid var(--gualda);
+    padding-bottom:8px; margin-top:0;
+  }
+  h3{ color:var(--azulejo); font-size:1.3em; margin-top:30px; }
+
+  .caja{ background:var(--azulejo-suave); border-left:7px solid var(--azulejo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-roja{ background:var(--rojo-suave); border-left:7px solid var(--rojo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-oliva{ background:var(--oliva-suave); border-left:7px solid var(--oliva); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .cultura{ background:var(--gualda-suave); border-left:7px solid var(--gualda); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .terra{ background:var(--terracota-suave); border-left:7px solid var(--terracota); border-radius:12px; padding:18px 22px; margin:18px 0; }
+
+  .instrucciones{
+    font-weight:600; color:#fff;
+    background:linear-gradient(90deg,var(--azulejo),#2e86c1);
+    padding:13px 18px; border-radius:10px; margin-bottom:16px;
+  }
+
+  table{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.94em; border-radius:10px; overflow:hidden; }
+  th,td{ border:1px solid #e8d9c5; padding:11px; text-align:center; }
+  th{ background:var(--rojo); color:#fff; }
+  tr:nth-child(even){ background:var(--gualda-suave); }
+
+  .opciones{ display:flex; flex-wrap:wrap; gap:12px; margin:14px 0; }
+  .opcion-btn{
+    font-size:1em; padding:14px 20px; border:3px solid var(--azulejo);
+    border-radius:14px; background:#fff; color:var(--azulejo);
+    cursor:pointer; font-weight:700; min-width:120px;
+  }
+  .opcion-btn:hover{ background:var(--azulejo-suave); }
+  .opcion-btn.correcta{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; }
+  .opcion-btn.incorrecta{ background:var(--rojo-suave); border-color:var(--rojo); color:var(--rojo); }
+  .opcion-btn:disabled{ cursor:default; }
+
+  .feedback{ margin-top:12px; padding:13px 18px; border-radius:10px; font-weight:700; display:none; }
+  .feedback.ok{ display:block; background:var(--oliva-suave); color:#4a6b12; border-left:6px solid var(--oliva); }
+  .feedback.no{ display:block; background:var(--rojo-suave); color:var(--rojo); border-left:6px solid var(--rojo); }
+
+  input[type="text"]{
+    font-size:1em; padding:10px 12px; border:3px solid var(--azulejo);
+    border-radius:10px; width:180px; margin:5px;
+  }
+  input[type="text"].ok{ border-color:var(--oliva); background:var(--oliva-suave); }
+  input[type="text"].no{ border-color:var(--rojo); background:var(--rojo-suave); }
+
+  .btn-grande{
+    font-size:1.08em; padding:15px 30px;
+    background:linear-gradient(135deg,var(--rojo),var(--terracota));
+    color:#fff; border:none; border-radius:32px; cursor:pointer;
+    font-weight:700; margin-top:14px; box-shadow:0 4px 10px rgba(170,21,27,.28);
+  }
+  .btn-grande:hover{ background:linear-gradient(135deg,var(--terracota),var(--rojo)); }
+  .btn-amarillo{
+    background:linear-gradient(135deg,var(--gualda),#e6a700); color:#5b4200;
+    box-shadow:0 4px 10px rgba(241,191,0,.35);
+  }
+
+  /* --- ALFABETO CON AUDIO --- */
+  .aviso-audio{
+    background:var(--morado-suave); border-left:7px solid var(--morado);
+    border-radius:12px; padding:16px 20px; margin:16px 0; font-size:.97em;
+  }
+  .flashcards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:14px; margin:18px 0; }
+  .letra-card{
+    border-radius:16px; padding:16px 8px 14px; text-align:center;
+    color:#fff; cursor:pointer; transition:.2s;
+    box-shadow:0 3px 8px rgba(0,0,0,.16);
+  }
+  .letra-card:hover{ transform:translateY(-4px) scale(1.03); }
+  .letra-card .grande{ font-size:2em; font-weight:800; line-height:1.1; }
+  .letra-card .nombre{ font-size:1em; font-weight:600; opacity:.95; }
+  .letra-card .altavoz{ font-size:1.1em; margin-top:4px; }
+  .letra-card.sonando{ outline:5px solid var(--gualda); transform:scale(1.06); }
+
+  .btn-audio-fila{ display:flex; flex-wrap:wrap; gap:12px; margin:14px 0; }
+
+  /* --- VÍDEO --- */
+  .video-wrap{
+    position:relative; padding-bottom:56.25%; height:0;
+    border-radius:16px; overflow:hidden; margin:18px 0;
+    border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2);
+  }
+  .video-wrap iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .video-link-card{
+    display:block; position:relative; border-radius:16px; overflow:hidden; margin:18px 0;
+    border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2); text-decoration:none;
+  }
+  .video-link-card img{ display:block; width:100%; height:auto; }
+  .video-link-card .play-overlay{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.25); transition:.2s;
+  }
+  .video-link-card:hover .play-overlay{ background:rgba(0,0,0,.4); }
+  .video-link-card .play-circle{
+    width:76px; height:76px; border-radius:50%; background:#FF0000; color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:2em; box-shadow:0 4px 12px rgba(0,0,0,.4);
+  }
+  .video-link-card .caption{
+    position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:#fff;
+    padding:10px 16px; font-weight:700; font-size:.95em;
+  }
+  .link-yt{
+    display:inline-block; background:#FF0000; color:#fff; text-decoration:none;
+    padding:13px 24px; border-radius:30px; font-weight:700; margin:10px 0;
+    box-shadow:0 4px 10px rgba(255,0,0,.3);
+  }
+  .link-yt:hover{ background:#cc0000; }
+
+  /* --- EMPAREJAR --- */
+  .emparejar{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin:16px 0; }
+  .columna{ display:flex; flex-direction:column; gap:10px; min-width:215px; }
+  .item-emparejar{
+    padding:14px 16px; border:3px solid var(--azulejo); border-radius:12px;
+    background:#fff; cursor:pointer; font-weight:700; text-align:center;
+  }
+  .item-emparejar.seleccionado{ background:var(--azulejo); color:#fff; }
+  .item-emparejar.acertado{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; cursor:default; }
+
+  .puntuacion{
+    background:linear-gradient(135deg,var(--oliva),#8bb32e); color:#fff;
+    padding:15px 22px; border-radius:12px; font-size:1.15em;
+    font-weight:800; text-align:center; margin:20px 0;
+  }
+
+  .tabla-video input[type="text"]{ width:100%; margin:0; }
+  .tabla-video td{ padding:7px; }
+
+  footer{ text-align:center; padding:26px; color:var(--gris); font-size:.95em; background:var(--gualda-suave); border-top:6px solid var(--rojo); }
+  .avanzar-wrap{ text-align:center; margin-top:34px; }
+
+  @media(max-width:600px){
+    body{ font-size:18px; }
+    header h1{ font-size:1.55em; }
+    nav button{ font-size:.86em; padding:9px 13px; }
+    .emparejar{ gap:14px; }
+    .columna{ min-width:150px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="banderita">🇪🇸 🇲🇽 🇦🇷 🇨🇴 🇵🇪 🇨🇱</div>
+  <h1>Unidad 1 · ¡Hola! Nos presentamos</h1>
+  <p>Curso de Español · Tercera Edad · Nivel A1</p>
+</header>
+
+<nav id="menu">
+  <button data-seccion="s0" class="activo">Bienvenida</button>
+  <button data-seccion="s1">Saludos</button>
+  <button data-seccion="s2">Alfabeto 🔊</button>
+  <button data-seccion="s3">Números</button>
+  <button data-seccion="s4">Nacionalidades</button>
+  <button data-seccion="s5">Profesiones</button>
+  <button data-seccion="s6">Gramática</button>
+  <button data-seccion="s7">Practicamos</button>
+  <button data-seccion="s8">Vídeo: Hostal Babel</button>
+  <button data-seccion="s9">Cultura</button>
+  <button data-seccion="s10">Evaluación</button>
+</nav>
+
+<main>
+
+<!-- 0 · BIENVENIDA -->
+<section id="s0" class="activa">
+  <h2>¡Bienvenido/a a la Unidad 1!</h2>
+  <div class="caja-roja">
+    <p><strong>En esta unidad vas a aprender a:</strong></p>
+    <p>➤ Saludar y despedirte<br>
+    ➤ Presentarte y presentar a otra persona<br>
+    ➤ Decir tu nacionalidad, profesión y edad<br>
+    ➤ Deletrear palabras con el alfabeto español<br>
+    ➤ Conocer la importancia del español en el mundo</p>
+  </div>
+  <div class="cultura">
+    <p>¿Cómo se dice <em>hola</em> en tu lengua? ¿Y <em>buenos días</em>? En español, cada saludo tiene su momento del día. Vamos a descubrirlo juntos, <strong>paso a paso y sin prisa</strong>.</p>
+  </div>
+  <div class="avanzar-wrap">
+    <button class="btn-grande" onclick="irA('s1')">Empezar → Saludos</button>
+  </div>
+</section>
+
+<!-- 1 · SALUDOS -->
+<section id="s1">
+  <h2>1. Saludar y despedirse</h2>
+  <div class="caja">
+    <h3 style="margin-top:0;">Para saludar</h3>
+    <p>¡Hola! · ¿Qué tal? · ¿Cómo estás?<br>
+    Buenos días. · Buenas tardes. · Buenas noches.</p>
+  </div>
+  <div class="terra">
+    <h3 style="margin-top:0; color:var(--terracota);">Para despedirse</h3>
+    <p>Adiós (+ buenos días / buenas tardes / buenas noches).<br>
+    Hasta mañana. · Hasta luego.</p>
+  </div>
+  <div class="cultura">
+    <strong>Nota cultural:</strong> Cuando te presentan a alguien, en España e Hispanoamérica se da la mano en situaciones formales (o entre dos hombres), y se dan dos besos en situaciones informales o familiares.
+  </div>
+
+  <h3>🎧 Escucha los saludos</h3>
+  <div class="btn-audio-fila" id="audio-saludos"></div>
+
+  <h3>Actividad · ¿Saludo o despedida?</h3>
+  <p class="instrucciones">Lee cada expresión y decide si es un saludo o una despedida.</p>
+  <div id="quiz-saludos"></div>
+  <div class="puntuacion" id="puntos-saludos" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s2')">Continuar → Alfabeto</button></div>
+</section>
+
+<!-- 2 · ALFABETO CON AUDIO -->
+<section id="s2">
+  <h2>2. El abecedario 🔊</h2>
+  <div class="aviso-audio">
+    <strong>🔊 Cómo usar el audio:</strong> toca cualquier letra y la escucharás pronunciada en español.
+    Toca otra vez para escucharla de nuevo. Sube el volumen de tu dispositivo.
+    <br><em>Si no oyes nada, comprueba que tu navegador no está en silencio.</em>
+  </div>
+
+  <div class="btn-audio-fila">
+    <button class="btn-grande btn-amarillo" onclick="leerAbecedarioCompleto()">▶ Escuchar todo el abecedario</button>
+    <button class="btn-grande" onclick="pararAudio()">■ Parar</button>
+  </div>
+
+  <div class="flashcards" id="flashcards-abc"></div>
+
+  <div class="cultura">
+    <strong>Variación del español:</strong> en América, la <strong>b</strong> se llama también <em>be alta</em> o <em>be larga</em>; la <strong>v</strong>, <em>ve baja</em>, <em>ve corta</em> o <em>ve chica</em>; y la <strong>w</strong>, <em>doble ve</em> o, en México y Centroamérica, <em>doble u</em>.
+  </div>
+
+  <h3>Actividad · Escucha y adivina la letra</h3>
+  <p class="instrucciones">🔊 Toca el altavoz, escucha la palabra y escribe con qué letra empieza. No se muestra la palabra escrita: ¡solo el oído!</p>
+  <div id="ejercicio-deletrear"></div>
+  <button class="btn-grande" onclick="corregirDeletrear()">Corregir</button>
+  <div class="feedback" id="feedback-deletrear"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s3')">Continuar → Números</button></div>
+</section>
+
+<!-- 3 · NÚMEROS -->
+<section id="s3">
+  <h2>3. Los números del 0 al 111</h2>
+  <div class="btn-audio-fila">
+    <button class="btn-grande btn-amarillo" onclick="hablar('cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez')">🔊 Escuchar 0 al 10</button>
+    <button class="btn-grande btn-amarillo" onclick="hablar('once, doce, trece, catorce, quince, dieciséis, diecisiete, dieciocho, diecinueve, veinte')">🔊 Escuchar 11 al 20</button>
+    <button class="btn-grande btn-amarillo" onclick="hablar('treinta, cuarenta, cincuenta, sesenta, setenta, ochenta, noventa, cien')">🔊 Escuchar las decenas</button>
+  </div>
+  <table>
+    <tr><th>0 – 9</th><th>10 – 19</th><th>20 – 29</th><th>Decenas</th></tr>
+    <tr>
+      <td>0 cero · 1 uno · 2 dos · 3 tres · 4 cuatro · 5 cinco · 6 seis · 7 siete · 8 ocho · 9 nueve</td>
+      <td>10 diez · 11 once · 12 doce · 13 trece · 14 catorce · 15 quince · 16 dieciséis · 17 diecisiete · 18 dieciocho · 19 diecinueve</td>
+      <td>20 veinte · 21 veintiuno · 22 veintidós · 23 veintitrés · 24 veinticuatro · 25 veinticinco · 26 veintiséis · 27 veintisiete · 28 veintiocho · 29 veintinueve</td>
+      <td>30 treinta · 40 cuarenta · 50 cincuenta · 60 sesenta · 70 setenta · 80 ochenta · 90 noventa · 100 cien · 111 ciento once</td>
+    </tr>
+  </table>
+
+  <h3>Actividad · ¿Cómo se escribe correctamente?</h3>
+  <p class="instrucciones">Aparece un número. Elige la <strong>única opción escrita correctamente</strong>: las otras dos tienen un pequeño error de ortografía.</p>
+  <div id="quiz-numeros"></div>
+  <div class="puntuacion" id="puntos-numeros" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s4')">Continuar → Nacionalidades</button></div>
+</section>
+
+<!-- 4 · NACIONALIDADES -->
+<section id="s4">
+  <h2>4. Nacionalidades (gentilicios)</h2>
+  <table>
+    <tr><th>País</th><th>Masculino</th><th>Femenino</th><th>🔊</th></tr>
+    <tr><td>Alemania</td><td>alemán</td><td>alemana</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('alemán, alemana')">🔊</button></td></tr>
+    <tr><td>Argentina</td><td>argentino</td><td>argentina</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('argentino, argentina')">🔊</button></td></tr>
+    <tr><td>Brasil</td><td>brasileño</td><td>brasileña</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('brasileño, brasileña')">🔊</button></td></tr>
+    <tr><td>Canadá</td><td>canadiense</td><td>canadiense</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('canadiense')">🔊</button></td></tr>
+    <tr><td>Dinamarca</td><td>danés</td><td>danesa</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('danés, danesa')">🔊</button></td></tr>
+    <tr><td>Estados Unidos</td><td>estadounidense</td><td>estadounidense</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('estadounidense')">🔊</button></td></tr>
+    <tr><td>Marruecos</td><td>marroquí</td><td>marroquí</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('marroquí')">🔊</button></td></tr>
+    <tr><td>Perú</td><td>peruano</td><td>peruana</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('peruano, peruana')">🔊</button></td></tr>
+    <tr><td>Puerto Rico</td><td>puertorriqueño</td><td>puertorriqueña</td><td><button class="opcion-btn" style="min-width:auto;padding:6px 12px;" onclick="hablar('puertorriqueño, puertorriqueña')">🔊</button></td></tr>
+  </table>
+  <div class="cultura">
+    <strong>Terminaciones más comunes:</strong> -o/-a (argentino/a) · -és/-esa (danés/danesa) · -ense (canadiense) · -í (marroquí) · -eño/-eña (puertorriqueño/a) · -án/-ana (alemán/alemana)
+  </div>
+
+  <h3>Actividad · Empareja el país con la nacionalidad</h3>
+  <p class="instrucciones">Toca un país y después su nacionalidad (masculino singular).</p>
+  <div class="emparejar" id="emparejar-nacionalidad"></div>
+  <div class="puntuacion" id="puntos-nacionalidad" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s5')">Continuar → Profesiones</button></div>
+</section>
+
+<!-- 5 · PROFESIONES -->
+<section id="s5">
+  <h2>5. Profesiones y lugares de trabajo</h2>
+  <p class="instrucciones">Toca cada tarjeta para escuchar el nombre de la profesión.</p>
+  <div class="flashcards" id="tarjetas-profesiones"></div>
+  <div class="avanzar-wrap">
+    <button class="btn-grande btn-amarillo" onclick="hablar('médico, recepcionista, camarero, cocinero, abogado, ingeniero, enfermero, profesor, taxista, dependiente')">🔊 Escuchar todas las profesiones</button>
+  </div>
+  <div class="cultura">
+    <strong>Variación del español:</strong> en España se dice <em>camarero/a</em>; en muchos países de América se dice <em>mesero/a</em> o <em>mozo/a</em>.
+  </div>
+
+  <h3>Actividad · ¿Dónde trabaja?</h3>
+  <p class="instrucciones">Une cada profesión con su lugar de trabajo más lógico.</p>
+  <div class="emparejar" id="emparejar-profesion"></div>
+  <div class="puntuacion" id="puntos-profesion" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s6')">Continuar → Gramática</button></div>
+</section>
+
+<!-- 6 · GRAMÁTICA -->
+<section id="s6">
+  <h2>6. Gramática: pronombres y verbos</h2>
+
+  <h3>Pronombres personales de sujeto</h3>
+  <table>
+    <tr><th></th><th>Singular</th><th>Plural</th></tr>
+    <tr><td>1.ª persona</td><td>yo</td><td>nosotros, nosotras</td></tr>
+    <tr><td>2.ª persona</td><td>tú</td><td>vosotros, vosotras</td></tr>
+    <tr><td>3.ª persona</td><td>él, ella, usted</td><td>ellos, ellas, ustedes</td></tr>
+  </table>
+  <div class="cultura">
+    <strong>Variación:</strong> en Hispanoamérica y en parte de España no se usa <em>vosotros/as</em>; se usa <em>ustedes</em>. En Argentina, Uruguay y Paraguay, la forma de <em>tú</em> es <em>vos</em>.
+    <br><em>Usted</em> y <em>ustedes</em> son formales: muestran respeto o distancia.
+  </div>
+
+  <h3>Verbos llamarse, ser, tener, vivir y trabajar</h3>
+  <table>
+    <tr><th></th><th>llamarse</th><th>ser</th><th>tener</th><th>vivir</th><th>trabajar</th></tr>
+    <tr><td>yo</td><td>me llamo</td><td>soy</td><td>tengo</td><td>vivo</td><td>trabajo</td></tr>
+    <tr><td>tú</td><td>te llamas</td><td>eres</td><td>tienes</td><td>vives</td><td>trabajas</td></tr>
+    <tr><td>él/ella/usted</td><td>se llama</td><td>es</td><td>tiene</td><td>vive</td><td>trabaja</td></tr>
+    <tr><td>nosotros/as</td><td>nos llamamos</td><td>somos</td><td>tenemos</td><td>vivimos</td><td>trabajamos</td></tr>
+    <tr><td>vosotros/as</td><td>os llamáis</td><td>sois</td><td>tenéis</td><td>vivís</td><td>trabajáis</td></tr>
+    <tr><td>ellos/as/ustedes</td><td>se llaman</td><td>son</td><td>tienen</td><td>viven</td><td>trabajan</td></tr>
+  </table>
+
+  <div class="caja">
+    <p>Nombre → <strong>llamarse / ser</strong>: Me llamo Ricardo. / Soy Ricardo.<br>
+    Edad → <strong>tener</strong>: Tengo 65 años.<br>
+    Residencia → <strong>vivir + en</strong>: Vivo en Brasilia.<br>
+    Nacionalidad → <strong>ser + adjetivo / ser de + lugar</strong>: Soy brasileña, de Brasilia.<br>
+    Profesión → <strong>ser</strong>: Soy profesora.<br>
+    Lugar de trabajo → <strong>trabajar + en</strong>: Trabajo en un instituto.</p>
+  </div>
+
+  <div class="terra">
+    <strong>Interrogativos:</strong> cómo · dónde · cuántos + verbo · cuál / cuáles + verbo · qué + verbo/nombre
+    <p style="margin-bottom:0;">¿Cómo te llamas? · ¿De dónde eres? · ¿Cuántos años tienes? · ¿Cuál es tu profesión? · ¿Dónde trabajas?</p>
+  </div>
+
+  <h3>Actividad · Completa con el verbo correcto</h3>
+  <p class="instrucciones">Escribe la forma correcta del verbo entre paréntesis.</p>
+  <div id="ejercicio-verbos"></div>
+  <button class="btn-grande" onclick="corregirVerbos()">Corregir</button>
+  <div class="feedback" id="feedback-verbos"></div>
+
+  <h3>Actividad · Practica más verbos</h3>
+  <p class="instrucciones">Completa las 10 frases con la forma correcta del verbo entre paréntesis (llamarse, ser, tener, vivir o trabajar).</p>
+  <div id="ejercicio-verbos-2"></div>
+  <button class="btn-grande" onclick="corregirVerbos2()">Corregir</button>
+  <div class="feedback" id="feedback-verbos-2"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s7')">Continuar → Practicamos</button></div>
+</section>
+
+<!-- 7 · PRACTICAMOS -->
+<section id="s7">
+  <h2>7. Practicamos en contexto</h2>
+  <div class="caja">
+    <h3 style="margin-top:0;">Presentarte</h3>
+    <p>Me llamo + nombre · Tengo + edad · Soy + profesión · Soy + nacionalidad / Soy de + país · Vivo en + ciudad</p>
+  </div>
+  <div class="caja-oliva">
+    <h3 style="margin-top:0; color:#4a6b12;">Presentar a otra persona</h3>
+    <p>Mira / Mire, este es… · esta es… · Te / Le presento a…</p>
+  </div>
+  <div class="terra">
+    <h3 style="margin-top:0; color:var(--terracota);">Responder a una presentación</h3>
+    <p>¡Hola! · Encantado/a (de conocerte / conocerlo / conocerla) · Mucho gusto.</p>
+    <button class="btn-grande btn-amarillo" onclick="hablar('Hola, encantado de conocerte. Mucho gusto.')">🔊 Escuchar</button>
+  </div>
+
+  <h3>Actividad · Lee y responde</h3>
+  <p class="instrucciones">Lee la presentación de Amelia y responde a las preguntas.</p>
+  <div class="cultura">
+    <p><em>«Hola, soy Amelia. Tengo 68 años. Soy argentina, pero vivo en Madrid. Trabajo en una tienda de móviles y soy dependienta.»</em></p>
+    <button class="btn-grande btn-amarillo" onclick="hablar('Hola, soy Amelia. Tengo 68 años. Soy argentina, pero vivo en Madrid. Trabajo en una tienda de móviles y soy dependienta.')">🔊 Escuchar a Amelia</button>
+  </div>
+  <div id="quiz-lectura"></div>
+  <div class="puntuacion" id="puntos-lectura" style="display:none;"></div>
+
+  <h3>Actividad · Abreviaturas de datos personales</h3>
+  <p class="instrucciones">Une cada abreviatura con su significado.</p>
+  <div class="emparejar" id="emparejar-abreviaturas"></div>
+  <div class="puntuacion" id="puntos-abreviaturas" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s8')">Continuar → Vídeo Hostal Babel</button></div>
+</section>
+
+<!-- 8 · VÍDEO HOSTAL BABEL -->
+<section id="s8">
+  <h2>8. Vídeo · Hostal Babel — «¡Bienvenido al hostal Babel!»</h2>
+
+  <div class="caja-roja">
+    <strong>Sobre el vídeo:</strong> <em>Hostal Babel</em> es una serie de la Editorial Edinumen. En este primer capítulo conocemos a <strong>Bea</strong>, <strong>Carla</strong>, <strong>Tere</strong> y a <strong>Hugo</strong>, el nuevo huésped mexicano que acaba de llegar a España.
+  </div>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/Db58XXsrXqo" title="Hostal Babel - Episodio 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <!-- ANTES DEL VÍDEO -->
+  <h3>🟡 Antes del vídeo</h3>
+  <div class="cultura">
+    <p><strong>1.</strong> Estas son las protagonistas del Hostal Babel: <strong>Bea, Carla y Tere</strong>. Antes de ver el vídeo, piensa:</p>
+    <p>¿Cuántos años crees que tienen? ¿De dónde crees que son? ¿Cuáles crees que son sus profesiones?</p>
+    <p><em>Usa: «Creo que tiene… años» · «Creo que es de…» · «Creo que es…»</em></p>
+  </div>
+
+  <!-- DURANTE EL VÍDEO -->
+  <h3>🔵 Durante el vídeo</h3>
+  <p class="instrucciones">Actividad 2 · Mira el fragmento <strong>01:40 – 02:42</strong> y completa la ficha de cada personaje.</p>
+
+  <table class="tabla-video">
+    <tr><th>Nombre</th><th>Edad</th><th>Profesión / Estudios</th><th>Nacionalidad</th></tr>
+    <tr>
+      <td><strong>Bea</strong></td>
+      <td>33</td>
+      <td>hostelera</td>
+      <td>española</td>
+    </tr>
+    <tr>
+      <td><strong>Carla</strong></td>
+      <td><input type="text" id="v-carla-edad" placeholder="edad"></td>
+      <td><input type="text" id="v-carla-prof" placeholder="¿qué estudia?"></td>
+      <td>española</td>
+    </tr>
+    <tr>
+      <td><strong>Tere</strong></td>
+      <td><input type="text" id="v-tere-edad" placeholder="edad"></td>
+      <td><input type="text" id="v-tere-prof" placeholder="profesión"></td>
+      <td>española</td>
+    </tr>
+    <tr>
+      <td><strong>Hugo</strong></td>
+      <td>—</td>
+      <td>huésped nuevo</td>
+      <td><input type="text" id="v-hugo-nac" placeholder="nacionalidad"></td>
+    </tr>
+  </table>
+  <button class="btn-grande" onclick="corregirFicha()">Corregir la ficha</button>
+  <div class="feedback" id="feedback-ficha"></div>
+
+  <!-- DIÁLOGO -->
+  <p class="instrucciones" style="margin-top:28px;">Actividad 3 · Vuelve a ver el fragmento <strong>01:40 – 02:20</strong> y completa el diálogo.</p>
+  <div class="caja" id="dialogo-babel">
+    <p><strong>Bea:</strong> ¡<input type="text" id="d1" placeholder="saludo">, chicas! Mirad, <input type="text" id="d2" placeholder="presentar" style="width:130px;"> Hugo. Es nuestro nuevo huésped. Es de México.</p>
+    <p><strong>Hugo:</strong> Sí, acabo de llegar a España. Del aeropuerto directamente al hostal Babel.</p>
+    <p><strong>Tere:</strong> Pues yo <input type="text" id="d3" placeholder="me…" style="width:130px;"> Tere. Soy estudiante y <input type="text" id="d4" placeholder="verbo tener" style="width:130px;"> 19 años.</p>
+    <p><strong>Hugo:</strong> ¡<input type="text" id="d5" placeholder="respuesta" style="width:150px;">, Tere! ¿Qué estás estudiando?</p>
+    <p><strong>Carla:</strong> Yo <input type="text" id="d6" placeholder="verbo ser" style="width:110px;"> Carla. Tengo 24 años y estudio Filosofía.</p>
+    <p><strong>Hugo:</strong> <input type="text" id="d7" placeholder="respuesta" style="width:150px;">, Carla. ¿En qué trabajas?</p>
+  </div>
+  <button class="btn-grande" onclick="corregirDialogo()">Corregir el diálogo</button>
+  <div class="feedback" id="feedback-dialogo"></div>
+
+  <!-- COMPRENSIÓN -->
+  <h3>🟢 Comprensión — ¿Verdadero o falso?</h3>
+  <p class="instrucciones">Responde según lo que has visto en el vídeo.</p>
+  <div id="quiz-video"></div>
+  <div class="puntuacion" id="puntos-video" style="display:none;"></div>
+
+  <!-- DESPUÉS DEL VÍDEO -->
+  <h3>🟠 Después del vídeo · Reflexión</h3>
+  <div class="terra">
+    <p><strong>Recuerda:</strong> cuando presentamos a alguien, usamos <em>este es</em> / <em>esta es</em> + nombre, señalando a la persona con la mano extendida: <em>«Hola, chicas, este es Hugo.»</em></p>
+    <p>En España e Hispanoamérica, cuando te presentan a alguien, se <strong>da la mano</strong> en situaciones formales o entre dos hombres, y se dan <strong>dos besos</strong> en situaciones informales o familiares.</p>
+    <p><strong>Para conversar en clase:</strong> ¿Es igual en Brasil? ¿Cómo saludas tú a una persona que conoces por primera vez? ¿Y a un amigo de toda la vida? ¿Ha cambiado la forma de saludar a lo largo de tu vida?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s9')">Continuar → Cultura</button></div>
+</section>
+
+<!-- 9 · CULTURA -->
+<section id="s9">
+  <h2>9. El español en números</h2>
+  <div class="cultura">
+    <p>El español es una lengua que hablan <strong>567 millones de personas</strong> en el mundo. Según el Instituto Cervantes, <strong>472 millones</strong> tienen el español como lengua materna.</p>
+    <p>Es la <strong>segunda lengua materna del mundo</strong> por número de hablantes y el <strong>segundo idioma de comunicación internacional</strong>.</p>
+    <p>Es la <strong>tercera lengua más utilizada en internet</strong>. Más de <strong>21 millones de personas</strong> estudian español como lengua extranjera.</p>
+    <p>La mayor parte de los hablantes de español vive en el <strong>continente americano</strong>.</p>
+  </div>
+
+  <h3>Actividad · ¿Verdadero o falso?</h3>
+  <div id="quiz-cultura"></div>
+  <div class="puntuacion" id="puntos-cultura" style="display:none;"></div>
+
+  <h3>📺 Reportaje de TVE · Españoles en el mundo: Buenos Aires</h3>
+  <div class="caja-roja">
+    <strong>Sobre el reportaje:</strong> Un programa de Televisión Española (RTVE) sobre Buenos Aires, capital de Argentina — un país donde también se habla español. Veremos el río de la Plata, el Teatro Colón y mucho más.
+  </div>
+  <a class="video-link-card" href="https://www.youtube.com/watch?v=W9p-Njqn938" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/W9p-Njqn938/hqdefault.jpg" alt="Españoles en el mundo: Buenos Aires">
+    <div class="play-overlay"><div class="play-circle">▶</div></div>
+    <div class="caption">▶ Ver en YouTube: Españoles en el mundo — Buenos Aires (RTVE)</div>
+  </a>
+  <p style="text-align:center; font-size:.9em; color:var(--gris);">Este vídeo se abre directamente en YouTube (RTVE no permite insertarlo en otras páginas).</p>
+  <div class="terra">
+    <strong>Preguntas para debatir en clase:</strong>
+    <p>1. ¿Qué lugares de Buenos Aires aparecen en el reportaje? ¿Cuál te gustaría visitar?<br>
+    2. ¿Sabías que en Argentina, en vez de "tú", se usa "vos"? ¿Qué otras diferencias notas en el español de Argentina?<br>
+    3. ¿Conoces a alguien que haya vivido o viajado a Argentina? ¿Qué te ha contado?<br>
+    4. ¿Qué país de habla hispana te gustaría conocer y por qué?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s10')">Continuar → Evaluación final</button></div>
+</section>
+
+<!-- 10 · EVALUACIÓN -->
+<section id="s10">
+  <h2>10. Evaluación final de la Unidad 1</h2>
+  <p class="instrucciones">Vamos a repasar todo lo aprendido. Responde a las 8 preguntas y descubre tu resultado.</p>
+  <div id="evaluacion-final"></div>
+  <button class="btn-grande" onclick="corregirEvaluacion()">Ver mi resultado</button>
+  <div class="puntuacion" id="resultado-final" style="display:none;"></div>
+
+  <div class="avanzar-wrap">
+    <div class="cultura">
+      <p style="margin:0;">¡Muy bien hecho! En la <strong>Unidad 2</strong> hablaremos de <strong>tu casa y tu barrio</strong>. 🏠</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Curso de Español · Lengua, Cultura y Arte · Tercera Edad · Unidad 1 de 3<br>
+  Vídeo: <em>Hostal Babel</em> — Editorial Edinumen
+</footer>
+
+<script>
+/* ================= NAVEGACIÓN ================= */
+function irA(id){
+  pararAudio();
+  document.querySelectorAll('main section').forEach(s=>s.classList.remove('activa'));
+  const destino = document.getElementById(id);
+  if(destino) destino.classList.add('activa');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('activo'));
+  const btn = document.querySelector('nav button[data-seccion="'+id+'"]');
+  if(btn) btn.classList.add('activo');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click', ()=> irA(b.dataset.seccion));
+});
+
+/* ================= AUDIO (Web Speech API) ================= */
+let vozES = null;
+function cargarVoces(){
+  if(!('speechSynthesis' in window)) return;
+  const voces = window.speechSynthesis.getVoices();
+  vozES = voces.find(v=>v.lang==='es-ES')
+       || voces.find(v=>v.lang && v.lang.startsWith('es'))
+       || null;
+}
+if('speechSynthesis' in window){
+  cargarVoces();
+  window.speechSynthesis.onvoiceschanged = cargarVoces;
+}
+function hablar(texto, velocidad){
+  if(!('speechSynthesis' in window)){
+    alert('Tu navegador no permite el audio. Prueba con Chrome, Edge o Safari.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang = 'es-ES';
+  u.rate = velocidad || 0.85;   // más lento, adecuado para principiantes
+  u.pitch = 1;
+  if(vozES) u.voice = vozES;
+  window.speechSynthesis.speak(u);
+}
+function pararAudio(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+/* ================= ALFABETO ================= */
+const abecedario = [
+  ['A','a'],['B','be'],['C','ce'],['D','de'],['E','e'],['F','efe'],['G','ge'],
+  ['H','hache'],['I','i'],['J','jota'],['K','ka'],['L','ele'],['M','eme'],
+  ['N','ene'],['Ñ','eñe'],['O','o'],['P','pe'],['Q','cu'],['R','erre'],
+  ['S','ese'],['T','te'],['U','u'],['V','uve'],['W','uve doble'],['X','equis'],
+  ['Y','i griega'],['Z','zeta']
+];
+const paletaLetras = ['#AA151B','#C1440E','#1B6CA8','#6B8E23','#7D3C98','#D68910'];
+const contFlash = document.getElementById('flashcards-abc');
+abecedario.forEach((par,i)=>{
+  const card = document.createElement('div');
+  card.className='letra-card';
+  card.style.background = paletaLetras[i % paletaLetras.length];
+  card.innerHTML = '<div class="grande">'+par[0]+'</div>'
+                 + '<div class="nombre">'+par[1]+'</div>'
+                 + '<div class="altavoz">🔊</div>';
+  card.onclick = ()=>{
+    document.querySelectorAll('.letra-card').forEach(c=>c.classList.remove('sonando'));
+    card.classList.add('sonando');
+    hablar(par[1], 0.75);
+    setTimeout(()=>card.classList.remove('sonando'), 1400);
+  };
+  contFlash.appendChild(card);
+});
+function leerAbecedarioCompleto(){
+  hablar(abecedario.map(p=>p[1]).join(', '), 0.8);
+}
+
+/* Audio de saludos */
+const saludosAudio = [
+  '¡Hola!', '¿Qué tal?', 'Buenos días', 'Buenas tardes',
+  'Buenas noches', 'Adiós', 'Hasta luego', 'Hasta mañana'
+];
+const contSaludos = document.getElementById('audio-saludos');
+saludosAudio.forEach(s=>{
+  const b = document.createElement('button');
+  b.className='btn-grande btn-amarillo';
+  b.style.fontSize='.95em';
+  b.style.padding='11px 18px';
+  b.textContent = '🔊 '+s;
+  b.onclick = ()=> hablar(s, 0.8);
+  contSaludos.appendChild(b);
+});
+
+/* ================= QUIZ GENÉRICO ================= */
+function crearQuiz(contenedorId, preguntas, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  let aciertos = 0;
+  preguntas.forEach((p, idx)=>{
+    const bloque = document.createElement('div');
+    bloque.className = 'caja';
+    bloque.innerHTML = '<p><strong>'+(idx+1)+'. '+p.pregunta+'</strong></p>';
+    const opciones = document.createElement('div');
+    opciones.className = 'opciones';
+    p.opciones.forEach(op=>{
+      const btn = document.createElement('button');
+      btn.className='opcion-btn';
+      btn.textContent = op;
+      btn.onclick = ()=>{
+        if(btn.disabled) return;
+        opciones.querySelectorAll('button').forEach(b=>b.disabled=true);
+        if(op === p.correcta){
+          btn.classList.add('correcta');
+          aciertos++;
+        } else {
+          btn.classList.add('incorrecta');
+          opciones.querySelectorAll('button').forEach(b=>{
+            if(b.textContent===p.correcta) b.classList.add('correcta');
+          });
+        }
+        const el = document.getElementById(idPuntos);
+        if(el){
+          el.style.display='block';
+          el.textContent = '✔ Aciertos: '+aciertos+' de '+preguntas.length;
+        }
+      };
+      opciones.appendChild(btn);
+    });
+    bloque.appendChild(opciones);
+    cont.appendChild(bloque);
+  });
+}
+
+/* ================= EMPAREJAR ================= */
+function crearEmparejar(contenedorId, pares, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  const colIzq = document.createElement('div'); colIzq.className='columna';
+  const colDer = document.createElement('div'); colDer.className='columna';
+  let seleccionIzq = null, aciertos = 0;
+  const derechas = pares.map(p=>p.der).slice().sort(()=>Math.random()-0.5);
+
+  pares.forEach(p=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar';
+    el.textContent = p.izq;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado')) return;
+      colIzq.querySelectorAll('.item-emparejar').forEach(x=>x.classList.remove('seleccionado'));
+      el.classList.add('seleccionado');
+      seleccionIzq = {texto:p.izq, el:el};
+    };
+    colIzq.appendChild(el);
+  });
+
+  derechas.forEach(txt=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar';
+    el.textContent = txt;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado') || !seleccionIzq) return;
+      const correcto = pares.find(p=>p.izq===seleccionIzq.texto).der;
+      if(correcto === txt){
+        el.classList.add('acertado');
+        seleccionIzq.el.classList.add('acertado');
+        aciertos++;
+      } else {
+        el.style.background='#fdecec';
+        setTimeout(()=>{ el.style.background=''; }, 450);
+      }
+      seleccionIzq.el.classList.remove('seleccionado');
+      seleccionIzq = null;
+      const pt = document.getElementById(idPuntos);
+      if(pt){
+        pt.style.display='block';
+        pt.textContent = '✔ Parejas correctas: '+aciertos+' de '+pares.length;
+      }
+    };
+    colDer.appendChild(el);
+  });
+
+  cont.appendChild(colIzq);
+  cont.appendChild(colDer);
+}
+
+/* ================= CONTENIDOS ================= */
+crearQuiz('quiz-saludos', [
+  {pregunta:'«Buenos días» es un…', opciones:['Saludo','Despedida'], correcta:'Saludo'},
+  {pregunta:'«Hasta luego» es un…', opciones:['Saludo','Despedida'], correcta:'Despedida'},
+  {pregunta:'«¿Qué tal?» es un…', opciones:['Saludo','Despedida'], correcta:'Saludo'},
+  {pregunta:'«Adiós, buenas noches» es un…', opciones:['Saludo','Despedida'], correcta:'Despedida'}
+], 'puntos-saludos');
+
+const palabrasDeletrear = [
+  {palabra:'casa', letra:'C'},
+  {palabra:'hola', letra:'H'},
+  {palabra:'nombre', letra:'N'},
+  {palabra:'zapato', letra:'Z'},
+  {palabra:'ventana', letra:'V'},
+  {palabra:'restaurante', letra:'R'},
+  {palabra:'reloj', letra:'R'},
+  {palabra:'jardín', letra:'J'},
+  {palabra:'joven', letra:'J'},
+  {palabra:'garaje', letra:'G'},
+  {palabra:'gato', letra:'G'}
+];
+const contDeletrear = document.getElementById('ejercicio-deletrear');
+palabrasDeletrear.forEach((it,i)=>{
+  const p = document.createElement('p');
+  p.innerHTML = '<button class="opcion-btn" style="min-width:auto;padding:8px 14px;" onclick="hablar(\''+it.palabra+'\',0.7)">🔊 Escuchar palabra '+(i+1)+'</button> '
+              + '→ empieza con la letra: '
+              + '<input type="text" maxlength="2" id="del-'+i+'" style="width:80px;">';
+  contDeletrear.appendChild(p);
+});
+function corregirDeletrear(){
+  let aciertos=0;
+  palabrasDeletrear.forEach((it,i)=>{
+    const input = document.getElementById('del-'+i);
+    if(input.value.trim().toUpperCase() === it.letra){ input.className='ok'; aciertos++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-deletrear');
+  fb.className = aciertos===palabrasDeletrear.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+aciertos+' de '+palabrasDeletrear.length
+    + (aciertos===palabrasDeletrear.length ? ' · ¡Perfecto!' : ' · Sigue practicando.');
+}
+
+function mezclar(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+const preguntasNumeros = [
+  {n:12, correcta:'doce', opciones:['doce','doze','dose']},
+  {n:15, correcta:'quince', opciones:['quince','kince','quinse']},
+  {n:16, correcta:'dieciséis', opciones:['dieciséis','diesiseis','diesiséis']},
+  {n:21, correcta:'veintiuno', opciones:['veintiuno','beintiuno','veintiun']},
+  {n:30, correcta:'treinta', opciones:['treinta','trienta','treynta']},
+  {n:40, correcta:'cuarenta', opciones:['cuarenta','kuarenta','cuarrenta']},
+  {n:50, correcta:'cincuenta', opciones:['cincuenta','sincuenta','cinquenta']},
+  {n:70, correcta:'setenta', opciones:['setenta','cetenta','cietenta']},
+  {n:90, correcta:'noventa', opciones:['noventa','nobenta','novemta']},
+  {n:100, correcta:'cien', opciones:['cien','sien','cient']}
+];
+crearQuiz('quiz-numeros', preguntasNumeros.map(p=>({
+  pregunta:'Número: <span style="font-size:1.5em; color:var(--rojo); font-weight:800;">'+p.n+'</span>',
+  opciones: mezclar(p.opciones),
+  correcta: p.correcta
+})), 'puntos-numeros');
+
+const profesionesImg = [
+  {emoji:'🩺', nombre:'médico/a'},
+  {emoji:'🛎️', nombre:'recepcionista'},
+  {emoji:'🍽️', nombre:'camarero/a'},
+  {emoji:'👨‍🍳', nombre:'cocinero/a'},
+  {emoji:'⚖️', nombre:'abogado/a'},
+  {emoji:'🛠️', nombre:'ingeniero/a'},
+  {emoji:'💉', nombre:'enfermero/a'},
+  {emoji:'👩‍🏫', nombre:'profesor/a'},
+  {emoji:'🚕', nombre:'taxista'},
+  {emoji:'🛍️', nombre:'dependiente/a'}
+];
+const paletaProf = ['#AA151B','#C1440E','#1B6CA8','#6B8E23','#7D3C98','#D68910'];
+const contProf = document.getElementById('tarjetas-profesiones');
+profesionesImg.forEach((p,i)=>{
+  const card = document.createElement('div');
+  card.className='letra-card';
+  card.style.background = paletaProf[i % paletaProf.length];
+  card.innerHTML = '<div class="grande" style="font-size:2.4em;">'+p.emoji+'</div>'
+                 + '<div class="nombre">'+p.nombre+'</div>'
+                 + '<div class="altavoz">🔊</div>';
+  card.onclick = ()=> hablar(p.nombre.replace('/a',''), 0.8);
+  contProf.appendChild(card);
+});
+
+crearEmparejar('emparejar-nacionalidad', [
+  {izq:'Alemania', der:'alemán'},
+  {izq:'Argentina', der:'argentino'},
+  {izq:'Brasil', der:'brasileño'},
+  {izq:'Canadá', der:'canadiense'},
+  {izq:'Perú', der:'peruano'},
+  {izq:'Marruecos', der:'marroquí'}
+], 'puntos-nacionalidad');
+
+crearEmparejar('emparejar-profesion', [
+  {izq:'médico/a', der:'hospital'},
+  {izq:'camarero/a', der:'restaurante'},
+  {izq:'profesor/a', der:'escuela'},
+  {izq:'taxista', der:'taxi'},
+  {izq:'recepcionista', der:'hotel'},
+  {izq:'dependiente/a', der:'tienda'}
+], 'puntos-profesion');
+
+const ejerciciosVerbos = [
+  {frase:'Yo _____ (llamarse) Patricia y _____ (tener) 68 años.', respuestas:['me llamo','tengo']},
+  {frase:'Ella _____ (ser) española, pero _____ (vivir) en Brasilia.', respuestas:['es','vive']},
+  {frase:'Nosotros _____ (trabajar) en un instituto.', respuestas:['trabajamos']},
+  {frase:'¿Tú _____ (tener) hijos?', respuestas:['tienes']}
+];
+const contVerbos = document.getElementById('ejercicio-verbos');
+ejerciciosVerbos.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja-oliva';
+  let contador=0;
+  div.innerHTML = (i+1)+'. ' + it.frase.replace(/_____/g, ()=>{
+    return '<input type="text" id="verbo-'+i+'-'+(contador++)+'">';
+  });
+  contVerbos.appendChild(div);
+});
+function corregirVerbos(){
+  let ok=0, total=0;
+  ejerciciosVerbos.forEach((it,i)=>{
+    it.respuestas.forEach((resp,j)=>{
+      total++;
+      const input = document.getElementById('verbo-'+i+'-'+j);
+      if(input.value.trim().toLowerCase() === resp.toLowerCase()){ input.className='ok'; ok++; }
+      else input.className='no';
+    });
+  });
+  const fb = document.getElementById('feedback-verbos');
+  fb.className = ok===total ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+total+'.';
+}
+
+const ejerciciosVerbos2 = [
+  {frase:'Yo _____ (tener) 70 años.', respuesta:'tengo'},
+  {frase:'Ella _____ (llamarse) Rosa.', respuesta:'se llama'},
+  {frase:'Nosotros _____ (vivir) en Brasilia.', respuesta:'vivimos'},
+  {frase:'¿Tú _____ (ser) española?', respuesta:'eres'},
+  {frase:'Ellos _____ (trabajar) en un hospital.', respuesta:'trabajan'},
+  {frase:'Vosotros _____ (tener) dos hijos.', respuesta:'tenéis'},
+  {frase:'Usted _____ (llamarse) señor García.', respuesta:'se llama'},
+  {frase:'Yo _____ (ser) profesora.', respuesta:'soy'},
+  {frase:'Nosotras _____ (trabajar) en una tienda.', respuesta:'trabajamos'},
+  {frase:'Ellas _____ (vivir) en Madrid.', respuesta:'viven'}
+];
+const contVerbos2 = document.getElementById('ejercicio-verbos-2');
+ejerciciosVerbos2.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja';
+  div.innerHTML = (i+1)+'. ' + it.frase.replace('_____', '<input type="text" id="verbo2-'+i+'">');
+  contVerbos2.appendChild(div);
+});
+function corregirVerbos2(){
+  let ok=0;
+  ejerciciosVerbos2.forEach((it,i)=>{
+    const input = document.getElementById('verbo2-'+i);
+    if(input.value.trim().toLowerCase() === it.respuesta.toLowerCase()){ input.className='ok'; ok++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-verbos-2');
+  fb.className = ok===ejerciciosVerbos2.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+ejerciciosVerbos2.length+'.';
+}
+
+crearQuiz('quiz-lectura', [
+  {pregunta:'¿Cuántos años tiene Amelia?', opciones:['68 años','58 años','78 años'], correcta:'68 años'},
+  {pregunta:'¿De dónde es Amelia?', opciones:['Argentina','España','México'], correcta:'Argentina'},
+  {pregunta:'¿Dónde vive Amelia?', opciones:['Madrid','Buenos Aires','Barcelona'], correcta:'Madrid'},
+  {pregunta:'¿Cuál es la profesión de Amelia?', opciones:['Dependienta','Profesora','Médica'], correcta:'Dependienta'}
+], 'puntos-lectura');
+
+crearEmparejar('emparejar-abreviaturas', [
+  {izq:'C/', der:'calle'},
+  {izq:'Avda.', der:'avenida'},
+  {izq:'Tel.', der:'teléfono'},
+  {izq:'Móv.', der:'móvil'},
+  {izq:'@', der:'arroba'}
+], 'puntos-abreviaturas');
+
+/* ===== VÍDEO HOSTAL BABEL ===== */
+const respuestasFicha = {
+  'v-carla-edad':['24'],
+  'v-carla-prof':['filosofía','filosofia','estudia filosofía','estudia filosofia'],
+  'v-tere-edad':['19'],
+  'v-tere-prof':['estudiante'],
+  'v-hugo-nac':['mexicano','mexicana','méxico','mexico','es mexicano']
+};
+function corregirFicha(){
+  let ok=0, total=0;
+  for(const id in respuestasFicha){
+    total++;
+    const input = document.getElementById(id);
+    const val = input.value.trim().toLowerCase();
+    if(respuestasFicha[id].includes(val)){ input.className='ok'; ok++; }
+    else input.className='no';
+  }
+  const fb = document.getElementById('feedback-ficha');
+  fb.className = ok===total ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+total
+    + (ok===total ? ' · ¡Muy bien! Has entendido el vídeo.' : ' · Vuelve a ver el fragmento 01:40 – 02:42.');
+}
+
+const respuestasDialogo = {
+  'd1':['hola'],
+  'd2':['este es','éste es'],
+  'd3':['me llamo','soy'],
+  'd4':['tengo'],
+  'd5':['encantado','mucho gusto','hola'],
+  'd6':['soy','me llamo'],
+  'd7':['encantado','mucho gusto','hola']
+};
+function corregirDialogo(){
+  let ok=0, total=0;
+  for(const id in respuestasDialogo){
+    total++;
+    const input = document.getElementById(id);
+    const val = input.value.trim().toLowerCase().replace(/[¡!¿?,.]/g,'');
+    if(respuestasDialogo[id].includes(val)){ input.className='ok'; ok++; }
+    else input.className='no';
+  }
+  const fb = document.getElementById('feedback-dialogo');
+  fb.className = ok===total ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+total
+    + (ok===total ? ' · ¡Excelente! Ya sabes presentarte.' : ' · Escucha otra vez el fragmento 01:40 – 02:20.');
+}
+
+crearQuiz('quiz-video', [
+  {pregunta:'Hugo es el nuevo huésped del hostal Babel.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'Hugo llega al hostal directamente desde el aeropuerto.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'Tere tiene 24 años y estudia Filosofía.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'Bea trabaja en la hostelería.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'Para presentar a alguien, Bea usa la expresión «este es…».', opciones:['Verdadero','Falso'], correcta:'Verdadero'}
+], 'puntos-video');
+
+crearQuiz('quiz-cultura', [
+  {pregunta:'El español lo hablan más de 500 millones de personas.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'El español es la primera lengua materna del mundo.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'La mayoría de los hispanohablantes vive en Europa.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'El español es la tercera lengua más usada en internet.', opciones:['Verdadero','Falso'], correcta:'Verdadero'}
+], 'puntos-cultura');
+
+const preguntasFinales = [
+  {pregunta:'¿Cuál es una despedida por la noche?', opciones:['Adiós, buenas noches','Buenos días','¿Qué tal?'], correcta:'Adiós, buenas noches'},
+  {pregunta:'¿Cómo se llama la letra «H» en español?', opciones:['hache','ache','jota'], correcta:'hache'},
+  {pregunta:'¿Cómo se escribe el número 45?', opciones:['cuarenta y cinco','cuarenta y seis','cincuenta y cuatro'], correcta:'cuarenta y cinco'},
+  {pregunta:'La nacionalidad de una persona de Alemania es…', opciones:['alemán / alemana','alemano','germano'], correcta:'alemán / alemana'},
+  {pregunta:'Un/a camarero/a normalmente trabaja en…', opciones:['un restaurante','un hospital','una escuela'], correcta:'un restaurante'},
+  {pregunta:'«Yo _____ 70 años» (verbo tener)', opciones:['tengo','soy','vivo'], correcta:'tengo'},
+  {pregunta:'«Ella _____ en Brasilia» (verbo vivir)', opciones:['vive','vives','vivo'], correcta:'vive'},
+  {pregunta:'Para presentar a otra persona decimos…', opciones:['Este es / Esta es','Me llamo','Hasta luego'], correcta:'Este es / Esta es'},
+  {pregunta:'¿Cómo se escribe el número 16?', opciones:['dieciséis','diesiseis','diesiséis'], correcta:'dieciséis'},
+  {pregunta:'Un/a médico/a normalmente trabaja en…', opciones:['un hospital','un taxi','una tienda'], correcta:'un hospital'},
+  {pregunta:'«¿Tú _____ española?» (verbo ser)', opciones:['eres','es','soy'], correcta:'eres'},
+  {pregunta:'La nacionalidad de una persona de Perú es…', opciones:['peruano/a','peruense','perueño/a'], correcta:'peruano/a'},
+  {pregunta:'«Ellos _____ en un hospital» (verbo trabajar)', opciones:['trabajan','trabaja','trabajamos'], correcta:'trabajan'},
+  {pregunta:'En Hostal Babel, Hugo llega de…', opciones:['México','Argentina','Perú'], correcta:'México'},
+  {pregunta:'El español es hablado por más de…', opciones:['500 millones de personas','100 millones de personas','50 millones de personas'], correcta:'500 millones de personas'}
+];
+crearQuiz('evaluacion-final', preguntasFinales, null);
+
+function corregirEvaluacion(){
+  const bloques = document.querySelectorAll('#evaluacion-final .caja');
+  let aciertos=0;
+  bloques.forEach(b=>{
+    const correcta = b.querySelector('.opcion-btn.correcta');
+    const incorrecta = b.querySelector('.opcion-btn.incorrecta');
+    if(correcta && !incorrecta) aciertos++;
+  });
+  const el = document.getElementById('resultado-final');
+  el.style.display='block';
+  let msg;
+  if(aciertos >= 13) msg = '🏆 ¡Excelente! Dominas muy bien la Unidad 1.';
+  else if(aciertos >= 9) msg = '👏 ¡Muy bien! Repasa los temas con menos aciertos.';
+  else msg = '💪 Buen intento. Te recomiendo repasar las secciones antes de continuar.';
+  el.textContent = 'Resultado: '+aciertos+' de '+preguntasFinales.length+' correctas. '+msg;
+}
+</script>
+</body>
+</html>

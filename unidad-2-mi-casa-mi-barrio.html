@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 2 · Mi casa, mi barrio — Español para la Tercera Edad</title>
+<style>
+  :root{
+    --rojo:#AA151B; --rojo-suave:#fdecec;
+    --gualda:#F1BF00; --gualda-suave:#fff8e1;
+    --azulejo:#1B6CA8; --azulejo-suave:#e3f0fa;
+    --terracota:#C1440E; --terracota-suave:#fdeee7;
+    --oliva:#6B8E23; --oliva-suave:#f0f6e4;
+    --morado:#7D3C98; --morado-suave:#f4ecf7;
+    --crema:#FFFDF7; --texto:#2B1B17; --gris:#6E5B55;
+  }
+  *{box-sizing:border-box;}
+  body{ font-family:'Segoe UI', Verdana, Arial, sans-serif; background:var(--crema); color:var(--texto); margin:0; padding:0; font-size:20px; line-height:1.65; }
+  header{ background:linear-gradient(135deg,var(--rojo) 0%, #c9302c 45%, var(--gualda) 100%); color:#fff; padding:34px 20px 30px; text-align:center; border-bottom:8px solid var(--gualda); }
+  header h1{ font-size:2.2em; margin:0 0 8px; text-shadow:2px 2px 4px rgba(0,0,0,.3); }
+  header p{ font-size:1.15em; margin:0; }
+  .banderita{ font-size:1.8em; letter-spacing:6px; margin-bottom:6px; }
+  nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px; background:#7d1014; padding:14px 10px; position:sticky; top:0; z-index:50; border-bottom:5px solid var(--gualda); }
+  nav button{ font-size:.95em; padding:11px 16px; border:2px solid transparent; border-radius:30px; background:#a8272c; color:#fff; cursor:pointer; font-weight:600; transition:.2s; }
+  nav button:hover{ background:var(--gualda); color:var(--rojo); }
+  nav button.activo{ background:var(--gualda); color:#7d1014; border-color:#fff; }
+  main{ max-width:920px; margin:0 auto; padding:26px 18px 70px; }
+  section{ display:none; animation:fade .4s ease; }
+  section.activa{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  h2{ color:var(--rojo); font-size:1.65em; border-bottom:5px solid var(--gualda); padding-bottom:8px; margin-top:0; }
+  h3{ color:var(--azulejo); font-size:1.3em; margin-top:30px; }
+  .caja{ background:var(--azulejo-suave); border-left:7px solid var(--azulejo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-roja{ background:var(--rojo-suave); border-left:7px solid var(--rojo); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .caja-oliva{ background:var(--oliva-suave); border-left:7px solid var(--oliva); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .cultura{ background:var(--gualda-suave); border-left:7px solid var(--gualda); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .terra{ background:var(--terracota-suave); border-left:7px solid var(--terracota); border-radius:12px; padding:18px 22px; margin:18px 0; }
+  .instrucciones{ font-weight:600; color:#fff; background:linear-gradient(90deg,var(--azulejo),#2e86c1); padding:13px 18px; border-radius:10px; margin-bottom:16px; }
+  table{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.94em; border-radius:10px; overflow:hidden; }
+  th,td{ border:1px solid #e8d9c5; padding:11px; text-align:center; }
+  th{ background:var(--rojo); color:#fff; }
+  tr:nth-child(even){ background:var(--gualda-suave); }
+  .opciones{ display:flex; flex-wrap:wrap; gap:12px; margin:14px 0; }
+  .opcion-btn{ font-size:1em; padding:14px 20px; border:3px solid var(--azulejo); border-radius:14px; background:#fff; color:var(--azulejo); cursor:pointer; font-weight:700; min-width:120px; }
+  .opcion-btn:hover{ background:var(--azulejo-suave); }
+  .opcion-btn.correcta{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; }
+  .opcion-btn.incorrecta{ background:var(--rojo-suave); border-color:var(--rojo); color:var(--rojo); }
+  .opcion-btn:disabled{ cursor:default; }
+  .feedback{ margin-top:12px; padding:13px 18px; border-radius:10px; font-weight:700; display:none; }
+  .feedback.ok{ display:block; background:var(--oliva-suave); color:#4a6b12; border-left:6px solid var(--oliva); }
+  .feedback.no{ display:block; background:var(--rojo-suave); color:var(--rojo); border-left:6px solid var(--rojo); }
+  input[type="text"]{ font-size:1em; padding:10px 12px; border:3px solid var(--azulejo); border-radius:10px; width:180px; margin:5px; }
+  input[type="text"].ok{ border-color:var(--oliva); background:var(--oliva-suave); }
+  input[type="text"].no{ border-color:var(--rojo); background:var(--rojo-suave); }
+  .btn-grande{ font-size:1.08em; padding:15px 30px; background:linear-gradient(135deg,var(--rojo),var(--terracota)); color:#fff; border:none; border-radius:32px; cursor:pointer; font-weight:700; margin-top:14px; box-shadow:0 4px 10px rgba(170,21,27,.28); }
+  .btn-grande:hover{ background:linear-gradient(135deg,var(--terracota),var(--rojo)); }
+  .btn-amarillo{ background:linear-gradient(135deg,var(--gualda),#e6a700); color:#5b4200; box-shadow:0 4px 10px rgba(241,191,0,.35); }
+  .flashcards{ display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:14px; margin:18px 0; }
+  .letra-card{ border-radius:16px; padding:16px 8px 14px; text-align:center; color:#fff; cursor:pointer; transition:.2s; box-shadow:0 3px 8px rgba(0,0,0,.16); }
+  .letra-card:hover{ transform:translateY(-4px) scale(1.03); }
+  .letra-card .grande{ font-size:2em; font-weight:800; line-height:1.1; }
+  .letra-card .nombre{ font-size:.92em; font-weight:600; opacity:.95; }
+  .letra-card .altavoz{ font-size:1.1em; margin-top:4px; }
+  .video-wrap{ position:relative; padding-bottom:56.25%; height:0; border-radius:16px; overflow:hidden; margin:18px 0; border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2); }
+  .video-wrap iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .video-link-card{ display:block; position:relative; border-radius:16px; overflow:hidden; margin:18px 0; border:6px solid var(--gualda); box-shadow:0 6px 16px rgba(0,0,0,.2); text-decoration:none; }
+  .video-link-card img{ display:block; width:100%; height:auto; }
+  .video-link-card .play-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.25); transition:.2s; }
+  .video-link-card:hover .play-overlay{ background:rgba(0,0,0,.4); }
+  .video-link-card .play-circle{ width:76px; height:76px; border-radius:50%; background:#FF0000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:2em; box-shadow:0 4px 12px rgba(0,0,0,.4); }
+  .video-link-card .caption{ position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:#fff; padding:10px 16px; font-weight:700; font-size:.95em; }
+  .emparejar{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; margin:16px 0; }
+  .columna{ display:flex; flex-direction:column; gap:10px; min-width:200px; }
+  .item-emparejar{ padding:14px 16px; border:3px solid var(--azulejo); border-radius:12px; background:#fff; cursor:pointer; font-weight:700; text-align:center; }
+  .item-emparejar.seleccionado{ background:var(--azulejo); color:#fff; }
+  .item-emparejar.acertado{ background:var(--oliva-suave); border-color:var(--oliva); color:#4a6b12; cursor:default; }
+  .puntuacion{ background:linear-gradient(135deg,var(--oliva),#8bb32e); color:#fff; padding:15px 22px; border-radius:12px; font-size:1.15em; font-weight:800; text-align:center; margin:20px 0; }
+  .tabla-video td{ padding:7px; } .tabla-video input[type="text"]{ width:100%; margin:0; }
+  footer{ text-align:center; padding:26px; color:var(--gris); font-size:.95em; background:var(--gualda-suave); border-top:6px solid var(--rojo); }
+  .avanzar-wrap{ text-align:center; margin-top:34px; }
+  @media(max-width:600px){ body{font-size:18px;} header h1{font-size:1.5em;} nav button{font-size:.84em; padding:9px 12px;} .emparejar{gap:14px;} .columna{min-width:145px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="banderita">🇪🇸 🏠 🏘️ 🇲🇽 🇦🇷</div>
+  <h1>Unidad 2 · Mi casa, mi barrio</h1>
+  <p>Curso de Español · Tercera Edad · Nivel A1</p>
+</header>
+
+<nav id="menu">
+  <button data-seccion="s0" class="activo">Bienvenida</button>
+  <button data-seccion="s1">Viviendas</button>
+  <button data-seccion="s2">La casa</button>
+  <button data-seccion="s3">Barrios</button>
+  <button data-seccion="s4">Género</button>
+  <button data-seccion="s5">Artículos</button>
+  <button data-seccion="s6">Hay / Está</button>
+  <button data-seccion="s7">Números</button>
+  <button data-seccion="s8">Practicamos</button>
+  <button data-seccion="s9">Vídeo: Hostal Babel</button>
+  <button data-seccion="s10">Cultura</button>
+  <button data-seccion="s11">Evaluación</button>
+</nav>
+
+<main>
+
+<!-- 0 · BIENVENIDA -->
+<section id="s0" class="activa">
+  <h2>¡Bienvenido/a a la Unidad 2!</h2>
+  <div class="caja-roja">
+    <p><strong>En esta unidad vas a aprender a:</strong></p>
+    <p>➤ Localizar objetos en el espacio<br>
+    ➤ Hablar de la existencia o inexistencia de algo o de alguien<br>
+    ➤ Expresar cantidad<br>
+    ➤ Hablar de tu barrio y de tu casa<br>
+    ➤ Conocer una calle emblemática de Barcelona: las Ramblas</p>
+  </div>
+  <div class="cultura">
+    <p>¿Cómo es tu barrio, moderno o antiguo? ¿Vives en el centro de la ciudad o a las afueras? ¿Vives en una casa o en un piso? Vamos a hablar de eso, <strong>paso a paso</strong>.</p>
+  </div>
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s1')">Empezar → Tipos de vivienda</button></div>
+</section>
+
+<!-- 1 · VIVIENDAS -->
+<section id="s1">
+  <h2>1. Tipos de vivienda</h2>
+  <p class="instrucciones">Toca cada tarjeta para escuchar el tipo de vivienda.</p>
+  <div class="flashcards" id="tarjetas-vivienda"></div>
+  <div class="cultura">
+    <strong>Variación del español:</strong> en España se dice <em>piso/apartamento</em>; en América, <em>departamento</em>. La <em>piscina</em> española es la <em>alberca</em> en México y la <em>pileta</em> en Argentina.
+  </div>
+
+  <h3>Actividad · ¿Qué tipo de vivienda es?</h3>
+  <p class="instrucciones">Elige la opción correcta según la descripción.</p>
+  <div id="quiz-vivienda"></div>
+  <div class="puntuacion" id="puntos-vivienda" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s2')">Continuar → La casa</button></div>
+</section>
+
+<!-- 2 · LA CASA -->
+<section id="s2">
+  <h2>2. Partes de la casa, muebles y electrodomésticos</h2>
+  <table>
+    <tr><th>Partes de la casa</th><th>Muebles</th><th>Electrodomésticos</th><th>Otros</th></tr>
+    <tr><td>baño, dormitorio, salón-comedor</td><td>armarios, sillas, sofá, sillón, mesa</td><td>microondas, nevera, lavadora, horno, lavavajillas</td><td>garaje, calefacción, ascensor</td></tr>
+  </table>
+  <div class="cultura">
+    <strong>Variación del español:</strong> <em>dormitorio</em> (España) = <em>recámara/cuarto</em> (América) · <em>nevera/frigorífico</em> (España) = <em>heladera/refrigerador</em> (América) · <em>salón</em> (España) = <em>living/sala</em> (América) · <em>lavadora</em> (España) = <em>lavarropas</em> (América).
+  </div>
+
+  <h3>Actividad · Escucha y clasifica</h3>
+  <p class="instrucciones">Toca la palabra para escucharla y después únela a su categoría correcta.</p>
+  <div class="emparejar" id="emparejar-casa"></div>
+  <div class="puntuacion" id="puntos-casa" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s3')">Continuar → Barrios</button></div>
+</section>
+
+<!-- 3 · BARRIOS -->
+<section id="s3">
+  <h2>3. Describir un barrio</h2>
+  <div class="caja">
+    <p><strong>Adjetivos:</strong> residencial · céntrico · moderno · tranquilo · antiguo · ruidoso</p>
+    <button class="btn-grande btn-amarillo" onclick="hablar('residencial, céntrico, moderno, tranquilo, antiguo, ruidoso')">🔊 Escuchar los adjetivos</button>
+  </div>
+  <div class="terra">
+    <p><strong>Establecimientos de un barrio:</strong> centro comercial, farmacia, banco, centro de salud, gimnasio, parque, supermercado, panadería, colegio.</p>
+    <p><em>Ejemplo:</em> En mi barrio hay dos cafeterías, un supermercado y una farmacia, pero no hay centro de salud.</p>
+  </div>
+
+  <h3>Actividad · El opuesto</h3>
+  <p class="instrucciones">Une cada adjetivo con su opuesto.</p>
+  <div class="emparejar" id="emparejar-opuestos"></div>
+  <div class="puntuacion" id="puntos-opuestos" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s4')">Continuar → Género</button></div>
+</section>
+
+<!-- 4 · GÉNERO Y NÚMERO -->
+<section id="s4">
+  <h2>4. Género y número de nombres y adjetivos</h2>
+  <div class="caja">
+    <p><strong>Masculino:</strong> nombres terminados en <strong>-o</strong> (apartamento, niño) y en <strong>-aje</strong> (garaje, viaje).<br>
+    <strong>Femenino:</strong> nombres terminados en <strong>-a</strong> (casa, niña) y en <strong>-ción, -sión, -dad</strong> (estación, televisión, nacionalidad).</p>
+    <p><strong>Excepciones femeninas:</strong> la mano, la foto, la moto, la radio.<br>
+    <strong>Excepciones masculinas:</strong> el día, el problema, el idioma, el tema, el sofá.</p>
+  </div>
+  <div class="cultura">
+    <strong>Plural:</strong> vocal + <strong>-s</strong> (piso → pisos); consonante + <strong>-es</strong> (móvil → móviles); <strong>-z</strong> → <strong>-ces</strong> (lápiz → lápices).
+  </div>
+
+  <h3>Actividad · ¿El o la?</h3>
+  <p class="instrucciones">Toca <strong>el (M)</strong> o <strong>la (F)</strong> para clasificar cada palabra. ¡Cuidado con las excepciones!</p>
+  <div id="quiz-genero"></div>
+  <div class="puntuacion" id="puntos-genero" style="display:none;"></div>
+
+  <h3>Actividad · Forma el plural</h3>
+  <p class="instrucciones">Escribe el plural de cada palabra.</p>
+  <div id="ejercicio-plural"></div>
+  <button class="btn-grande" onclick="corregirPlural()">Corregir</button>
+  <div class="feedback" id="feedback-plural"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s5')">Continuar → Artículos</button></div>
+</section>
+
+<!-- 5 · ARTÍCULOS -->
+<section id="s5">
+  <h2>5. Artículo determinado e indeterminado</h2>
+  <table>
+    <tr><th></th><th>Indeterminado (M/F)</th><th>Determinado (M/F)</th></tr>
+    <tr><td>Singular</td><td>un restaurante / una cafetería</td><td>el restaurante / la cafetería</td></tr>
+    <tr><td>Plural</td><td>unos restaurantes / unas cafeterías</td><td>los restaurantes / las cafeterías</td></tr>
+  </table>
+  <div class="caja">
+    <p><strong>Indeterminado:</strong> para hablar por primera vez de algo desconocido. <em>Tengo un apartamento en Ibiza.</em><br>
+    <strong>Determinado:</strong> para hablar de algo ya conocido. <em>El apartamento tiene dos dormitorios.</em></p>
+  </div>
+
+  <h3>Actividad · Elige el artículo correcto</h3>
+  <p class="instrucciones">Elige el artículo adecuado para cada palabra.</p>
+  <div id="quiz-articulos"></div>
+  <div class="puntuacion" id="puntos-articulos" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s6')">Continuar → Hay / Está</button></div>
+</section>
+
+<!-- 6 · HAY / ESTÁ -->
+<section id="s6">
+  <h2>6. Contraste hay / está(n)</h2>
+  <div class="caja">
+    <p><strong>Hay</strong> + un/una/unos/unas + nombre → para expresar existencia. Tiene una sola forma (singular y plural).<br>
+    <em>En mi barrio hay un restaurante, tres escuelas y muchos árboles.</em></p>
+    <p><strong>El/la/los/las + nombre + está(n)</strong> → para localizar algo o a alguien.<br>
+    <em>El garaje está al lado de la peluquería.</em></p>
+  </div>
+  <div class="terra">
+    <strong>Cantidad:</strong> hay + mucho/a/os/as — poco/a/os/as + nombre.<br>
+    <em>En mi casa hay mucho ruido y poca luz.</em>
+  </div>
+
+  <h3>Verbo estar (presente)</h3>
+  <table>
+    <tr><td>yo estoy</td><td>tú estás</td><td>él/ella/usted está</td></tr>
+    <tr><td>nosotros/as estamos</td><td>vosotros/as estáis</td><td>ellos/as/ustedes están</td></tr>
+  </table>
+  <div class="cultura">
+    <strong>Expresiones de lugar:</strong> encima de · debajo de · al lado de · dentro de · entre… y… · a la izquierda de · a la derecha de · delante de · detrás de.
+    <br><em>Fíjate: a + el → al · de + el → del</em>
+  </div>
+
+  <h3>Actividad · ¿Hay, está o están?</h3>
+  <p class="instrucciones">Completa cada frase con la palabra correcta.</p>
+  <div id="ejercicio-hayesta"></div>
+  <button class="btn-grande" onclick="corregirHayEsta()">Corregir</button>
+  <div class="feedback" id="feedback-hayesta"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s7')">Continuar → Números</button></div>
+</section>
+
+<!-- 7 · NÚMEROS -->
+<section id="s7">
+  <h2>7. Números desde 100 y números ordinales</h2>
+  <table>
+    <tr><th>Centenas</th><th>Ordinales</th></tr>
+    <tr><td>100 cien · 101 ciento uno · 200 doscientos/as · 300 trescientos/as · 400 cuatrocientos/as · 500 quinientos/as · 600 seiscientos/as · 700 setecientos/as · 800 ochocientos/as · 900 novecientos/as · 1000 mil</td>
+        <td>1.º primero (primer) · 2.º segundo · 3.º tercero (tercer) · 4.º cuarto · 5.º quinto · 6.º sexto · 7.º séptimo · 8.º octavo · 9.º noveno · 10.º décimo</td></tr>
+  </table>
+  <div class="cultura">
+    <em>Fíjate:</em> piso primero → primer piso · piso tercero → tercer piso. <br>
+    <strong>m²</strong> se dice <em>metros cuadrados</em>.
+  </div>
+
+  <h3>Actividad · ¿Cómo se escribe correctamente?</h3>
+  <p class="instrucciones">Aparece un número. Elige la <strong>única opción escrita correctamente</strong>.</p>
+  <div id="quiz-numeros"></div>
+  <div class="puntuacion" id="puntos-numeros" style="display:none;"></div>
+
+  <h3>Actividad · Empareja el número ordinal</h3>
+  <div class="emparejar" id="emparejar-ordinales"></div>
+  <div class="puntuacion" id="puntos-ordinales" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s8')">Continuar → Practicamos</button></div>
+</section>
+
+<!-- 8 · PRACTICAMOS -->
+<section id="s8">
+  <h2>8. Practicamos en contexto: anuncios de alquiler</h2>
+  <div class="caja">
+    <p><strong>Anuncio:</strong> «Piso de 65 m², exterior, muy céntrico y luminoso. Dos dormitorios, salón, cocina y tres balcones. Sin amueblar. Cuatro plantas, sin ascensor. Cocina de gas, aire acondicionado, calefacción central, lavadora.»</p>
+    <button class="btn-grande btn-amarillo" onclick="hablar('Piso de sesenta y cinco metros cuadrados, exterior, muy céntrico y luminoso. Dos dormitorios, salón, cocina y tres balcones.')">🔊 Escuchar el anuncio</button>
+  </div>
+
+  <h3>Actividad · Comprensión del anuncio</h3>
+  <p class="instrucciones">Responde según la información del anuncio.</p>
+  <div id="quiz-anuncio"></div>
+  <div class="puntuacion" id="puntos-anuncio" style="display:none;"></div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s9')">Continuar → Vídeo Hostal Babel</button></div>
+</section>
+
+<!-- 9 · VÍDEO -->
+<section id="s9">
+  <h2>9. Vídeo · Hostal Babel — «Este barrio»</h2>
+  <div class="caja-roja">
+    <strong>Sobre el vídeo:</strong> En este episodio conocemos la cocina del hostal Babel y hablamos de los establecimientos típicos de un barrio.
+  </div>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/6OsYoK9mbro" title="Hostal Babel - Episodio 2 - Este barrio" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <h3>🟡 Antes del vídeo</h3>
+  <div class="cultura">
+    <p>En la cocina del hostal Babel hay varias cosas. Antes de ver el vídeo, ¿cuáles crees que aparecen? lámpara · plantas · mesa · nevera · armario · lavadora · aire acondicionado · sillas · horno · lavavajillas · microondas</p>
+  </div>
+
+  <h3>🔵 Durante el vídeo</h3>
+  <p class="instrucciones">Mira el fragmento 00:30 – 03:25 y marca los establecimientos del barrio que se mencionan.</p>
+  <div id="quiz-video-establecimientos"></div>
+  <div class="puntuacion" id="puntos-video-establecimientos" style="display:none;"></div>
+
+  <p class="instrucciones" style="margin-top:24px;">Ahora, según el vídeo (fragmento 04:20 – 04:40), completa dónde está cada dormitorio.</p>
+  <div class="caja" id="dormitorios-babel">
+    <p>1. El cuarto de Carla está <input type="text" id="dorm1" placeholder="enfrente de / al lado de..." style="width:220px;"></p>
+    <p>2. El cuarto de Tere está <input type="text" id="dorm2" placeholder="a la izquierda / derecha" style="width:220px;"></p>
+  </div>
+  <button class="btn-grande" onclick="corregirDormitorios()">Corregir</button>
+  <div class="feedback" id="feedback-dormitorios"></div>
+
+  <h3>🟢 Comprensión — ¿Verdadero o falso?</h3>
+  <div id="quiz-video2"></div>
+  <div class="puntuacion" id="puntos-video2" style="display:none;"></div>
+
+  <h3>🟠 Después del vídeo · Reflexión</h3>
+  <div class="terra">
+    <p><strong>Para conversar:</strong> ¿Qué lugares de tu barrio visitas con más frecuencia? Dibuja (mentalmente o en papel) el plano de tu casa: ¿cuántas habitaciones tiene? ¿Dónde está tu habitación?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s10')">Continuar → Cultura</button></div>
+</section>
+
+<!-- 10 · CULTURA -->
+<section id="s10">
+  <h2>10. Las Ramblas de Barcelona</h2>
+  <div class="cultura">
+    <p>Las Ramblas es una de las calles más emblemáticas de Barcelona. Está entre la plaza de Cataluña y el monumento a Colón. Cada año la visitan <strong>unos 78 millones de personas</strong>. Siempre hay mucha gente, quioscos de prensa y flores, actores callejeros, cafeterías y tiendas.</p>
+    <p><strong>Lugares para visitar:</strong> la Farmacia Nadal (estilo modernista) · el Mercado de la Boquería (más de 300 puestos) · el Teatro del Liceo (el más antiguo de Barcelona) · la Fuente de Canaletas · la Casa de los Paraguas · el Mosaico de Joan Miró.</p>
+  </div>
+
+  <h3>Actividad · ¿Verdadero o falso?</h3>
+  <div id="quiz-cultura"></div>
+  <div class="puntuacion" id="puntos-cultura" style="display:none;"></div>
+
+  <h3>📺 Reportaje de TVE · Españoles en el mundo: Bogotá</h3>
+  <div class="caja-roja">
+    <strong>Sobre el reportaje:</strong> Un programa de Televisión Española (RTVE) sobre Bogotá, capital de Colombia, a través de la mirada de españoles que viven allí.
+  </div>
+  <a class="video-link-card" href="https://www.youtube.com/watch?v=TMJXZM3h_80" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/TMJXZM3h_80/hqdefault.jpg" alt="Españoles en el mundo: Bogotá">
+    <div class="play-overlay"><div class="play-circle">▶</div></div>
+    <div class="caption">▶ Ver en YouTube: Españoles en el mundo — Bogotá (RTVE)</div>
+  </a>
+  <p style="text-align:center; font-size:.9em; color:var(--gris);">Este vídeo se abre directamente en YouTube (RTVE no permite insertarlo en otras páginas).</p>
+  <div class="terra">
+    <strong>Preguntas para debatir en clase:</strong>
+    <p>1. ¿Qué barrios o lugares de Bogotá aparecen en el reportaje?<br>
+    2. ¿Cómo describen los protagonistas su casa o su barrio en Bogotá?<br>
+    3. ¿Qué diferencias hay entre los barrios de Bogotá y tu propio barrio?<br>
+    4. ¿Te gustaría vivir en otro país de habla hispana? ¿Por qué?</p>
+  </div>
+
+  <div class="avanzar-wrap"><button class="btn-grande" onclick="irA('s11')">Continuar → Evaluación final</button></div>
+</section>
+
+<!-- 11 · EVALUACIÓN -->
+<section id="s11">
+  <h2>11. Evaluación final de la Unidad 2</h2>
+  <p class="instrucciones">Responde a las 15 preguntas y descubre tu resultado.</p>
+  <div id="evaluacion-final"></div>
+  <button class="btn-grande" onclick="corregirEvaluacion()">Ver mi resultado</button>
+  <div class="puntuacion" id="resultado-final" style="display:none;"></div>
+  <div class="avanzar-wrap">
+    <div class="cultura"><p style="margin:0;">¡Muy bien hecho! En la <strong>Unidad 3</strong> hablaremos de viajes. ✈️</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Curso de Español · Lengua, Cultura y Arte · Tercera Edad · Unidad 2 de 3<br>
+  Vídeo: <em>Hostal Babel</em> — Editorial Edinumen
+</footer>
+
+<script>
+/* NAVEGACIÓN */
+function irA(id){
+  pararAudio();
+  document.querySelectorAll('main section').forEach(s=>s.classList.remove('activa'));
+  const destino = document.getElementById(id);
+  if(destino) destino.classList.add('activa');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('activo'));
+  const btn = document.querySelector('nav button[data-seccion="'+id+'"]');
+  if(btn) btn.classList.add('activo');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('nav button').forEach(b=> b.addEventListener('click', ()=> irA(b.dataset.seccion)));
+
+/* AUDIO */
+let vozES = null;
+function cargarVoces(){
+  if(!('speechSynthesis' in window)) return;
+  const voces = window.speechSynthesis.getVoices();
+  vozES = voces.find(v=>v.lang==='es-ES') || voces.find(v=>v.lang && v.lang.startsWith('es')) || null;
+}
+if('speechSynthesis' in window){ cargarVoces(); window.speechSynthesis.onvoiceschanged = cargarVoces; }
+function hablar(texto, velocidad){
+  if(!('speechSynthesis' in window)){ alert('Tu navegador no permite el audio. Prueba con Chrome, Edge o Safari.'); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang='es-ES'; u.rate = velocidad || 0.85; u.pitch=1;
+  if(vozES) u.voice = vozES;
+  window.speechSynthesis.speak(u);
+}
+function pararAudio(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+
+/* QUIZ GENÉRICO */
+function crearQuiz(contenedorId, preguntas, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  let aciertos = 0;
+  preguntas.forEach((p, idx)=>{
+    const bloque = document.createElement('div');
+    bloque.className = 'caja';
+    bloque.innerHTML = '<p><strong>'+(idx+1)+'. '+p.pregunta+'</strong></p>';
+    const opciones = document.createElement('div');
+    opciones.className = 'opciones';
+    p.opciones.forEach(op=>{
+      const btn = document.createElement('button');
+      btn.className='opcion-btn';
+      btn.textContent = op;
+      btn.onclick = ()=>{
+        if(btn.disabled) return;
+        opciones.querySelectorAll('button').forEach(b=>b.disabled=true);
+        if(op === p.correcta){ btn.classList.add('correcta'); aciertos++; }
+        else{
+          btn.classList.add('incorrecta');
+          opciones.querySelectorAll('button').forEach(b=>{ if(b.textContent===p.correcta) b.classList.add('correcta'); });
+        }
+        const el = document.getElementById(idPuntos);
+        if(el){ el.style.display='block'; el.textContent = '✔ Aciertos: '+aciertos+' de '+preguntas.length; }
+      };
+      opciones.appendChild(btn);
+    });
+    bloque.appendChild(opciones);
+    cont.appendChild(bloque);
+  });
+}
+
+/* EMPAREJAR */
+function crearEmparejar(contenedorId, pares, idPuntos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont) return;
+  const colIzq = document.createElement('div'); colIzq.className='columna';
+  const colDer = document.createElement('div'); colDer.className='columna';
+  let seleccionIzq = null, aciertos = 0;
+  const derechas = pares.map(p=>p.der).slice().sort(()=>Math.random()-0.5);
+  pares.forEach(p=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar'; el.textContent = p.izq;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado')) return;
+      colIzq.querySelectorAll('.item-emparejar').forEach(x=>x.classList.remove('seleccionado'));
+      el.classList.add('seleccionado');
+      seleccionIzq = {texto:p.izq, el:el};
+    };
+    colIzq.appendChild(el);
+  });
+  derechas.forEach(txt=>{
+    const el = document.createElement('div');
+    el.className='item-emparejar'; el.textContent = txt;
+    el.onclick = ()=>{
+      if(el.classList.contains('acertado') || !seleccionIzq) return;
+      const correcto = pares.find(p=>p.izq===seleccionIzq.texto).der;
+      if(correcto === txt){ el.classList.add('acertado'); seleccionIzq.el.classList.add('acertado'); aciertos++; }
+      else{ el.style.background='#fdecec'; setTimeout(()=>{ el.style.background=''; }, 450); }
+      seleccionIzq.el.classList.remove('seleccionado'); seleccionIzq = null;
+      const pt = document.getElementById(idPuntos);
+      if(pt){ pt.style.display='block'; pt.textContent = '✔ Parejas correctas: '+aciertos+' de '+pares.length; }
+    };
+    colDer.appendChild(el);
+  });
+  cont.appendChild(colIzq); cont.appendChild(colDer);
+}
+function mezclar(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+
+/* ===== 1. VIVIENDAS ===== */
+const tiposVivienda = [
+  {emoji:'🏢', nombre:'edificio de pisos'},
+  {emoji:'🏘️', nombre:'urbanización'},
+  {emoji:'🏡', nombre:'casa con jardín y piscina'},
+  {emoji:'🏠', nombre:'casa con patio'},
+  {emoji:'🏘️', nombre:'chalé adosado'},
+  {emoji:'🛖', nombre:'casa baja'}
+];
+const paleta = ['#AA151B','#C1440E','#1B6CA8','#6B8E23','#7D3C98','#D68910'];
+const contViv = document.getElementById('tarjetas-vivienda');
+tiposVivienda.forEach((t,i)=>{
+  const card = document.createElement('div');
+  card.className='letra-card';
+  card.style.background = paleta[i % paleta.length];
+  card.innerHTML = '<div class="grande" style="font-size:2.2em;">'+t.emoji+'</div><div class="nombre">'+t.nombre+'</div><div class="altavoz">🔊</div>';
+  card.onclick = ()=> hablar(t.nombre, 0.8);
+  contViv.appendChild(card);
+});
+
+crearQuiz('quiz-vivienda', [
+  {pregunta:'Vivienda individual con jardín y piscina propios se llama…', opciones:['casa con jardín y piscina','edificio de pisos','urbanización'], correcta:'casa con jardín y piscina'},
+  {pregunta:'Conjunto de casas o chalés con zonas comunes se llama…', opciones:['urbanización','casa baja','edificio de pisos'], correcta:'urbanización'},
+  {pregunta:'Vivienda de varias plantas con muchos apartamentos se llama…', opciones:['edificio de pisos','chalé adosado','casa con patio'], correcta:'edificio de pisos'},
+  {pregunta:'Casa unida a otra por una pared lateral se llama…', opciones:['chalé adosado','casa baja','urbanización'], correcta:'chalé adosado'}
+], 'puntos-vivienda');
+
+/* ===== 2. LA CASA ===== */
+crearEmparejar('emparejar-casa', [
+  {izq:'dormitorio', der:'parte de la casa'},
+  {izq:'sofá', der:'mueble'},
+  {izq:'nevera', der:'electrodoméstico'},
+  {izq:'garaje', der:'otros'},
+  {izq:'lavadora', der:'electrodoméstico'},
+  {izq:'salón-comedor', der:'parte de la casa'}
+], 'puntos-casa');
+
+/* ===== 3. BARRIOS ===== */
+crearEmparejar('emparejar-opuestos', [
+  {izq:'moderno', der:'antiguo'},
+  {izq:'tranquilo', der:'ruidoso'},
+  {izq:'céntrico', der:'a las afueras'}
+], 'puntos-opuestos');
+
+/* ===== 4. GÉNERO Y NÚMERO ===== */
+const palabrasGenero = [
+  {palabra:'apartamento', genero:'el'}, {palabra:'madre', genero:'la'},
+  {palabra:'habitación', genero:'la'}, {palabra:'ciudad', genero:'la'},
+  {palabra:'televisión', genero:'la'}, {palabra:'garaje', genero:'el'},
+  {palabra:'piso', genero:'el'}, {palabra:'sofá', genero:'el'},
+  {palabra:'idioma', genero:'el'}, {palabra:'calefacción', genero:'la'},
+  {palabra:'restaurante', genero:'el'}, {palabra:'día', genero:'el'}
+];
+crearQuiz('quiz-genero', palabrasGenero.map(p=>({
+  pregunta: p.palabra,
+  opciones:['el (M)','la (F)'],
+  correcta: p.genero==='el' ? 'el (M)' : 'la (F)'
+})), 'puntos-genero');
+
+const ejerciciosPlural = [
+  {palabra:'piso', respuesta:'pisos'},
+  {palabra:'móvil', respuesta:'móviles'},
+  {palabra:'lápiz', respuesta:'lápices'},
+  {palabra:'ciudad', respuesta:'ciudades'},
+  {palabra:'joven', respuesta:'jóvenes'}
+];
+const contPlural = document.getElementById('ejercicio-plural');
+ejerciciosPlural.forEach((it,i)=>{
+  const p = document.createElement('p');
+  p.innerHTML = (i+1)+'. <strong>'+it.palabra+'</strong> → <input type="text" id="pl-'+i+'" style="width:150px;">';
+  contPlural.appendChild(p);
+});
+function corregirPlural(){
+  let ok=0;
+  ejerciciosPlural.forEach((it,i)=>{
+    const input = document.getElementById('pl-'+i);
+    if(input.value.trim().toLowerCase()===it.respuesta){ input.className='ok'; ok++; }
+    else input.className='no';
+  });
+  const fb = document.getElementById('feedback-plural');
+  fb.className = ok===ejerciciosPlural.length ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+ejerciciosPlural.length+'.';
+}
+
+/* ===== 5. ARTÍCULOS ===== */
+crearQuiz('quiz-articulos', [
+  {pregunta:'____ bolígrafo (determinado)', opciones:['el','la'], correcta:'el'},
+  {pregunta:'____ mesas (determinado)', opciones:['los','las'], correcta:'las'},
+  {pregunta:'____ idioma (indeterminado)', opciones:['un','una'], correcta:'un'},
+  {pregunta:'____ nacionalidad (indeterminado)', opciones:['un','una'], correcta:'una'},
+  {pregunta:'____ garajes (determinado)', opciones:['los','las'], correcta:'los'},
+  {pregunta:'____ fuentes (indeterminado)', opciones:['unos','unas'], correcta:'unas'}
+], 'puntos-articulos');
+
+/* ===== 6. HAY / ESTÁ ===== */
+const ejerciciosHayEsta = [
+  {frase:'Mi apartamento _____ en el centro de la ciudad.', respuesta:'está'},
+  {frase:'_____ una estación de metro en la plaza.', respuesta:'hay'},
+  {frase:'El garaje _____ en el mismo edificio.', respuesta:'está'},
+  {frase:'En mi apartamento _____ una cocina, un salón y un dormitorio.', respuesta:'hay'},
+  {frase:'La mesa y las sillas _____ en el salón.', respuesta:'están'},
+  {frase:'No _____ aire acondicionado, pero _____ calefacción.', respuesta:'hay'}
+];
+const contHayEsta = document.getElementById('ejercicio-hayesta');
+ejerciciosHayEsta.forEach((it,i)=>{
+  const div = document.createElement('div');
+  div.className='caja';
+  div.innerHTML = (i+1)+'. ' + it.frase.replace('_____', '<input type="text" id="he-'+i+'" style="width:110px;">').replace('_____', '<input type="text" id="he-'+i+'b" style="width:110px;">');
+  contHayEsta.appendChild(div);
+});
+function corregirHayEsta(){
+  let ok=0, total=0;
+  ejerciciosHayEsta.forEach((it,i)=>{
+    total++;
+    const input = document.getElementById('he-'+i);
+    if(input && input.value.trim().toLowerCase()===it.respuesta){ input.className='ok'; ok++; }
+    else if(input) input.className='no';
+  });
+  const fb = document.getElementById('feedback-hayesta');
+  fb.className = ok===total ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de '+total+'.';
+}
+
+/* ===== 7. NÚMEROS ===== */
+const preguntasNumeros = [
+  {n:150, correcta:'ciento cincuenta', opciones:['ciento cincuenta','siento cincuenta','ciento cincuemta']},
+  {n:200, correcta:'doscientos', opciones:['doscientos','doscentos','dosientos']},
+  {n:300, correcta:'trescientos', opciones:['trescientos','trecientos','trescentos']},
+  {n:500, correcta:'quinientos', opciones:['quinientos','quinentos','quinientros']},
+  {n:600, correcta:'seiscientos', opciones:['seiscientos','seicientos','saiscientos']},
+  {n:700, correcta:'setecientos', opciones:['setecientos','sietecientos','setecentos']},
+  {n:900, correcta:'novecientos', opciones:['novecientos','nuevecientos','novecentos']},
+  {n:1000, correcta:'mil', opciones:['mil','miel','mill']},
+  {n:101, correcta:'ciento uno', opciones:['ciento uno','cientouno','ciento un']},
+  {n:1439, correcta:'mil cuatrocientos treinta y nueve', opciones:['mil cuatrocientos treinta y nueve','mil quatrocientos treinta y nueve','mil cuatrocientos trainta y nueve']}
+];
+crearQuiz('quiz-numeros', preguntasNumeros.map(p=>({
+  pregunta:'Número: <span style="font-size:1.4em; color:var(--rojo); font-weight:800;">'+p.n+'</span>',
+  opciones: mezclar(p.opciones), correcta: p.correcta
+})), 'puntos-numeros');
+
+crearEmparejar('emparejar-ordinales', [
+  {izq:'1.º', der:'primero'}, {izq:'2.º', der:'segundo'}, {izq:'3.º', der:'tercero'},
+  {izq:'5.º', der:'quinto'}, {izq:'8.º', der:'octavo'}, {izq:'10.º', der:'décimo'}
+], 'puntos-ordinales');
+
+/* ===== 8. PRACTICAMOS ===== */
+crearQuiz('quiz-anuncio', [
+  {pregunta:'¿Cuántos metros cuadrados tiene el piso?', opciones:['65 m²','125 m²','35 m²'], correcta:'65 m²'},
+  {pregunta:'¿Cuántos dormitorios tiene?', opciones:['Dos','Tres','Uno'], correcta:'Dos'},
+  {pregunta:'¿El edificio tiene ascensor?', opciones:['No','Sí'], correcta:'No'},
+  {pregunta:'¿Qué tipo de calefacción tiene?', opciones:['Central','Individual','No tiene'], correcta:'Central'}
+], 'puntos-anuncio');
+
+/* ===== 9. VÍDEO ===== */
+crearQuiz('quiz-video-establecimientos', [
+  {pregunta:'¿Se menciona "centro de salud" en el vídeo?', opciones:['Sí','No'], correcta:'Sí'},
+  {pregunta:'¿Se menciona "gimnasio" en el vídeo?', opciones:['Sí','No'], correcta:'Sí'},
+  {pregunta:'¿Se menciona "supermercado" en el vídeo?', opciones:['Sí','No'], correcta:'Sí'},
+  {pregunta:'¿Se menciona "discoteca" en el vídeo?', opciones:['Sí','No'], correcta:'No'}
+], 'puntos-video-establecimientos');
+
+const respuestasDormitorios = {'dorm1':['enfrente del cuarto de tere','enfrente de tere','enfrente'], 'dorm2':['a la izquierda del pasillo','izquierda','a la izquierda']};
+function corregirDormitorios(){
+  let ok=0;
+  for(const id in respuestasDormitorios){
+    const input = document.getElementById(id);
+    const val = input.value.trim().toLowerCase();
+    if(respuestasDormitorios[id].some(r=>val.includes(r))){ input.className='ok'; ok++; }
+    else input.className='no';
+  }
+  const fb = document.getElementById('feedback-dormitorios');
+  fb.className = ok===2 ? 'feedback ok' : 'feedback no';
+  fb.textContent = 'Aciertos: '+ok+' de 2. Vuelve a ver el fragmento 04:20 – 04:40 si tienes dudas.';
+}
+
+crearQuiz('quiz-video2', [
+  {pregunta:'La cocina del hostal Babel está totalmente equipada.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'En el barrio del hostal Babel no hay ningún establecimiento de comida.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'Carla, Tere y Leo le explican a Hugo dónde están los dormitorios.', opciones:['Verdadero','Falso'], correcta:'Verdadero'}
+], 'puntos-video2');
+
+/* ===== 10. CULTURA ===== */
+crearQuiz('quiz-cultura', [
+  {pregunta:'Las Ramblas están en Madrid.', opciones:['Verdadero','Falso'], correcta:'Falso'},
+  {pregunta:'Cada año visitan las Ramblas unos 78 millones de personas.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'El Mercado de la Boquería tiene más de 300 puestos.', opciones:['Verdadero','Falso'], correcta:'Verdadero'},
+  {pregunta:'El Teatro del Liceo es el más moderno de Barcelona.', opciones:['Verdadero','Falso'], correcta:'Falso'}
+], 'puntos-cultura');
+
+/* ===== 11. EVALUACIÓN FINAL (15 ítems) ===== */
+const preguntasFinales = [
+  {pregunta:'Una vivienda con jardín y piscina propios es una…', opciones:['casa con jardín y piscina','edificio de pisos','urbanización'], correcta:'casa con jardín y piscina'},
+  {pregunta:'¿Dónde guardas la ropa?', opciones:['En el armario','En la nevera','En el horno'], correcta:'En el armario'},
+  {pregunta:'Un barrio con mucho tráfico y sonido es…', opciones:['ruidoso','tranquilo','antiguo'], correcta:'ruidoso'},
+  {pregunta:'¿Qué género tiene la palabra "problema"?', opciones:['el (M)','la (F)'], correcta:'el (M)'},
+  {pregunta:'¿Qué género tiene la palabra "televisión"?', opciones:['la (F)','el (M)'], correcta:'la (F)'},
+  {pregunta:'El plural de "lápiz" es…', opciones:['lápices','lapizes','lápizs'], correcta:'lápices'},
+  {pregunta:'"Tengo ____ apartamento en Ibiza" (indeterminado)', opciones:['un','el'], correcta:'un'},
+  {pregunta:'Para expresar existencia usamos…', opciones:['hay','está'], correcta:'hay'},
+  {pregunta:'Para localizar algo usamos…', opciones:['está / están','hay'], correcta:'está / están'},
+  {pregunta:'"El libro está ____ la mesa" (encima)', opciones:['encima de','debajo de'], correcta:'encima de'},
+  {pregunta:'¿Cómo se escribe 300?', opciones:['trescientos','trecientos','trescentos'], correcta:'trescientos'},
+  {pregunta:'El ordinal de "3" es…', opciones:['tercero','tercer','treinta'], correcta:'tercero'},
+  {pregunta:'"Piso ____" (delante de un sustantivo masculino, se apocopa)', opciones:['piso tercer','piso tercero'], correcta:'piso tercer'},
+  {pregunta:'En "Hostal Babel — Este barrio" vemos principalmente…', opciones:['la cocina y el barrio','un aeropuerto','una playa'], correcta:'la cocina y el barrio'},
+  {pregunta:'Las Ramblas están en…', opciones:['Barcelona','Madrid','Sevilla'], correcta:'Barcelona'}
+];
+crearQuiz('evaluacion-final', preguntasFinales, null);
+
+function corregirEvaluacion(){
+  const bloques = document.querySelectorAll('#evaluacion-final .caja');
+  let aciertos=0;
+  bloques.forEach(b=>{
+    const correcta = b.querySelector('.opcion-btn.correcta');
+    const incorrecta = b.querySelector('.opcion-btn.incorrecta');
+    if(correcta && !incorrecta) aciertos++;
+  });
+  const el = document.getElementById('resultado-final');
+  el.style.display='block';
+  let msg;
+  if(aciertos >= 13) msg = '🏆 ¡Excelente! Dominas muy bien la Unidad 2.';
+  else if(aciertos >= 9) msg = '👏 ¡Muy bien! Repasa los temas con menos aciertos.';
+  else msg = '💪 Buen intento. Te recomiendo repasar las secciones antes de continuar.';
+  el.textContent = 'Resultado: '+aciertos+' de '+preguntasFinales.length+' correctas. '+msg;
+}
+</script>
+</body>
+</html>

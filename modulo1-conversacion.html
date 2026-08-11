@@ -823,31 +823,229 @@ footer a{color:#ffc400}
 <button class="btn audio-btn" onclick="speakText('barcelona')">Escuchar el texto</button>
 </div>
 
-<div class="section comprension">
-<div class="section-titulo">Guión de charla</div>
-<div class="ejercicio">
-<div class="pregunta">1. Completa: "La Sagrada Familia ___ en el centro de Barcelona." (verbo estar)</div>
-</div>
-<div class="ejercicio">
-<div class="pregunta">2. Completa con el artículo correcto: "___ parque Güell tiene mosaicos coloridos."</div>
-</div>
-<div class="ejercicio">
-<div class="pregunta">3. ¿De qué color son las ventanas de la Casa Batlló?</div>
+<div class="section" id="quiz-barcelona">
+<div class="section-titulo">Comprensión: "Un paseo por Barcelona"</div>
+<p style="margin-bottom:10px">Escucha el audio del texto y elige la opción correcta. Después, haz clic en "Comprobar respuestas".</p>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">1. Según el texto, ¿cómo es Barcelona?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Triste y gris</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Vibrante y colorida</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Pequeña y tranquila</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Antigua y silenciosa</li>
+</ul>
 </div>
 
-<div class="ejercicio">
-<div class="pregunta">4. ¿Qué animal parece el techo de la Casa Batlló?</div>
-</div>
+<div class="mc-question" data-correct="b">
+<p class="pregunta">2. ¿Dónde está ubicada la Sagrada Familia?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) En las afueras de Barcelona</li>
+<li data-opcion="b" onclick="selectOption(this)">b) En el centro de la ciudad</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Cerca del mar</li>
+<li data-opcion="d" onclick="selectOption(this)">d) En otra ciudad</li>
+</ul>
 </div>
 
+<div class="mc-question" data-correct="b">
+<p class="pregunta">3. ¿Está terminada la Sagrada Familia?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Sí, hace muchos años</li>
+<li data-opcion="b" onclick="selectOption(this)">b) No, todavía no</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Se terminó ayer</li>
+<li data-opcion="d" onclick="selectOption(this)">d) El texto no lo dice</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">4. ¿Qué hay en el Parque Güell?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Solo árboles</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Mosaicos coloridos, escaleras de piedra y una terraza</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Un museo</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Una piscina</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">5. ¿Qué hacen los turistas en la terraza del parque?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Comen</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Están sentados, mirando la ciudad</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Bailan</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Duermen</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">6. ¿Cómo se llama la calle donde están la Casa Batlló y la Casa Milà?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Rambla de Cataluña</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Paseo de Gracia</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Calle Mayor</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Avenida Diagonal</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">7. ¿Qué animal parece el techo de la Casa Batlló?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Un león</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Un dragón</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Un águila</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Un pez</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">8. ¿De qué colores son las ventanas y detalles de la Casa Batlló?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Rojas y amarillas</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Azules y verdes</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Negras y blancas</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Doradas</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('quiz-barcelona')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="quiz-barcelona-resultado"></div>
+</div>
+
+<div class="section" id="quiz-vivienda-barrio">
+<div class="section-titulo">Ejercicio de gramática: Mi casa y mi barrio</div>
+<p style="margin-bottom:10px">Practica artículos definidos, preposiciones de lugar y los verbos <em>ser</em>, <em>estar</em> y <em>hay</em>. Elige la opción correcta y haz clic en "Comprobar respuestas".</p>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">1. En mi barrio ___ un parque muy bonito.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) es</li>
+<li data-opcion="d" onclick="selectOption(this)">d) tiene</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">2. El parque ___ cerca de mi casa.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) es</li>
+<li data-opcion="d" onclick="selectOption(this)">d) son</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">3. ___ casa de mis abuelos es grande y antigua.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) El</li>
+<li data-opcion="b" onclick="selectOption(this)">b) La</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Los</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Las</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">4. Mi casa ___ en el centro de la ciudad.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) es</li>
+<li data-opcion="d" onclick="selectOption(this)">d) son</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">5. En mi salón ___ un sofá y dos sillas.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) son</li>
+<li data-opcion="d" onclick="selectOption(this)">d) tiene</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">6. La cocina está ___ el salón y el baño.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) encima de</li>
+<li data-opcion="b" onclick="selectOption(this)">b) entre</li>
+<li data-opcion="c" onclick="selectOption(this)">c) debajo de</li>
+<li data-opcion="d" onclick="selectOption(this)">d) delante de</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="d">
+<p class="pregunta">7. ___ ventanas de mi casa son grandes.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) El</li>
+<li data-opcion="b" onclick="selectOption(this)">b) La</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Los</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Las</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">8. El supermercado está ___ de mi casa, a cinco minutos caminando.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) lejos</li>
+<li data-opcion="b" onclick="selectOption(this)">b) cerca</li>
+<li data-opcion="c" onclick="selectOption(this)">c) dentro</li>
+<li data-opcion="d" onclick="selectOption(this)">d) fuera</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">9. Mi casa ___ pequeña, pero muy cómoda.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) es</li>
+<li data-opcion="d" onclick="selectOption(this)">d) tiene</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">10. Al lado ___ mi casa ___ una farmacia.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) de / hay</li>
+<li data-opcion="b" onclick="selectOption(this)">b) de / está</li>
+<li data-opcion="c" onclick="selectOption(this)">c) a / es</li>
+<li data-opcion="d" onclick="selectOption(this)">d) en / hay</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('quiz-vivienda-barrio')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="quiz-vivienda-barrio-resultado"></div>
+</div>
+
+<div class="section vocabulario">
+<div class="section-titulo">Vocabulario: Vivienda y Barrio</div>
+<div class="vocab-item"><strong>la vivienda</strong></div>
+<div class="vocab-item"><strong>el apartamento / el piso</strong></div>
+<div class="vocab-item"><strong>la casa</strong></div>
+<div class="vocab-item"><strong>el edificio</strong></div>
+<div class="vocab-item"><strong>el barrio</strong></div>
+<div class="vocab-item"><strong>el vecino / la vecina</strong></div>
+<div class="vocab-item"><strong>la farmacia</strong></div>
+<div class="vocab-item"><strong>el supermercado</strong></div>
+<div class="vocab-item"><strong>la panadería</strong></div>
+<div class="vocab-item"><strong>la parada de autobús</strong></div>
+<div class="vocab-item"><strong>el colegio / la escuela</strong></div>
+<div class="vocab-item"><strong>el hospital</strong></div>
+<div class="vocab-item"><strong>la plaza</strong></div>
+<div class="vocab-item"><strong>alquilar</strong></div>
+<div class="vocab-item"><strong>el alquiler</strong></div>
+<div class="vocab-item"><strong>mudarse</strong></div>
+</div>
 
 <div class="section actividad">
 <div class="section-titulo">Actividades Orales</div>
 <div class="actividad-card">
 <h4>Actividad Oral 2: Mi casa actual y la casa de mis sueños</h4>
-<p><strong>Objetivo:</strong> Describir lugares usando <em>hay</em>, <em>estar</em>, preposiciones de lugar y el vocabulario de la casa.</p>
+<p><strong>Objetivo:</strong> Describir lugares usando <em>hay</em>, <em>estar</em>, preposiciones de lugar y el vocabulario de la casa y el barrio.</p>
 <ul class="pasos">
-<li>Piensa un momento en tu casa actual: ¿Cuántas habitaciones hay? ¿Qué hay en cada una? ¿Dónde está ubicada tu casa (ciudad, barrio)?</li>
+<li>Piensa un momento en tu casa actual: ¿Cuántas habitaciones hay? ¿Qué hay en cada una? ¿Dónde está ubicada tu casa (ciudad, barrio)? ¿Qué hay cerca (farmacia, supermercado, parque)?</li>
 <li>Ahora piensa en la casa de tus sueños: ¿Cómo es? ¿Qué hay allí que no tienes hoy? ¿Dónde está situada?</li>
 <li>Busca a <strong>dos compañeros</strong> y cuéntales, por turnos, cómo es tu casa actual y cómo es la casa de tus sueños. Usa: "En mi casa actual hay ___. Está ___ (cerca de / lejos de / en el centro de...). En cambio, en la casa de mis sueños habría ___, y estaría ___."</li>
 <li>Escucha a tus compañeros y anota una cosa en común y una diferencia entre las tres casas de tus sueños.</li>

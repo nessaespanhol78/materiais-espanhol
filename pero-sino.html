@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pero vs. Sino / Sino que · Español FIC 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#45231B;
+  --coral:#C1272D;
+  --ambar:#F2A900;
+  --verde:#2F9C6A;
+  --rojo:#A31D14;
+  --papel:#FDF8EF;
+  --niebla:#F6E9D6;
+  --linea:#E5D5BE;
+  --radius:14px;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Atkinson Hyperlegible',system-ui,sans-serif;background:var(--papel);color:var(--tinta);line-height:1.65}
+h1,h2,h3{font-family:'Archivo',sans-serif;letter-spacing:-0.01em}
+.wrap{max-width:820px;margin:0 auto;padding:0 1.6rem}
+.hero{background:linear-gradient(160deg,var(--tinta) 0%, #7A2A1C 100%);color:#fff;padding:3.2rem 0 2.6rem;margin-bottom:2.2rem}
+.eyebrow{font-family:'Archivo';font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--ambar);margin-bottom:.8rem}
+.hero h1{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;line-height:1.15}
+.hero p{margin-top:1rem;max-width:38em;opacity:.92}
+section{margin-bottom:2.6rem}
+.sec-label{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.sec-label .dot{width:11px;height:11px;border-radius:50%;background:var(--coral);flex:none}
+.sec-label h2{font-size:1.3rem;font-weight:800}
+.card{background:#fff;border:1px solid var(--linea);border-radius:var(--radius);padding:1.5rem 1.7rem;margin-bottom:1rem}
+.card p{margin-bottom:.8rem}
+.card p:last-child{margin-bottom:0}
+.ej{display:block;font-style:italic;color:#6b5142;margin:.35rem 0 .35rem 1rem;position:relative}
+.ej::before{content:"·";position:absolute;left:-.9rem;color:var(--coral);font-weight:900;font-style:normal}
+.nota{background:var(--niebla);border-left:4px solid var(--ambar);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;font-size:.92rem;margin:.9rem 0}
+.gram-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:.6rem 0}
+.gram-table th{background:var(--tinta);color:#fff;font-family:'Archivo';font-weight:800;text-align:left;padding:.5rem .7rem}
+.gram-table td{border:1px solid var(--linea);padding:.5rem .7rem}
+.gram-table tr:nth-child(even) td{background:var(--niebla)}
+.err-line{margin-bottom:.6rem;font-size:.95rem}
+.err-line .malo{color:var(--rojo);text-decoration:line-through}
+.err-line .bueno{color:var(--verde);font-weight:700}
+
+button{font-family:'Archivo';font-weight:800;border:none;cursor:pointer;border-radius:10px}
+.btn{background:var(--coral);color:#fff;padding:.6rem 1.3rem;font-size:.9rem}
+.btn.sec{background:var(--niebla);color:var(--tinta)}
+
+.pregunta{margin-bottom:1.1rem}
+.pregunta p{font-weight:700;margin-bottom:.45rem}
+.opcion{display:block;padding:.5rem .8rem;border:1px solid var(--linea);border-radius:10px;margin-bottom:.4rem;cursor:pointer;font-size:.95rem;background:#fff}
+.opcion:hover{background:var(--niebla)}
+.opcion input{margin-right:.6rem;accent-color:var(--coral)}
+.opcion.ok{border-color:var(--verde);background:#EAF7F0}
+.opcion.mal{border-color:var(--rojo);background:#FBEDEA}
+
+.fill-item{margin-bottom:.9rem;font-size:.97rem}
+input[type=text].hueco{
+  font-family:'Atkinson Hyperlegible';font-size:.95rem;
+  border:none;border-bottom:2px solid var(--tinta);background:transparent;
+  padding:.15rem .3rem;width:9em;text-align:center;
+}
+input[type=text].hueco:focus{outline:none;border-color:var(--coral)}
+input[type=text].hueco.ok{border-color:var(--verde);color:var(--verde);font-weight:700}
+input[type=text].hueco.mal{border-color:var(--rojo);color:var(--rojo)}
+
+.feedback{font-family:'Archivo';font-weight:800;font-size:.95rem;margin-top:.8rem;min-height:1.4em}
+.feedback.bien{color:var(--verde)}
+.feedback.regular{color:var(--ambar)}
+
+footer{border-top:1px solid var(--linea);padding:1.4rem 0 3rem;font-size:.82rem;color:#7A5C4F}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Español FIC 6 · Mini-lección de gramática · Nivel B1</div>
+    <h1><em>Pero</em> vs. <em>sino</em> / <em>sino que</em></h1>
+    <p>Tres palabras muy parecidas, tres usos distintos. Aquí tienes la explicación, ejemplos y más de veinte frases para practicar hasta dominarlas.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ===== EXPLICACIÓN ===== -->
+  <section id="explicacion">
+    <div class="sec-label"><span class="dot"></span><h2>1 · ¿Cuál es la diferencia?</h2></div>
+    <div class="card">
+      <p><b><i>pero</i></b> introduce un contraste o una objeción, sin anular ni corregir la primera idea. Puede usarse después de una frase afirmativa o negativa.</p>
+      <span class="ej">Me gusta el voluntariado, pero no tengo mucho tiempo libre. <i>(las dos ideas son compatibles)</i></span>
+      <span class="ej">No he donado dinero, pero sí he donado ropa. <i>(dos informaciones distintas, ninguna corrige a la otra)</i></span>
+      <p style="margin-top:1rem"><b><i>sino</i></b> y <b><i>sino que</i></b> corrigen o sustituyen una idea negada por la verdadera alternativa. Solo se usan cuando la primera parte es <b>negativa</b>, y la segunda la contradice directamente — las dos no pueden ser ciertas a la vez.</p>
+      <span class="ej">No busco caridad, sino justicia social. <i>(no es caridad — ES justicia social)</i></span>
+      <span class="ej">No dona dinero, sino que dona su tiempo. <i>(se sustituye por completo)</i></span>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:.6rem">¿Sino o sino que?</h3>
+      <p>Usa <b>sino</b> cuando lo que sigue <b>NO</b> es un verbo conjugado (sustantivo, adjetivo, adverbio, infinitivo o grupo preposicional).</p>
+      <span class="ej">No es voluntario, sino trabajador contratado. <i>(sustantivo)</i></span>
+      <span class="ej">No fue fácil, sino muy difícil. <i>(adjetivo)</i></span>
+      <span class="ej">No quiere donar, sino ayudar en persona. <i>(infinitivo)</i></span>
+      <p style="margin-top:.8rem">Usa <b>sino que</b> cuando lo que sigue <b>SÍ</b> es un verbo conjugado.</p>
+      <span class="ej">No solo recauda fondos, sino que también organiza eventos.</span>
+      <span class="ej">No cerró la campaña, sino que la amplió un mes más.</span>
+    </div>
+
+    <div class="nota">💡 <b>La prueba rápida:</b> ¿la primera parte es negativa Y la segunda la contradice o sustituye por completo? → <i>sino / sino que</i>. Si no hay negación previa, o las dos ideas pueden ser ciertas a la vez → <i>pero</i>.</div>
+
+    <div class="card">
+      <table class="gram-table">
+        <tr><th></th><th>PERO</th><th>SINO / SINO QUE</th></tr>
+        <tr><td>¿Primera parte negativa?</td><td>No es obligatorio</td><td>Sí, siempre</td></tr>
+        <tr><td>¿Las dos ideas pueden ser ciertas a la vez?</td><td>Sí</td><td>No — se excluyen</td></tr>
+        <tr><td>¿Corrige o sustituye la primera idea?</td><td>No</td><td>Sí, totalmente</td></tr>
+        <tr><td>Ejemplo</td><td>Ayuda, pero poco.</td><td>No ayuda, sino que estorba.</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:.7rem">Errores frecuentes</h3>
+      <p class="err-line"><span class="malo">✗ No dona dinero, pero dona tiempo.</span> → <span class="bueno">✓ No dona dinero, sino que dona tiempo.</span></p>
+      <p class="err-line"><span class="malo">✗ Es difícil, sino posible.</span> → <span class="bueno">✓ Es difícil, pero posible.</span></p>
+      <p class="err-line"><span class="malo">✗ No solo ayuda, sino también inspira.</span> → <span class="bueno">✓ No solo ayuda, sino que también inspira.</span></p>
+    </div>
+  </section>
+
+  <!-- ===== EJERCICIO A: OPCIÓN MÚLTIPLE (10) ===== -->
+  <section id="ejercicioA">
+    <div class="sec-label"><span class="dot"></span><h2>2 · Ejercicio A — Elige la opción correcta</h2></div>
+    <div class="card" id="quiz-a">
+      <div class="pregunta">
+        <p>1. No queremos lástima, ___ compromiso.</p>
+        <label class="opcion"><input type="radio" name="qa1" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa1" value="1" data-ok>sino</label>
+        <label class="opcion"><input type="radio" name="qa1" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>2. Me gustaría ser voluntaria, ___ trabajo todos los fines de semana.</p>
+        <label class="opcion"><input type="radio" name="qa2" value="0" data-ok>pero</label>
+        <label class="opcion"><input type="radio" name="qa2" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa2" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>3. El comercio justo no solo paga mejor, ___ también protege el medio ambiente.</p>
+        <label class="opcion"><input type="radio" name="qa3" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa3" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa3" value="2" data-ok>sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>4. No es una ONG pequeña, ___ una organización internacional.</p>
+        <label class="opcion"><input type="radio" name="qa4" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa4" value="1" data-ok>sino</label>
+        <label class="opcion"><input type="radio" name="qa4" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>5. Quiso donar sangre, ___ no cumplía los requisitos.</p>
+        <label class="opcion"><input type="radio" name="qa5" value="0" data-ok>pero</label>
+        <label class="opcion"><input type="radio" name="qa5" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa5" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>6. No fuimos al banco de alimentos el sábado, ___ el domingo.</p>
+        <label class="opcion"><input type="radio" name="qa6" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa6" value="1" data-ok>sino</label>
+        <label class="opcion"><input type="radio" name="qa6" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>7. La campaña no ha terminado, ___ sigue activa hasta diciembre.</p>
+        <label class="opcion"><input type="radio" name="qa7" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa7" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa7" value="2" data-ok>sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>8. Es un proyecto ambicioso, ___ perfectamente posible.</p>
+        <label class="opcion"><input type="radio" name="qa8" value="0" data-ok>pero</label>
+        <label class="opcion"><input type="radio" name="qa8" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa8" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>9. No buscamos voluntarios ocasionales, ___ personas comprometidas a largo plazo.</p>
+        <label class="opcion"><input type="radio" name="qa9" value="0">pero</label>
+        <label class="opcion"><input type="radio" name="qa9" value="1" data-ok>sino</label>
+        <label class="opcion"><input type="radio" name="qa9" value="2">sino que</label>
+      </div>
+      <div class="pregunta">
+        <p>10. Ayudó mucho, ___ todavía queda trabajo por hacer.</p>
+        <label class="opcion"><input type="radio" name="qa10" value="0" data-ok>pero</label>
+        <label class="opcion"><input type="radio" name="qa10" value="1">sino</label>
+        <label class="opcion"><input type="radio" name="qa10" value="2">sino que</label>
+      </div>
+      <button class="btn" onclick="corregirQuiz('quiz-a')">Comprobar</button>
+      <button class="btn sec" onclick="reiniciarQuiz('quiz-a')">Reiniciar</button>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- ===== EJERCICIO B: RELLENAR HUECOS (10) ===== -->
+  <section id="ejercicioB">
+    <div class="sec-label"><span class="dot"></span><h2>3 · Ejercicio B — Completa el hueco</h2></div>
+    <div class="card" id="fill-b">
+      <p style="margin-bottom:1rem;font-size:.9rem;color:#6b5142">Escribe <b>pero</b>, <b>sino</b> o <b>sino que</b> en cada hueco.</p>
+      <div class="fill-item">1. No es caro, <input type="text" class="hueco" data-r="sino"> muy barato.</div>
+      <div class="fill-item">2. Le gusta ayudar, <input type="text" class="hueco" data-r="pero"> no tiene tiempo.</div>
+      <div class="fill-item">3. No dona ropa, <input type="text" class="hueco" data-r="sino que"> dona alimentos.</div>
+      <div class="fill-item">4. Es difícil, <input type="text" class="hueco" data-r="pero"> no imposible.</div>
+      <div class="fill-item">5. No solo organiza eventos, <input type="text" class="hueco" data-r="sino que"> también busca patrocinadores.</div>
+      <div class="fill-item">6. No fue una donación pequeña, <input type="text" class="hueco" data-r="sino"> una de las más grandes del año.</div>
+      <div class="fill-item">7. ACNUR no dejará de trabajar, <input type="text" class="hueco" data-r="pero"> necesita más recursos.</div>
+      <div class="fill-item">8. El objetivo no era ganar dinero, <input type="text" class="hueco" data-r="sino"> ayudar a la comunidad.</div>
+      <div class="fill-item">9. No compraré ese producto, <input type="text" class="hueco" data-r="pero"> quizás lo recomiende a un amigo.</div>
+      <div class="fill-item">10. Los agricultores no solo cultivan café, <input type="text" class="hueco" data-r="sino que"> también exportan cacao.</div>
+      <button class="btn" onclick="corregirFill('fill-b')">Comprobar</button>
+      <button class="btn sec" onclick="reiniciarFill('fill-b')">Reiniciar</button>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <footer>
+    Instituto Federal de Brasília · Campus Brasília · Curso FIC Español 6 — Voces del Mundo Hispano · Nivel B1 · Profª Drª Vanessa Cristina Silva
+  </footer>
+
+</div>
+
+<script>
+function corregirQuiz(id){
+  const cont = document.getElementById(id);
+  let total = 0, aciertos = 0, sinResponder = 0;
+  cont.querySelectorAll('.pregunta').forEach(p=>{
+    total++;
+    const marcada = p.querySelector('input:checked');
+    p.querySelectorAll('.opcion').forEach(o=>o.classList.remove('ok','mal'));
+    if(!marcada){ sinResponder++; return; }
+    const lab = marcada.closest('.opcion');
+    if(marcada.hasAttribute('data-ok')){ lab.classList.add('ok'); aciertos++; }
+    else{
+      lab.classList.add('mal');
+      p.querySelector('input[data-ok]').closest('.opcion').classList.add('ok');
+    }
+  });
+  const fb = cont.querySelector('.feedback');
+  if(sinResponder>0){ fb.className='feedback regular'; fb.textContent=`Te faltan ${sinResponder} pregunta(s) por responder.`; return; }
+  fb.className = 'feedback ' + (aciertos===total ? 'bien' : 'regular');
+  fb.textContent = aciertos===total
+    ? `¡Excelente! ${aciertos}/${total}.`
+    : `Has acertado ${aciertos}/${total}. Revisa las respuestas marcadas en verde e inténtalo de nuevo.`;
+}
+function reiniciarQuiz(id){
+  const cont = document.getElementById(id);
+  cont.querySelectorAll('input').forEach(i=>i.checked=false);
+  cont.querySelectorAll('.opcion').forEach(o=>o.classList.remove('ok','mal'));
+  const fb = cont.querySelector('.feedback'); fb.className='feedback'; fb.textContent='';
+}
+
+function normaliza(s){ return s.trim().toLowerCase().replace(/\s+/g,' '); }
+function corregirFill(id){
+  const cont = document.getElementById(id);
+  let total=0, aciertos=0;
+  cont.querySelectorAll('input.hueco').forEach(inp=>{
+    total++;
+    inp.classList.remove('ok','mal');
+    if(normaliza(inp.value) === normaliza(inp.dataset.r)){ inp.classList.add('ok'); aciertos++; }
+    else{ inp.classList.add('mal'); inp.title = 'Respuesta: ' + inp.dataset.r; }
+  });
+  const fb = cont.querySelector('.feedback');
+  fb.className = 'feedback ' + (aciertos===total?'bien':'regular');
+  fb.textContent = aciertos===total
+    ? `¡Perfecto! ${aciertos}/${total} correctas.`
+    : `${aciertos}/${total} correctas. Pasa el cursor sobre los huecos rojos para ver la solución.`;
+}
+function reiniciarFill(id){
+  const cont = document.getElementById(id);
+  cont.querySelectorAll('input.hueco').forEach(i=>{ i.value=''; i.classList.remove('ok','mal'); i.title=''; });
+  const fb = cont.querySelector('.feedback'); fb.className='feedback'; fb.textContent='';
+}
+</script>
+</body>
+</html>

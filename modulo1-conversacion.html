@@ -99,6 +99,26 @@ nav li a.active{background:#c60b1e}
 .mc-opciones li.incorrecta{background:#f8d7da;border-color:#e74c3c;color:#c0392b}
 .quiz-resultado{margin-top:12px;font-weight:bold;color:#c60b1e;font-size:1.05em}
 
+/* === VISOR DE DIAPOSITIVAS (verbo gustar) === */
+.slides-wrap{background:#342B70;border-radius:12px;padding:0;margin:18px 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+.slide-view{min-height:340px;padding:26px 30px;color:#fff}
+.slide-view h4{color:#fff;font-size:1.45em;margin:0 0 14px 0;line-height:1.25}
+.slide-view p{color:#EDEAF9;margin:8px 0;line-height:1.5}
+.slide-view .destaque{color:#FFD9A0;font-weight:bold}
+.slide-view .caja{background:rgba(255,255,255,0.10);border-radius:8px;padding:12px 16px;margin:10px 0}
+.slide-view .caja-clara{background:#EDEAF9;color:#333;border-radius:8px;padding:12px 16px;margin:10px 0}
+.slide-view .caja-clara p{color:#333;margin:5px 0}
+.slide-view table{width:100%;border-collapse:collapse;margin:10px 0;background:rgba(255,255,255,0.06)}
+.slide-view table td,.slide-view table th{padding:7px 10px;border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:0.92em;text-align:left}
+.slide-view table th{background:rgba(255,255,255,0.12);font-weight:bold}
+.slide-view .mal{color:#FFB3AB}
+.slide-view .bien{color:#A8E6C0}
+.slides-nav{background:rgba(0,0,0,0.22);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.slides-nav button{background:#c60b1e;color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-size:0.95em;font-weight:bold}
+.slides-nav button:disabled{background:#6b6b7a;cursor:default;opacity:0.6}
+.slides-contador{color:#EDEAF9;font-size:0.9em}
+@media (max-width:600px){.slide-view{padding:18px 16px;min-height:0}.slide-view h4{font-size:1.15em}.slide-view table td,.slide-view table th{padding:5px 6px;font-size:0.82em}}
+
 /* === DIÁLOGOS PARA ASOCIAR === */
 .dialogo-mini{background:#fff;border-radius:8px;padding:12px 15px;margin:10px 0;border:1px solid #e8d5b8}
 .dialogo-mini select{padding:5px 8px;border-radius:5px;border:1px solid #ccc;font-size:0.95em;margin-left:6px}
@@ -1075,11 +1095,22 @@ footer a{color:#ffc400}
 <p>La música es una de las expresiones culturales más potentes del mundo hispanohablante. El <strong>flamenco</strong>, originario de Andalucía (sur de España), fue declarado Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO en 2010. Combina cante (canto), toque (guitarra) y baile, con raíces gitanas, árabes y judías.</p>
 <p>El <strong>tango</strong> nació en los barrios portuarios de Buenos Aires (Argentina) y Montevideo (Uruguay) a finales del siglo XIX. Es una música de nostalgia, pasión y melancolía. Carlos Gardel es su máximo exponente.</p>
 <p>La <strong>salsa</strong> es una fusión de ritmos cubanos (son, mambo, chachachá) con influencias del jazz latino y el rock. Se popularizó en Nueva York en los años 60 y 70 con artistas como Celia Cruz y Willie Colón.</p>
-<div style="margin:10px 0">
-<a href="https://www.youtube.com/results?search_query=Flamenco%20-%20Paco%20de%20Luc%C3%ADa" target="_blank" class="recurso musica">Flamenco - Paco de Lucía</a>
-<a href="https://www.youtube.com/results?search_query=Tango%20-%20Carlos%20Gardel%20Por%20una%20cabeza" target="_blank" class="recurso musica">Tango - Carlos Gardel "Por una cabeza"</a>
-<a href="https://www.youtube.com/results?search_query=Salsa%20-%20Celia%20Cruz%20La%20vida%20es%20un%20carnaval" target="_blank" class="recurso musica">Salsa - Celia Cruz "La vida es un carnaval"</a>
-<a href="https://www.youtube.com/results?search_query=Documental%20Historia%20del%20Tango" target="_blank" class="recurso video">▶ Documental: Historia del Tango</a>
+<h3>Flamenco</h3>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/2oyhlad64-s" title="Paco de Lucía — Entre dos aguas" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h3>Tango</h3>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/meKnaxKrtYk" title="Carlos Gardel — Por una cabeza" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h3>Salsa</h3>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/ibaoNRS1IZA" title="Celia Cruz — La vida es un carnaval" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h3>Bolero</h3>
+<p>El <strong>bolero</strong> nació en Cuba a finales del siglo XIX y se extendió por toda América Latina. Es un ritmo lento y romántico, ideal para hablar de sentimientos. "Piel canela" es uno de los boleros más conocidos del repertorio hispanoamericano.</p>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/eRsegTKfgaw" title="Bolero — Piel canela" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 </div>
 
@@ -1096,6 +1127,61 @@ footer a{color:#ffc400}
 <p><strong>Estructura:</strong> [Pronombre] + [gusta/gustan] + [sustantivo]</p>
 <p>Me gusta | Te gusta | Le gusta | Nos gusta | Os gusta | Les gusta</p>
 <p><strong>Para enfatizar:</strong> "A mí me gusta", "A Juan le gusta", "A nosotros nos gusta".</p>
+
+<h3>Presentación: cómo funciona el verbo GUSTAR</h3>
+<p>Usa las flechas para avanzar por la explicación completa, paso a paso.</p>
+<div class="slides-wrap">
+<div class="slide-view" id="slide-view"></div>
+<div class="slides-nav">
+<button onclick="slideAnterior()" id="btn-slide-prev">‹ Anterior</button>
+<span class="slides-contador" id="slides-contador"></span>
+<button onclick="slideSiguiente()" id="btn-slide-next">Siguiente ›</button>
+</div>
+</div>
+
+<h3>Cortometraje: "Me gusta"</h3>
+<p>Mira este cortometraje de la Editorial Difusión, creado para practicar cómo expresamos lo que nos gusta y lo que no.</p>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/GhRUfvSDPNU" title="Me gusta - Cortometraje (Editorial Difusión)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+
+<div class="section" id="quiz-me-gusta">
+<div class="section-titulo">Ejercicio: Comprensión del cortometraje</div>
+<p style="margin-bottom:10px">Elige la opción correcta y haz clic en "Comprobar respuestas".</p>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">1. En el cortometraje, los personajes hablan principalmente de...</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Cosas que les gustan y no les gustan</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Un viaje que hicieron</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Sus rutinas diarias</li>
+<li data-opcion="d" onclick="selectOption(this)">d) La historia de España</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">2. Para decir que algo te gusta mucho, ¿qué verbo puedes usar además de "gustar"?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Doler</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Encantar</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Tener</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Estar</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">3. "A mí ___ gusta el cine." ¿Qué palabra falta?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) yo</li>
+<li data-opcion="b" onclick="selectOption(this)">b) mí</li>
+<li data-opcion="c" onclick="selectOption(this)">c) me</li>
+<li data-opcion="d" onclick="selectOption(this)">d) mi</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('quiz-me-gusta')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="quiz-me-gusta-resultado"></div>
 </div>
 
 <div class="section vocabulario">
@@ -1644,6 +1730,123 @@ function selectOption(li){
   li.classList.add('selected');
 }
 
+// === VISOR DE DIAPOSITIVAS: EL VERBO GUSTAR ===
+var SLIDES_GUSTAR = [
+{
+  h: 'El verbo GUSTAR',
+  c: '<p>Cómo funciona de verdad — y por qué nos confunde.</p>'
+    + '<div class="caja"><p>En esta presentación vamos a ver: la lógica invertida del verbo, las dos partes de la frase, los pronombres, el uso con <span class="destaque">personas</span> (la parte más difícil) y los errores más frecuentes.</p></div>'
+},
+{
+  h: '1. El problema: en portugués es al revés',
+  c: '<div class="caja-clara"><p><strong>PORTUGUÉS:</strong> <strong>Eu</strong> gosto da praia.</p><p><em>Quem gosta = EU → o sujeito é a pessoa.</em></p></div>'
+    + '<div class="caja"><p><strong>ESPAÑOL:</strong> <span class="destaque">Me</span> gusta <span class="destaque">la playa</span>.</p><p><em>Quien gusta = LA PLAYA → el sujeto es la cosa.</em></p></div>'
+    + '<p><span class="destaque">La clave:</span> en español la persona NO es el sujeto. El sujeto es lo que provoca la sensación. Por eso el verbo concuerda con ELLO, no contigo.</p>'
+},
+{
+  h: '2. La frase tiene dos partes independientes',
+  c: '<div class="caja"><p><span class="destaque">PARTE 1 — ¿A quién?</span></p><p>El pronombre dice quién siente: me · te · le · nos · os · les</p></div>'
+    + '<div class="caja"><p><span class="destaque">PARTE 2 — ¿Qué?</span></p><p><strong>GUSTA</strong> + infinitivo o singular: nadar · el fútbol · la playa</p><p><strong>GUSTAN</strong> + plural: los libros · las clases · tus ojos</p></div>'
+    + '<p>La parte 1 funciona independiente de la parte 2. Con infinitivo <span class="destaque">siempre gusta</span>, aunque haya varios.</p>'
+},
+{
+  h: '3. Los pronombres: forma tónica y forma átona',
+  c: '<table>'
+    + '<tr><th>Tónica (opcional)</th><th>Átona (obligatoria)</th><th>Ejemplo</th></tr>'
+    + '<tr><td>(A mí)</td><td>me</td><td>Me gusta esta playa.</td></tr>'
+    + '<tr><td>(A ti / a vos)</td><td>te</td><td>Te gustan los libros.</td></tr>'
+    + '<tr><td>(A él / ella / usted)</td><td>le</td><td>Le duele el estómago.</td></tr>'
+    + '<tr><td>(A nosotros/-as)</td><td>nos</td><td>Nos gusta ver las olas.</td></tr>'
+    + '<tr><td>(A vosotros/-as)</td><td>os</td><td>Os parece bien el plan.</td></tr>'
+    + '<tr><td>(A ellos / ellas / ustedes)</td><td>les</td><td>Les encantan las danzas.</td></tr>'
+    + '</table>'
+    + '<p>La forma tónica sirve para aclarar o enfatizar. La átona <span class="destaque">nunca se omite</span>.</p>'
+},
+{
+  h: '4. La parte difícil: ¿y si nos gustan las PERSONAS?',
+  c: '<p>Si el sujeto es lo que gusta… cuando lo que te gusta es una persona, <span class="destaque">esa persona es el sujeto</span>. Y el verbo se conjuga con ella.</p>'
+    + '<div class="caja"><p>Aquí es donde casi todos se confunden. Presta atención a los próximos ejemplos.</p></div>'
+},
+{
+  h: '5. Con personas, la lógica es la misma',
+  c: '<table>'
+    + '<tr><th>Español</th><th>¿Quién gusta?</th><th>Portugués</th></tr>'
+    + '<tr><td>Me gusta</td><td>él / ella</td><td>Gosto dele / dela</td></tr>'
+    + '<tr><td>Me gustas</td><td>tú</td><td>Gosto de você</td></tr>'
+    + '<tr><td>Me gustan</td><td>ellos / ellas</td><td>Gosto deles / delas</td></tr>'
+    + '<tr><td>Te gusto</td><td>yo</td><td>Você gosta de mim</td></tr>'
+    + '<tr><td>Le gusto</td><td>yo, a él/ella</td><td>Ele(a) gosta de mim</td></tr>'
+    + '<tr><td>Les gustamos</td><td>nosotros</td><td>Eles gostam da gente</td></tr>'
+    + '</table>'
+    + '<p><span class="destaque">El verbo cambia según QUIÉN gusta, no según quién siente.</span></p>'
+},
+{
+  h: '6. Conjugación completa',
+  c: '<p>Con personas, gustar se conjuga como cualquier verbo regular en -AR:</p>'
+    + '<div class="caja"><p>yo <span class="destaque">gusto</span> · tú <span class="destaque">gustas</span> · él/ella <span class="destaque">gusta</span></p>'
+    + '<p>nosotros <span class="destaque">gustamos</span> · vosotros <span class="destaque">gustáis</span> · ellos <span class="destaque">gustan</span></p></div>'
+    + '<p><strong>Y si TÚ le gustas a alguien:</strong></p>'
+    + '<p>¿A ti te gusto? — <em>Você gosta de mim?</em><br>'
+    + 'Le gusto a él. — <em>Ele gosta de mim.</em><br>'
+    + 'Le gusto a Carlos. — <em>Carlos gosta de mim.</em><br>'
+    + 'Les gusto a ellos. — <em>Eles gostam de mim.</em></p>'
+},
+{
+  h: '7. Cuidado: una letra cambia todo',
+  c: '<div class="caja"><p><span class="destaque">Me gusta ella.</span> — <em>Gosto dela.</em></p><p>El sujeto es ELLA (3ª persona singular) → gusta</p></div>'
+    + '<div class="caja"><p><span class="destaque">Me gustas tú.</span> — <em>Gosto de você.</em></p><p>El sujeto es TÚ (2ª persona) → gustas</p></div>'
+    + '<div class="caja"><p><span class="destaque">Le gustas tú.</span> — <em>Ele(a) gosta de você.</em></p><p>Quien siente es él/ella; quien gusta eres tú</p></div>'
+    + '<div class="caja"><p><span class="destaque">Le gusto yo.</span> — <em>Ele(a) gosta de mim.</em></p><p>Quien siente es él/ella; quien gusta soy yo</p></div>'
+},
+{
+  h: '8. Errores más frecuentes',
+  c: '<div class="caja"><p class="mal">✗ Yo gusto de la playa.</p><p class="bien">✓ Me gusta la playa.</p><p><em>Calco del portugués: "gostar de" no existe así.</em></p></div>'
+    + '<div class="caja"><p class="mal">✗ Me gusta los libros.</p><p class="bien">✓ Me gustan los libros.</p><p><em>El sujeto es plural → gustan.</em></p></div>'
+    + '<div class="caja"><p class="mal">✗ Yo te gusto a ti… (¿yo gosto?)</p><p class="bien">✓ Tú me gustas.</p><p><em>"Te gusto" significa que TÚ sientes algo por MÍ.</em></p></div>'
+    + '<div class="caja"><p class="mal">✗ A mí gusta bailar.</p><p class="bien">✓ A mí me gusta bailar.</p><p><em>La forma átona nunca se omite.</em></p></div>'
+},
+{
+  h: '9. Otros verbos funcionan igual',
+  c: '<table>'
+    + '<tr><th>Verbo</th><th>Ejemplo</th><th>Sentido</th></tr>'
+    + '<tr><td>ENCANTAR</td><td>Me encanta el tango.</td><td>gustar mucho</td></tr>'
+    + '<tr><td>INTERESAR</td><td>Nos interesan las artes.</td><td>atraer</td></tr>'
+    + '<tr><td>PARECER</td><td>Os parece bien el plan.</td><td>opinión</td></tr>'
+    + '<tr><td>DOLER</td><td>Le duele el estómago.</td><td>dolor</td></tr>'
+    + '<tr><td>FASCINAR</td><td>Le fascina la guitarra.</td><td>intensidad</td></tr>'
+    + '<tr><td>MOLESTAR</td><td>Me molesta el ruido.</td><td>incomodar</td></tr>'
+    + '</table>'
+    + '<p>Todos siguen la misma estructura: pronombre + verbo + sujeto real.</p>'
+},
+{
+  h: '10. Ahora te toca a ti',
+  c: '<p>Traduce al español. Piensa primero: <span class="destaque">¿quién es el sujeto?</span></p>'
+    + '<div class="caja"><p>1. Eu gosto de você.</p><p>2. Ela gosta de mim.</p><p>3. Nós gostamos deles.</p>'
+    + '<p>4. Vocês gostam de nadar?</p><p>5. A Carlos, ele gosta de dançar.</p><p>6. Eu gosto dos seus olhos.</p></div>'
+    + '<p><em>Pista: el verbo concuerda con quien PROVOCA la sensación.</em></p>'
+}
+];
+
+var slideActual = 0;
+
+function renderSlide(){
+  var s = SLIDES_GUSTAR[slideActual];
+  var view = document.getElementById('slide-view');
+  if(!view) return;
+  view.innerHTML = '<h4>' + s.h + '</h4>' + s.c;
+  document.getElementById('slides-contador').textContent = (slideActual + 1) + ' / ' + SLIDES_GUSTAR.length;
+  document.getElementById('btn-slide-prev').disabled = (slideActual === 0);
+  document.getElementById('btn-slide-next').disabled = (slideActual === SLIDES_GUSTAR.length - 1);
+}
+
+function slideSiguiente(){
+  if(slideActual < SLIDES_GUSTAR.length - 1){ slideActual++; renderSlide(); }
+}
+
+function slideAnterior(){
+  if(slideActual > 0){ slideActual--; renderSlide(); }
+}
+
 function corregirQuizMC(quizId){
   var quiz = document.getElementById(quizId);
   var preguntas = quiz.querySelectorAll('.mc-question');
@@ -1719,6 +1922,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(first) first.classList.add('active');
   var firstLink = document.querySelector('.sidebar-area a[data-aula]');
   if(firstLink) firstLink.classList.add('active');
+  renderSlide();
 });
 
 </script>

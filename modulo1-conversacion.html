@@ -98,6 +98,7 @@ nav li a.active{background:#c60b1e}
 .mc-opciones li.correcta{background:#d4edda;border-color:#27ae60;color:#1e7e34;font-weight:bold}
 .mc-opciones li.incorrecta{background:#f8d7da;border-color:#e74c3c;color:#c0392b}
 .quiz-resultado{margin-top:12px;font-weight:bold;color:#c60b1e;font-size:1.05em}
+.destaque-gustar{color:#c60b1e;font-weight:bold}
 
 /* === VISOR DE DIAPOSITIVAS (verbo gustar) === */
 .slides-wrap{background:#342B70;border-radius:12px;padding:0;margin:18px 0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
@@ -1184,6 +1185,310 @@ footer a{color:#ffc400}
 <div class="quiz-resultado" id="quiz-me-gusta-resultado"></div>
 </div>
 
+<div class="section gramatica">
+<div class="section-titulo">Explicación 1: GUSTAR con objetos, verbos y personas</div>
+<p>Con <em>gustar</em>, el sujeto NO es la persona que siente, sino <span class="destaque-gustar">lo que provoca la sensación</span>. Por eso el verbo solo tiene dos formas habituales:</p>
+<table>
+<tr><th>Forma</th><th>¿Cuándo se usa?</th><th>Ejemplo musical</th></tr>
+<tr><td><strong>gusta</strong></td><td>+ una cosa (singular)</td><td>Me gusta <em>el flamenco</em>.</td></tr>
+<tr><td><strong>gusta</strong></td><td>+ un verbo en infinitivo</td><td>Me gusta <em>bailar salsa</em>.</td></tr>
+<tr><td><strong>gusta</strong></td><td>+ varios infinitivos</td><td>Me gusta <em>cantar y tocar la guitarra</em>.</td></tr>
+<tr><td><strong>gustan</strong></td><td>+ varias cosas (plural)</td><td>Me gustan <em>los boleros</em>.</td></tr>
+</table>
+<p><strong>El pronombre indica quién siente:</strong> me · te · le · nos · os · les</p>
+<p><em>A mí me gusta el tango · A ti te gustan las canciones de Celia Cruz · A Juan le gusta el bolero.</em></p>
+</div>
+
+<div class="section" id="ej-gustar-1">
+<div class="section-titulo">Ejercicio 1 · ¿gusta o gustan?</div>
+<p style="margin-bottom:10px">Elige la forma correcta según el sujeto.</p>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">1. A mí me ___ las canciones de Celia Cruz.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) gusto</li>
+<li data-opcion="d" onclick="selectOption(this)">d) gustas</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">2. Nos ___ escuchar boleros por la noche.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) gustamos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) gustáis</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">3. A Paco de Lucía le ___ tocar la guitarra flamenca.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) gustaba</li>
+<li data-opcion="d" onclick="selectOption(this)">d) gustamos</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">4. Me ___ cantar y bailar en las fiestas.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) gustamos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) gustáis</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('ej-gustar-1')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="ej-gustar-1-resultado"></div>
+</div>
+
+<div class="section" id="ej-gustar-2">
+<div class="section-titulo">Ejercicio 2 · El pronombre correcto</div>
+<p style="margin-bottom:10px">¿Quién siente? Elige el pronombre adecuado.</p>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">1. A nosotros ___ gusta el tango argentino.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me</li>
+<li data-opcion="b" onclick="selectOption(this)">b) le</li>
+<li data-opcion="c" onclick="selectOption(this)">c) nos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) les</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="d">
+<p class="pregunta">2. A mis padres ___ gustan los boleros románticos.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me</li>
+<li data-opcion="b" onclick="selectOption(this)">b) te</li>
+<li data-opcion="c" onclick="selectOption(this)">c) nos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) les</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">3. ¿A ti ___ gusta la salsa?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me</li>
+<li data-opcion="b" onclick="selectOption(this)">b) te</li>
+<li data-opcion="c" onclick="selectOption(this)">c) le</li>
+<li data-opcion="d" onclick="selectOption(this)">d) os</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">4. A Celia Cruz ___ gustaba gritar "¡Azúcar!" en sus conciertos.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me</li>
+<li data-opcion="b" onclick="selectOption(this)">b) le</li>
+<li data-opcion="c" onclick="selectOption(this)">c) nos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) os</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('ej-gustar-2')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="ej-gustar-2-resultado"></div>
+</div>
+
+<div class="section" id="ej-gustar-3">
+<div class="section-titulo">Ejercicio 3 · Frase completa</div>
+<p style="margin-bottom:10px">Ahora las dos partes juntas: pronombre + verbo. Elige la opción correcta.</p>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">1. A Ana ___ los conciertos de flamenco.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) le gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) les gusta</li>
+<li data-opcion="c" onclick="selectOption(this)">c) le gustan</li>
+<li data-opcion="d" onclick="selectOption(this)">d) me gustan</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">2. A mí ___ aprender canciones en español.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) me gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) te gusta</li>
+<li data-opcion="d" onclick="selectOption(this)">d) nos gustan</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="d">
+<p class="pregunta">3. A vosotros ___ las letras de los boleros, ¿verdad?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) os gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) nos gustan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) les gusta</li>
+<li data-opcion="d" onclick="selectOption(this)">d) os gustan</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">4. A los turistas ___ el ritmo de la salsa.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) le gusta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) les gusta</li>
+<li data-opcion="c" onclick="selectOption(this)">c) les gustan</li>
+<li data-opcion="d" onclick="selectOption(this)">d) nos gusta</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('ej-gustar-3')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="ej-gustar-3-resultado"></div>
+</div>
+
+<div class="section gramatica">
+<div class="section-titulo">Explicación 2: GUSTAR con sentido de atracción</div>
+<p>Cuando lo que nos gusta es una <span class="destaque-gustar">persona</span>, esa persona es el sujeto — y el verbo se conjuga con ella. Aquí <em>gustar</em> puede tener sentido de atracción:</p>
+<table>
+<tr><th>Español</th><th>¿Quién gusta?</th><th>Portugués</th></tr>
+<tr><td>Me gusta <strong>él</strong></td><td>él</td><td>Gosto dele</td></tr>
+<tr><td>Me gusta<strong>s</strong> tú</td><td>tú</td><td>Gosto de você</td></tr>
+<tr><td>Me gusta<strong>n</strong> ellos</td><td>ellos</td><td>Gosto deles</td></tr>
+<tr><td>Te gust<strong>o</strong> yo</td><td>yo</td><td>Você gosta de mim</td></tr>
+<tr><td>Le gust<strong>o</strong> a ella</td><td>yo</td><td>Ela gosta de mim</td></tr>
+</table>
+<p><strong>Ojo:</strong> "Me gustas" ≠ "Te gusto". En la primera, quien siente soy yo; en la segunda, quien siente eres tú.</p>
+<p style="margin-top:12px"><strong>Otros verbos funcionan igual</strong> (con cosas y con personas):</p>
+<div class="vocab-item"><strong>encantar</strong> - gustar mucho: <em>Me encanta esa canción.</em></div>
+<div class="vocab-item"><strong>fascinar</strong> - atraer con fuerza: <em>Me fascina su voz.</em></div>
+<div class="vocab-item"><strong>interesar</strong> - despertar interés: <em>Nos interesan los ritmos caribeños.</em></div>
+<div class="vocab-item"><strong>emocionar</strong> - conmover: <em>Me emocionan los boleros.</em></div>
+<div class="vocab-item"><strong>molestar</strong> - incomodar: <em>Me molesta la música muy alta.</em></div>
+<div class="vocab-item"><strong>parecer</strong> - dar una opinión: <em>Me parece preciosa esa letra.</em></div>
+</div>
+
+<div class="section" id="ej-gustar-4">
+<div class="section-titulo">Ejercicio 4 · Gustar con personas</div>
+<p style="margin-bottom:10px">Piensa: ¿quién provoca la sensación? Ese es el sujeto.</p>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">1. "Gosto de você" se dice en español:</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Te gusto</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Me gustas</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Me gusta</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Yo gusto de ti</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">2. "Ela gosta de mim" se dice:</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Le gusto (a ella)</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Me gusta ella</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Le gusta ella</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Ella gusta de mí</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">3. El cantante dice: "Tú me gustas." ¿Quién siente la atracción?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) La persona que escucha</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Los dos por igual</li>
+<li data-opcion="c" onclick="selectOption(this)">c) El cantante</li>
+<li data-opcion="d" onclick="selectOption(this)">d) No se puede saber</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">4. "Nós gostamos deles" se dice:</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Les gustamos</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Nos gustan ellos</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Nos gusta ellos</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Nosotros gustamos de ellos</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('ej-gustar-4')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="ej-gustar-4-resultado"></div>
+</div>
+
+<div class="section" id="ej-gustar-5">
+<div class="section-titulo">Ejercicio 5 · Todos los verbos juntos</div>
+<p style="margin-bottom:10px">Nivel final: elige el verbo y la forma correctos, en contexto musical.</p>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">1. A mí ___ esa canción: la escucho todos los días.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me encantan</li>
+<li data-opcion="b" onclick="selectOption(this)">b) me encanta</li>
+<li data-opcion="c" onclick="selectOption(this)">c) me encantas</li>
+<li data-opcion="d" onclick="selectOption(this)">d) encanto</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">2. A Eva ___ los conciertos con mucho ruido.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) le molesta</li>
+<li data-opcion="b" onclick="selectOption(this)">b) me molestan</li>
+<li data-opcion="c" onclick="selectOption(this)">c) le molestan</li>
+<li data-opcion="d" onclick="selectOption(this)">d) les molesta</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">3. ¿Qué ___ la letra de "Piel canela"? — Me parece preciosa.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) te parece</li>
+<li data-opcion="b" onclick="selectOption(this)">b) te parecen</li>
+<li data-opcion="c" onclick="selectOption(this)">c) te pareces</li>
+<li data-opcion="d" onclick="selectOption(this)">d) tú pareces</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="d">
+<p class="pregunta">4. A nosotros ___ los ritmos del Caribe.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me interesan</li>
+<li data-opcion="b" onclick="selectOption(this)">b) nos interesa</li>
+<li data-opcion="c" onclick="selectOption(this)">c) les interesan</li>
+<li data-opcion="d" onclick="selectOption(this)">d) nos interesan</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">5. Cuando escucho un bolero triste, ___ mucho.</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) me emocionan</li>
+<li data-opcion="b" onclick="selectOption(this)">b) me emociono</li>
+<li data-opcion="c" onclick="selectOption(this)">c) me emocionas</li>
+<li data-opcion="d" onclick="selectOption(this)">d) emociono</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('ej-gustar-5')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="ej-gustar-5-resultado"></div>
+</div>
+
+<div class="section actividad">
+<div class="section-titulo">Producción escrita: "La música y yo"</div>
+<div class="actividad-card">
+<h4>Escribe un texto de 8 a 12 frases</h4>
+<p>Después de escuchar el flamenco, el tango, la salsa y el bolero de este encuentro, escribe sobre tu relación con la música. Usa <strong>al menos cinco</strong> de estos verbos: <em>gustar, encantar, fascinar, interesar, emocionar, molestar, parecer</em>.</p>
+<p><strong>Incluye en tu texto:</strong></p>
+<ul class="pasos">
+<li>Qué géneros musicales te gustan y cuáles no (usa <em>gustar</em> con singular y plural).</li>
+<li>Qué te gusta hacer con la música: escuchar, bailar, cantar, tocar un instrumento (<em>gustar</em> + infinitivo).</li>
+<li>Un cantante o grupo que te encanta o te fascina, y por qué.</li>
+<li>Algo relacionado con la música que te molesta.</li>
+<li>Qué te parecen los cuatro ritmos que escuchamos hoy (flamenco, tango, salsa, bolero).</li>
+<li>Compara con alguien de tu familia o un amigo: "A mi madre le gusta ___, pero a mí me gustan ___."</li>
+</ul>
+<p><strong>Empieza así:</strong> <em>"La música es muy importante en mi vida. A mí me gusta(n) ___ porque ___. También me encanta ___..."</em></p>
+<p style="margin-top:10px;color:#888;font-size:0.88em"><em>Al terminar, lee tu texto a un compañero. Él debe identificar cuántos verbos de este tipo usaste y si el verbo concuerda bien con el sujeto.</em></p>
+</div>
+</div>
+
 <div class="section vocabulario">
 <div class="section-titulo">Vocabulario: Ocio y Música</div>
 <div class="vocab-item"><strong>la música</strong></div>
@@ -1271,10 +1576,119 @@ footer a{color:#ffc400}
 <div class="section-titulo">Arte y Cultura: El Cine Hispánico</div>
 <p>El cine en español tiene una larga tradición. España cuenta con el director <strong>Pedro Almodóvar</strong>, conocido por sus colores vibrantes y sus historias de mujeres fuertes. Argentina tiene una de las cinematografías más sólidas de América Latina, con directores como <strong>Juan José Campanella</strong> (El secreto de sus ojos) y la nueva ola del cine argentino. México destaca con <strong>Guillermo del Toro</strong> y <strong>Alejandro González Iñárritu</strong>, ganadores de múltiples premios Óscar.</p>
 <p>En la vida cotidiana hispana, los horarios son diferentes: el desayuno es ligero, la comida principal es entre las 14:00 y las 15:00, y la cena es tarde (21:00-22:00). En muchos lugares de España y América Latina todavía se practica la <em>siesta</em>, una breve descanso después de comer.</p>
-<div style="margin:10px 0">
-<a href="https://www.youtube.com/results?search_query=Cortometraje%20La%20rutina%20%28animaci%C3%B3n%29" target="_blank" class="recurso video">▶ Cortometraje: "La rutina" (animación)</a>
-<a href="https://www.youtube.com/results?search_query=Corto%20argentino%20El%20d%C3%ADa%20del%20estreno" target="_blank" class="recurso video">▶ Corto argentino: "El día del estreno"</a>
+<h3>Vídeo: "Mi rutina diaria"</h3>
+<p>Mira el vídeo sobre la rutina diaria de Eva. Fíjate en los verbos reflexivos y en las horas del día. Después, responde el ejercicio.</p>
+<div class="video-embed-wrap">
+<iframe src="https://www.youtube.com/embed/SvfKrb_yxC8" title="Mi rutina diaria" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+</div>
+
+<div class="section" id="quiz-rutina">
+<div class="section-titulo">Ejercicio: Comprensión del vídeo y la rutina diaria</div>
+<p style="margin-bottom:10px">Elige la opción correcta y haz clic en "Comprobar respuestas".</p>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">1. ¿Cuál es la primera acción de la rutina, al empezar el día?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Acostarse</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Despertarse</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Cenar</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Volver a casa</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">2. "Me levanto a las siete." ¿Qué tipo de verbo es <em>levantarse</em>?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Un verbo irregular en -ER</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Un verbo en pasado</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Un verbo reflexivo</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Un verbo como <em>gustar</em></li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">3. ¿Cómo se dice "tomar café da manhã" en español?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Almorzar</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Desayunar</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Cenar</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Merendar</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">4. Completa: "Eva ___ ducha por la mañana."</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) se</li>
+<li data-opcion="b" onclick="selectOption(this)">b) me</li>
+<li data-opcion="c" onclick="selectOption(this)">c) te</li>
+<li data-opcion="d" onclick="selectOption(this)">d) nos</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">5. ¿Cómo se dice "7:30" en español?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Es la siete y media</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Son las siete y treinta minutos</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Son las siete y media</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Son la siete media</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">6. ¿Qué expresión indica una acción que se repite todos los días?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Ayer</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Todos los días</li>
+<li data-opcion="c" onclick="selectOption(this)">c) El año pasado</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Mañana</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="b">
+<p class="pregunta">7. Ordena: ¿qué acción viene normalmente <em>después</em> de "volver a casa"?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Despertarse</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Cenar</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Desayunar</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Ir al trabajo</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="d">
+<p class="pregunta">8. ¿Cuál de estos verbos NO es reflexivo?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Vestirse</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Peinarse</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Acostarse</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Trabajar</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="a">
+<p class="pregunta">9. "Por la mañana", "por la tarde", "por la noche" sirven para...</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Situar las acciones en momentos del día</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Expresar gustos</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Describir lugares</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Hablar del pasado</li>
+</ul>
+</div>
+
+<div class="mc-question" data-correct="c">
+<p class="pregunta">10. ¿Cuál es la última acción típica del día?</p>
+<ul class="mc-opciones">
+<li data-opcion="a" onclick="selectOption(this)">a) Levantarse</li>
+<li data-opcion="b" onclick="selectOption(this)">b) Ducharse</li>
+<li data-opcion="c" onclick="selectOption(this)">c) Acostarse</li>
+<li data-opcion="d" onclick="selectOption(this)">d) Desayunar</li>
+</ul>
+</div>
+
+<button class="btn" onclick="corregirQuizMC('quiz-rutina')">Comprobar respuestas</button>
+<div class="quiz-resultado" id="quiz-rutina-resultado"></div>
 </div>
 
 <div class="section gramatica">
